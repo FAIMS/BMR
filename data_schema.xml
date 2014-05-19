@@ -15,6 +15,9 @@
   <RelationshipElement name="TensionTensionBolt" type="bidirectional">
     <description>Implements a 1:N between Tension Station and Tension Station Bolt</description>
   </RelationshipElement>
+  <RelationshipElement name="FeaturePhotographLog" type="bidirectional">
+    <description>Implements a 1:N between a feature and photo logs</description>
+  </RelationshipElement>
 
   <!-- ARCHENT: Bucket -->
   <ArchaeologicalElement name="Bucket">
@@ -1117,7 +1120,7 @@
   <!-- ARCHENT: Track Rope -->
   <ArchaeologicalElement name="Track rope">
     <description></description>
-    <property name="Measurement Number" type="freetext" isIdentifier="true">
+    <property name="Measurement number" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
     </property>
     <property name="Gauge" type="float">
@@ -1178,7 +1181,7 @@
         </term>
       </lookup>
     </property>
-    <property name="Length of saddle wear zone">
+    <property name="Length of saddle wear zone" type="float">
       <description>Measurement in cm</description>
     </property>
     <property name="Rope end condition" type="enum">
@@ -1345,6 +1348,31 @@
     </property>
     <property name="Photos" type="file">
       <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+
+  <!-- ARCHENT: Photograph log -->
+  <ArchaeologicalElement name="Photograph log">
+    <description>A record of images created and stored on another device, eg by a professional site photographer.</description>
+    <property name="ContextID" type="freetext">
+      <description>Unique number or code for each Context</description>
+    </property>
+    <property name="Photograph reference ID" isIdentifier= "true" type="freetext">
+      <description>Unique number or code allocated by creator of the image. It could be a filename or a reference number</description>
+    </property>
+    <property name="Scene type" type="enum">
+      <description>The type of scene captured, eg opening or closing view of the Context. (Vocab: Open, Close, Other)</description>
+      <lookup>
+        <term> Open
+          <description/>
+        </term>
+        <term> Close
+          <description/>
+        </term>
+        <term> Other
+          <description/>
+        </term>
+      </lookup>
     </property>
   </ArchaeologicalElement>
 </dataSchema>
