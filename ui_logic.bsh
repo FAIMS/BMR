@@ -1,0 +1,220 @@
+startInternalGPS();
+
+User user;
+String userid;
+
+
+
+onEvent("control", "show", "populateControl()");
+onEvent("control/New_Data/newBucket", "click", "newBucket()");
+
+onEvent("control/Search", "show", "search()");
+onEvent("control/Search/searchButton", "click", "search()");
+onEvent("control/Search/searchAllButton", "click", "searchAll()");
+onEvent("control/Search/Search_Results", "click", "specialLoad()");
+
+onEvent("control/gps/connectinternal", "click", "startInternalGPS()");
+onEvent("control/gps/connectexternal", "click", "startExternalGPS()");
+
+searchAll(){
+	setFieldValue("control/Search/Search_Bar", "");
+	setFieldValue("control/Search/Dropdown", "");
+	search();
+}
+
+search(){
+    populateList("control/Search/Search_Results", fetchAll(""+
+        "SELECT uuid||'+'||aenttypename, group_concat(coalesce(measure   || ' '  || vocabname || '('  ||  freetext ||'; '|| (certainty * 100.0) || '% certain)',  "+
+        "                                     measure   || ' (' || freetext  || '; ' || (certainty * 100.0) || '% certain)',  "+
+        "                                     vocabname || ' (' || freetext  || '; ' || (certainty * 100.0) || '% certain)',  "+
+        "                                     measure   || ' '  || vocabname || ' (' || (certainty * 100.0) || '% certain)',  "+
+        "                                     vocabname || ' (' || freetext  || ')',  "+
+        "                                     measure   || ' (' || freetext  || ')',  "+
+        "                                     measure   || ' (' ||(certainty * 100.0) || '% certain)',  "+
+        "                                     vocabname || ' (' ||(certainty * 100.0) || '% certain)',  "+
+        "                                     freetext  || ' (' ||(certainty * 100.0) || '% certain)',  "+
+        "                                     measure,  "+
+        "                                     vocabname,  "+
+        "                                     freetext), ' ') as response  "+
+        "FROM (select * from latestNonDeletedArchentIdentifiers order by attributename) "+
+        "WHERE aenttypename LIKE '%'||'"+getFieldValue("control/Search/Dropdown")+"' "+
+        "and uuid in (select uuid from latestnondeletedaentvalue left outer join vocabulary using (vocabid) where freetext like '%"+getFieldValue("control/Search/Search_Bar")+"%' or vocabname like '%"+getFieldValue("control/Search/Search_Bar")+"%' or measure like '%"+getFieldValue("control/Search/Search_Bar")+"%') "+
+        "GROUP BY uuid "+
+        "order by response;"));
+}
+
+populateControl(){
+	populateDropDown("control/Search/Dropdown", fetchAll("select '', 'All Entities' union select aenttypename, aenttypename from aenttype;"));
+}
+
+specialLoad(){
+    
+    
+}
+
+
+
+//Bucket Archent
+
+String bucket_id;
+
+newBucket(){
+    bucket_id = null;
+    newTabGroup("Bucket");
+}
+
+loadBucketFrom(bucketid) {
+    bucket_id = bucketid;
+    if (isNull(bucket_id)) return;
+    
+    showTabGroup("Bucket", bucket_id);    
+    loadBucketAttributes();
+}
+
+loadBucketAttributes(){
+    //populateRadioGroup("Bucket/")
+}
+
+/*
+onEvent("Monitoring/Monitoring/Capture_GPS", "click", "fillInGPS()");
+onEvent("Monitoring/Monitoring/Update_and_Duplicate", "click", "saveMonitoring()");
+onEvent("Monitoring/Monitoring/Update_and_Close", "click", "saveandCloseMonitoring()");
+onEvent("Monitoring/Monitoring/Delete", "click", "deleteMonitoring()");
+onEvent("Monitoring/Monitoring/Attach_Photo", "delayclick", "attachPictureTo(\"Monitoring/Monitoring/Photos\")");
+onEvent("Monitoring/Monitoring/Attach_Video", "delayclick", "attachVideoTo(\"Monitoring/Monitoring/Videos\")");
+
+
+
+fillInGPS(){
+    Object position = getGPSPositionProjected();
+    Object projPosition = getGPSPositionProjected();
+    if (projPosition != null ){
+        Double latitude = projPosition.getLatitude();
+        Double longitude = projPosition.getLongitude();
+        setFieldValue("Monitoring/Monitoring/Latitude", latitude);
+        setFieldValue("Monitoring/Monitoring/Longitude", longitude);
+    } else {
+        showToast("GPS Not initialized");
+    }
+
+}
+
+
+saveMonitoring() {
+    if (isNull(getFieldValue("Monitoring/Monitoring/Place_Name"))) {
+        showWarning("Logic Error", "Cannot save record without Place Name");
+        return;
+    }
+    if (!isNull(monitoring_id)) {
+        entity = fetchArchEnt(monitoring_id);
+    }
+    saveTabGroup("Monitoring", monitoring_id, null, null, "monitoring_id = getLastSavedRecordId();duplicate();");
+}
+
+saveandCloseMonitoring() {
+    if (isNull(getFieldValue("Monitoring/Monitoring/Place_Name"))) {
+        showWarning("Logic Error", "Cannot save record without Place Name");
+        return;
+    }
+    if (!isNull(monitoring_id)) {
+        entity = fetchArchEnt(monitoring_id);
+    }
+    saveTabGroup("Monitoring", monitoring_id, null, null, "monitoring_id = getLastSavedRecordId();");
+    cancelTabGroup("Monitoring",false);
+}
+
+duplicate(){
+    monitoring_id = null;
+    setFieldValue("Monitoring/Monitoring/Place_Name", "");
+}
+
+
+deleteMonitoring(){
+    if (!isNull(monitoring_id)) {
+        showAlert("Confirm Deletion", "Press OK to Delete this Monitoring Record!", "reallyDeleteMonitoring()", "doNotDelete()");
+    } else {
+        cancelTabGroup("Monitoring", true);
+    }
+}
+
+reallyDeleteMonitoring(){
+    deleteArchEnt(monitoring_id);
+    cancelTabGroup("Monitoring", false);
+}
+
+doNotDelete(){
+    showToast("Delete Cancelled.");
+}
+*/
+
+
+
+
+// MISC FUNCTIONS    
+
+saveEntitiesToRel(type, entity1, entity2) {
+    if (isNull(entity1) || isNull(entity2)) return;
+    rel_id = saveRel(null, type, null, null);
+    addReln(entity1, rel_id, null);
+    addReln(entity2, rel_id, null);
+}
+
+makeVocab(String attrib){
+    Object a = fetchAll("select vocabid, vocabname from vocabulary join attributekey using (attributeid) where attributename = '"+attrib+"' order by vocabname;");
+    return a;
+}
+
+makePictureGallery(String attrib){
+    fetchAll("select vocabid, vocabname, pictureurl from vocabulary left join attributekey using (attributeid) where attributename = '" + attrib + "' order by vocabname;");
+}
+
+
+/*** SYNC ***/
+onEvent("control/gps/startsync", "click", "startSync()");
+onEvent("control/gps/stopsync", "click", "stopSync()");
+
+setSyncMinInterval(10.0f);
+setSyncMaxInterval(20.0f);
+setSyncDelay(5.0f);
+
+startSync() {
+    setSyncEnabled(true);
+    setFileSyncEnabled(true);
+}
+
+stopSync() {
+    setSyncEnabled(false);
+    setFileSyncEnabled(false);
+}
+
+/*** Uneditable - you can edit the code below with extreme precaution ***/
+/*** USER ***/
+
+getDefaultUsersList() {
+    users = fetchAll("select userid, fname || ' ' || lname from user");
+    return users;
+}
+
+populateListForUsers(){
+    populateList("user/usertab/users", getDefaultUsersList());
+}
+
+populateListForUsers();
+
+String username = "";
+String device = "";
+
+login(){
+    Object userResult = fetchOne("select userid,fname,lname,email from user where userid='" + getListItemValue() + "';");
+    User user = new User(userResult.get(0),userResult.get(1),userResult.get(2),userResult.get(3));
+    userid = userResult.get(0);
+    setUser(user);
+    username = userResult.get(1) + " " + userResult.get(2);
+    showTabGroup("control");
+}
+
+doNotDelete(){
+    showToast("Delete Cancelled.");
+}
+
+onEvent("user/usertab/users", "click", "login()");

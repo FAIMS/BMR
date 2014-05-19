@@ -1,0 +1,953 @@
+<?xml version="1.0" encoding="utf-8"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
+
+
+  <h:head>
+    <h:title>Ropeway</h:title>
+    <!--model lists user interface tabgroups, tabs and content of tabs-->
+    <model>
+      <instance>
+        <faims id="ropeway">
+          <style>
+            <orientation>
+              <orientation/>
+            </orientation>
+            <even>
+              <layout_weight/>
+            </even>
+            <leftBigger>
+              <layout_weight/>
+            </leftBigger>
+          </style>
+          <user>
+            <usertab>
+              <users/>
+            </usertab>
+          </user>
+          <control>
+            <New_Data>
+              <newTower/>
+              <newTensionStation/>
+              <newBucket/>
+              <newTrackRope/>
+              <newHaulRope/>
+              <newRopeJoiner/>
+              <newRopeGroove/>
+              <Other/>
+            </New_Data>
+            <Search>
+              <Search_Bar/>
+              <container1>
+                <child1>
+                  <Dropdown/>
+                </child1>
+                <child2>
+                  <child1>
+                    <searchButton/>
+                  </child1>
+                  <child2>
+                    <searchAllButton/>
+                  </child2>
+                </child2>
+              </container1>
+              <Search_Results/>
+            </Search>
+            <gps>
+              <connectexternal/>
+              <connectinternal/>
+              <startsync/>
+              <stopsync/>
+            </gps>
+          </control>
+          <Bucket>
+            <Carrier_Details>
+              <Bucket_assembly_number/>
+              <Fitted_with_anti-tip_brackets/>
+              <Grip_slide_present/>
+              <Bolt_in_grip_slide/>
+              <Grip_slide_smashed/>
+              <Grip_present/>
+              <Idler_wheel_present/>
+              <Idler_wheel_grease_cap_present/>
+              <LH_diagonal/>
+              <LH_carrier_arm/>
+              <RH_diagonal/>
+              <RH_carrier_arm/>
+              <Carrier_notes/>
+              <Carrier_latitude/>
+              <Carrier_longitude/>
+              <CalculateGPS/>
+              <Carrier_photos/>
+              <takePhoto/>
+              <Update/>
+              <Delete/>
+            </Carrier_Details>
+            <PhotoLog/>
+            <Carriage_Details>
+              <Left_track_damage/>
+              <Left_track_rope_wheel/>
+              <Right_track_damage/>
+              <Right_track_rope_wheel/>
+              <Number_of_bolts/>
+              <Carriage_notes/>
+              <Carriage_latitude/>
+              <Carriage_longitude/>
+              <CalculateGPS/>
+              <Carriage_photos/>
+              <takePhoto/>
+              <Update/>
+              <Delete/>
+            </Carriage_Details>
+            <Bucket_Details>
+              <Hit/>
+              <Bucket_notes/>
+              <Bucket_latitude/>
+              <Bucket_longitude/>
+              <CalculateGPS/>
+              <Bucket_photos/>
+              <takePhoto/>
+              <Update/>
+              <Delete/>
+            </Bucket_Details>
+          </Bucket>
+          <Tower>
+            <Tower_pole>
+              <Tower_number/>
+              <Fourth_stabilising_pole/>
+              <Add_pole/>
+              <List_poles/>
+              <Show_pole/>
+              <Delete_pole/>
+              <Footing_spacing/>
+              <Tower_pole_notes/>
+              <Update/>
+              <Delete/>
+            </Tower_pole>
+            <Tower_hardware>
+              <Tower_type/>
+              <Add_track_crossbar/>
+              <List_track_crossbar/>
+              <Show_track_crossbar/>
+              <Delete_track_crossbar/>
+              <Haul_rope_cross_timber/>
+              <Add_haul_rope_wheel_frame/>
+              <List_haul_rope_wheel_frame/>
+              <Load_haul_rope_wheel_frame/>
+              <Delete_haul_rope_wheel_frame/>
+              <Tower_hardware_notes/>
+              <Update/>
+              <Delete/>
+            </Tower_hardware>
+            <Tower_bolts>
+              <Add_tower_bolt/>
+              <List_tower_bolt/>
+              <Update/>
+              <Delete/>
+            </Tower_bolts>
+          </Tower>
+
+          <Tower_pole>
+            <Details>
+              <Pole_number/>
+              <Pole_exists/>
+              <Length/>
+              <Diameter/>
+              <Orientation/>
+              <Footing/>
+              <Footing_depth/>
+              <Footing_diameter/>
+              <Latitude/>
+              <Longitude/>
+              <Photos/>
+              <Attach_photos/>
+              <Update/>
+              <Delete/>
+            </Details>
+          </Tower_pole>
+
+          <Track_crossbar>
+            <Details>
+              <Crossbar_number/>
+              <Track_rope_wheel_cross_bar/>
+              <Track_rope_cross_timber_present/>
+              <U_clamps/>
+              <Track_rope_saddle_or_wheel/>
+              <Head_plate/>
+              <Cross_timber_angle_bracket/>
+              <Latitude/>
+              <Longitude/>
+              <Photos/>
+              <Attach_photos/>
+              <Update/>
+              <Delete/>
+            </Details>
+          </Track_crossbar>
+
+          <Wheel_frame>
+            <Details>
+              <Frame_number/>
+              <Wheel/>
+              <Bearings/>
+              <Latitude/>
+              <Longitude/>
+              <Photos/>
+              <Attach_photos/>
+              <Update/>
+              <Delete/>
+            </Details>
+          </Wheel_frame>
+
+          <Tower_bolts>
+            <Details>
+              <Length/>
+              <Diameter/>
+              <Type/>
+              <Head/>
+              <In_situ/>
+              <Function/>
+              <Estimated_offset/>
+              <Estimated_distance/>
+              <Nut/>
+              <Washer/>
+              <Length_of_bolt/>
+              <Notes/>
+              <Latitude/>
+              <Longitude/>
+              <Photos/>
+              <Attach_photos/>
+              <Update/>
+              <Delete/>
+            </Details>
+          </Tower_bolts>
+
+        </faims>
+      </instance>
+   <!--     <bind nodeset="" type=""/>   -->
+    </model>
+  </h:head>
+
+    <h:body>
+    <!--Describes controls for each tabgroup and its nested tabs-->
+    <group ref="style">
+      <label/>
+      <group ref="orientation">
+        <label/>
+        <input ref="orientation">
+          <label>horizontal</label>
+        </input>
+      </group>
+      <group ref="even">
+        <label/>
+        <input ref="layout_weight">
+          <label>1</label>
+        </input>
+      </group>
+      <group ref="leftBigger">
+        <label/>
+        <input ref="layout_weight">
+          <label>2</label>
+        </input>
+      </group>
+    </group>
+    <group ref="user">
+      <label>User List</label>
+      <group ref="usertab" faims_scrollable="false">
+        <label>User_List</label>
+        <select1 appearance="compact" ref="users">
+          <label>Users:</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+      </group>
+    </group>
+    <group ref="control">
+      <label>Bleichert Ropeway</label>
+      <group ref="New_Data" faims_scrollable="false">
+        <label>Record New Data</label>
+        <trigger ref="newTower">
+          <label>New Tower</label>
+        </trigger>
+        <trigger ref="newTensionStation">
+          <label>New Tension Station</label>
+        </trigger>
+        <trigger ref="newBucket">
+          <label>New Bucket</label>
+        </trigger>
+        <trigger ref="newTrackRope">
+          <label>New Track Rope</label>
+        </trigger>
+        <trigger ref="newHaulRope">
+          <label>New Haul Rope</label>
+        </trigger>
+        <trigger ref="newRopeJoiner">
+          <label>New Rope Joiner</label>
+        </trigger>
+        <trigger ref="newRopeGroove">
+          <label>New Rope Groove</label>
+        </trigger>
+        <trigger ref="Other">
+          <label>Other</label>
+        </trigger>
+      </group>
+      <group ref="Search" faims_scrollable="false">
+        <label>Search</label>
+        <input faims_annotation="false" faims_certainty="false" faims_read_only="false" ref="Search_Bar">
+          <label>Search Term</label>
+        </input>
+        <group faims_style="orientation" ref="container1">
+          <label/>
+          <group faims_style="even" ref="child1">
+            <label>2</label>
+            <select1 faims_annotation="false" faims_certainty="false" ref="Dropdown">
+              <label>Select Entity:</label>
+              <item>
+                <label>placeholder</label>
+                <value>placeholder</value>
+              </item>
+            </select1>
+          </group>
+          <group faims_style="leftBigger" ref="child2">
+            <label/>
+            <group ref="child1">
+              <label/>
+              <trigger ref="searchButton">
+                <label>Search</label>
+              </trigger>
+            </group>
+            <group ref="child2">
+              <label/>
+              <trigger ref="searchAllButton">
+                <label>Search All</label>
+              </trigger>
+            </group>
+          </group>
+        </group>
+        <select1 appearance="compact" faims_annotation="false" faims_certainty="false" ref="Search_Results">
+          <label>Tap Record ID in list below to load it.</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+      </group>
+      <group ref="gps">
+        <label>Control</label>
+        <trigger ref="connectexternal">
+          <label>Connect To External GPS</label>
+        </trigger>
+        <trigger ref="connectinternal">
+          <label>Connect To Internal GPS</label>
+        </trigger>
+        <trigger ref="startsync">
+          <label>Start Synching</label>
+        </trigger>
+        <trigger ref="stopsync">
+          <label>Stop Synching</label>
+        </trigger>
+      </group>
+    </group>
+    <group ref="Bucket" faims_archent_type="bucket">
+      <label>Bucket</label>
+      <group ref="Carrier_Details">
+        <label>Carrier Details</label>
+        <input ref="Bucket_assembly_number" faims_attribute_name="Bucket assembly number" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>Assembly Number</label>
+        </input>
+        <select1 appearance="full" ref="Fitted_with_anti-tip_brackets" faims_attribute_name="Fitted with anti-tip brackets" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>Fitted with anti-tip brackets?</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="Grip_slide_present" faims_attribute_name="Grip slide present" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>Grip slide present?</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="Bolt_in_grip_slide" faims_attribute_name="Bolt in grip slide" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>Bolt in grip slide?</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="Grip_slide_smashed" faims_attribute_name="Grip slide smashed" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>Grip slide smashed?</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="Grip_present" faims_attribute_name="Grip present" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>Grip present?</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="Idler_wheel_present" faims_attribute_name="Idler wheel present" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>Idler wheel present?</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="Idler_wheel_grease_cap_present" faims_attribute_name="Idler wheel grease cap present" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>Idler wheel grease cap present?</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="LH_diagonal" faims_attribute_name="LH diagonal" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>LH diagonal</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="LH_carrier_arm" faims_attribute_name="LH carrier arm" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>LH carrier arm</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="RH_diagonal" faims_attribute_name="RH diagonal" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>RH diagonal</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="RH_carrier_arm" faims_attribute_name="RH carrier arm" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>RH carrier arm</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <input ref="Carrier_notes" faims_attribute_name="Carrier notes" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>Notes</label>
+        </input>
+        <input ref="Carrier_latitude" faims_attribute_name="Carrier latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true" faims_read_only="false">
+          <label>Latitude</label>
+        </input>
+        <input ref="Carrier_longitude" faims_attribute_name="Carrier longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true" faims_read_only="false">
+          <label>Longitude</label>
+        </input>
+        <trigger ref="CalculateGPS">
+          <label>Calculate GPS</label>
+        </trigger>
+        <select type="camera" ref="Carrier_photos" faims_attribute_name="Carrier photos" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="true" faims_read_only="false">
+          <label>Carrier Photos</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="takePhoto">
+          <label>Take Photo</label>
+        </trigger>
+        <trigger ref="Update">
+          <label>Save</label>
+        </trigger>
+        <trigger ref="Delete">
+          <label>Delete</label>
+        </trigger>
+      </group>
+      <group ref="PhotoLog">
+        <label>Photo Log</label>
+      </group>
+      <group ref="Carriage_Details">
+        <label>Carriage Details</label>
+        <select1 appearance="full" ref="Left_track_damage" faims_attribute_name="Left track damage" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>Left track damage?</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="Left_track_rope_wheel" faims_attribute_name="Left track rope wheel" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>Left track rope wheel</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="Right_track_damage" faims_attribute_name="Right track damage" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>Right track damage?</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="Right_track_rope_wheel" faims_attribute_name="Right track rope wheel" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>Right track rope wheel</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <input ref="Number_of_bolts" faims_attribute_name="Number of bolts" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>Number of bolts</label>
+        </input>
+        <input ref="Carriage_notes" faims_attribute_name="Carriage notes" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>Notes</label>
+        </input>
+        <input ref="Carriage_latitude" faims_attribute_name="Carriage latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true" faims_read_only="false">
+          <label>Latitude</label>
+        </input>
+        <input ref="Carriage_longitude" faims_attribute_name="Carriage longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true" faims_read_only="false">
+          <label>Longitude</label>
+        </input>
+        <trigger ref="CalculateGPS">
+          <label>Calculate GPS</label>
+        </trigger>
+        <select type="camera" ref="Carriage_photos" faims_attribute_name="Carriage photos" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="true" faims_read_only="false">
+          <label>Carriage Photos</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="takePhoto">
+          <label>Take Photo</label>
+        </trigger>
+        <trigger ref="Update">
+          <label>Save</label>
+        </trigger>
+        <trigger ref="Delete">
+          <label>Delete</label>
+        </trigger>
+      </group>
+      <group ref="Bucket_Details">
+        <label>Bucket Details</label>
+        <select1 appearance="full" ref="Hit" faims_attribute_name="Hit" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>Hit?</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <input ref="Bucket_notes" faims_attribute_name="Bucket notes" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>Notes</label>
+        </input>
+        <input ref="Bucket_latitude" faims_attribute_name="Bucket latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true" faims_read_only="false">
+          <label>Latitude</label>
+        </input>
+        <input ref="Bucket_longitude" faims_attribute_name="Bucket longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true" faims_read_only="false">
+          <label>Longitude</label>
+        </input>
+        <trigger ref="CalculateGPS">
+          <label>Calculate GPS</label>
+        </trigger>
+        <select type="camera" ref="Bucket_photos" faims_attribute_name="Bucket photos" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="true" faims_read_only="false">
+          <label>Bucket Photos</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="takePhoto">
+          <label>Take Photo</label>
+        </trigger>
+        <trigger ref="Update">
+          <label>Save</label>
+        </trigger>
+        <trigger ref="Delete">
+          <label>Delete</label>
+        </trigger>
+      </group>
+    </group>
+    <group ref="Tower" faims_archent_type="tower">
+      <label>Tower</label>
+      <group ref="Tower_pole">
+        <label>Tower Pole</label>
+        <input ref="Tower_number" faims_attribute_name="Tower number" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+          <label>Tower Number</label>
+        </input>
+        <select1 appearance="full" ref="Fourth_stabilising_pole" faims_attribute_name="Fourth stabilising pole" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
+          <label>Fourth stabilising pole?</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <trigger ref="Add_pole" faims_certainty="false" faims_annotation="false">
+          <label>Add Pole</label>
+        </trigger>
+        <select1 ref="List_poles" faims_certainty="false" faims_annotation="false">
+          <label>List of Poles</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <trigger ref="Show_pole" faims_certainty="false" faims_annotation="false">
+          <label>Load Pole</label>
+        </trigger>
+        <trigger ref="Delete_pole" faims_certainty="false" faims_annotation="false">
+          <label>Delete Pole</label>
+        </trigger>
+        <input ref="Footing_spacing" faims_attribute_name="Footing spacing" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+          <label>Footing spacing</label>
+        </input>
+        <input ref="Tower_pole_notes" faims_attribute_name="Tower pole notes" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+          <label>Notes</label>
+        </input>
+        <trigger ref="Update">
+          <label>Save</label>
+        </trigger>
+        <trigger ref="Delete">
+          <label>Delete</label>
+        </trigger>
+      </group>
+      <group ref="Tower_hardware">
+        <label>Tower hardware</label>
+        <select1 appearance="full" ref="Tower_type" faims_attribute_name="Tower type" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="true">
+          <label>Tower type</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <trigger ref="Add_track_crossbar">
+          <label>Add Track Crossbar</label>
+        </trigger>
+        <select1 ref="List_track_crossbar" faims_certainty="false" faims_annotation="false">
+          <label>List of Track Crossbars</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <trigger ref="Show_track_crossbar">
+          <label>Load Track Crossbar</label>
+        </trigger>
+        <trigger ref="Delete_track_crossbar">
+          <label>Delete Tack Crossbar</label>
+        </trigger>
+        <select1 appearance="full" ref="Haul_rope_cross_timber" faims_attribute_name="Haul rope cross timber" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="true">
+          <label>Haul rope cross timber</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <trigger ref="Add_haul_rope_wheel_frame">
+          <label>Add haul rope wheel frame</label>
+        </trigger>
+        <select1 ref="List_haul_rope_wheel_frame" faims_certainty="false" faims_annotation="false">
+          <label>List of haul rope wheel frames</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <trigger ref="Load_haul_rope_wheel_frame">
+          <label>Load haul rope wheel frame</label>
+        </trigger>
+        <trigger ref="Delete_haul_rope_wheel_frame">
+          <label>Delete haul rope wheel frame</label>
+        </trigger>
+        <input ref="Tower_hardware_notes" faims_attribute_name="Tower hardware notes" faims_certainty="false" faims_annotation="false">
+          <label>Notes</label>
+        </input>
+        <trigger ref="Update">
+          <label>Save</label>
+        </trigger>
+        <trigger ref="Delete">
+          <label>Delete</label>
+        </trigger>
+      </group>
+      <group ref="Tower_bolts">
+        <label>Tower Bolts</label>
+        <trigger ref="Add_tower_bolt">
+          <label>Add Tower Bolt</label>
+        </trigger>
+        <select1 appearance="compact" ref="List_tower_bolt" faims_certainty="false" faims_annotation="false">
+          <label>List of Tower Bolt</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <trigger ref="Update">
+          <label>Save</label>
+        </trigger>
+        <trigger ref="Delete">
+          <label>Delete</label>
+        </trigger>
+      </group>
+    </group>
+    <group ref="Tower_pole" faims_archent_type="tower pole">
+      <label>Tower Pole</label>
+      <group ref="Details">
+        <label>Details</label>
+        <input ref="Pole_number" faims_attribute_name="Pole number" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+          <label>Pole number</label>
+        </input>
+        <select1 appearance="full" ref="Pole_exists" faims_attribute_name="Pole exists" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
+          <label>Pole exists</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <input ref="Length" faims_attribute_name="Length" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+          <label>Length</label>
+        </input>
+        <input ref="Diameter" faims_attribute_name="Diameter" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+          <label>Diameter</label>
+        </input>
+        <input ref="Orientation" faims_attribute_name="Orientation" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+          <label>Orientation</label>
+        </input>
+        <select1 appearance="full" ref="Footing" faims_attribute_name="Footing" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
+          <label>Footing</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <input ref="Footing_depth" faims_attribute_name="Footing depth" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+          <label>Footing depth</label>
+        </input>
+        <input ref="Footing_diameter" faims_attribute_name="Footing diameter" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+          <label>Footing diameter</label>
+        </input>
+        <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+          <label>Latitude</label>
+        </input>
+        <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+          <label>Longitude</label>
+        </input>
+        <select type="camera" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="camera" faims_certainty="false" faims_annotation="false">
+          <label>Photos</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="Attach_photos">
+          <label>Attach Photos</label>
+        </trigger>
+        <trigger ref="Update">
+          <label>Save</label>
+        </trigger>
+        <trigger ref="Delete">
+          <label>Delete</label>
+        </trigger>
+      </group>
+    </group>
+    <group ref="Track_crossbar" faims_archent_type="track crossbar">
+      <label>Track Crossbar</label>
+      <group ref="Details">
+        <label>Details</label>
+        <input ref="Crossbar_number" faims_attribute_name="Crossbar number" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+          <label>Crossbar Number</label>
+        </input>
+        <select1 appearance="full" ref="Track_rope_wheel_cross_bar" faims_attribute_name="Track rope wheel cross bar" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
+          <label>Track rope wheel cross bar</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="Track_rope_cross_timber_present" faims_attribute_name="Track rope cross timber present" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
+          <label>Track rope cross timber present</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <input ref="U_clamps" faims_attribute_name="U clamps for track rope wheel cross bar" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+          <label>U clamps for track rope wheel cross bar</label>
+        </input>
+        <select1 ref="Track_rope_saddle_or_wheel" faims_attribute_name="Track rope saddle or wheel" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="true">
+          <label>Track rope saddle or wheel</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="Head_plate" faims_attribute_name="Head plate" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
+          <label>Head plate</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="Cross_timber_angle_bracket" faims_attribute_name="Cross timber angle bracket" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
+          <label>Cross timber angle bracket</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+          <label>Latitude</label>
+        </input>
+        <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+          <label>Longitude</label>
+        </input>
+        <select type="camera" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="camera" faims_certainty="false" faims_annotation="false">
+          <label>Photos</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="Attach_photos">
+          <label>Attach Photos</label>
+        </trigger>
+        <trigger ref="Update">
+          <label>Save</label>
+        </trigger>
+        <trigger ref="Delete">
+          <label>Delete</label>
+        </trigger>
+      </group>
+    </group>
+    <group ref="Wheel_frame" faims_archent_type="haul rope wheel frame">
+      <label>Haul rope wheel frame</label>
+      <group ref="Details">
+        <label>Details</label>
+        <input ref="Frame_number" faims_attribute_name="Frame number" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+          <label>Frame number</label>
+        </input>
+        <select1 ref="Wheel" faims_attribute_name="Wheel" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
+          <label>Wheel</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="Bearings" faims_attribute_name="Bearings" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
+          <label>Bearings</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+          <label>Latitude</label>
+        </input>
+        <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+          <label>Longitude</label>
+        </input>
+        <select type="camera" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="camera" faims_certainty="false" faims_annotation="false">
+          <label>Photos</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="Attach_photos">
+          <label>Attach Photos</label>
+        </trigger>
+        <trigger ref="Update">
+          <label>Save</label>
+        </trigger>
+        <trigger ref="Delete">
+          <label>Delete</label>
+        </trigger>
+      </group>
+    </group>
+    <group ref="Tower_bolts" faims_archent_type="tower bolts">
+      <label>Tower Bolts</label>
+      <group ref="Details">
+        <label>Details</label>
+        <input ref="Length" faims_attribute_name="Length" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+          <label>Length</label>
+        </input>
+        <input ref="Diameter" faims_attribute_name="Diameter" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+          <label>Diameter</label>
+        </input>
+        <select1 appearance="full" ref="Type" faims_attribute_name="Tower bolt type" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
+          <label>Type</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="Head" faims_attribute_name="Head" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
+          <label>Head</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="In_situ" faims_attribute_name="In situ" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
+          <label>In situ</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 ref="Function" faims_attribute_name="Function" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
+          <label>Function</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <input ref="Estimated_offset" faims_attribute_name="Estimated offset" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+          <label>Estimated offset from centerline</label>
+        </input>
+        <input ref="Estimated_distance" faims_attribute_name="Estimated distance" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+          <label>Estimated distance north or south of supposed centre of tower</label>
+        </input>
+        <select1 appearance="full" ref="Nut" faims_attribute_name="Nut" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
+          <label>Nut</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="Washer" faims_attribute_name="Washer" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
+          <label>Washer</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <input ref="Length_of_bolt" faims_attribute_name="Length of bolt" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+          <label>Length of bolt between head and nut / washe</label>
+        </input>
+        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+          <label>Notes</label>
+        </input>
+        <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+          <label>Latitude</label>
+        </input>
+        <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+          <label>Longitude</label>
+        </input>
+        <select type="camera" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="camera" faims_certainty="false" faims_annotation="false">
+          <label>Photos</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="Attach_photos">
+          <label>Attach Photos</label>
+        </trigger>
+        <trigger ref="Update">
+          <label>Save</label>
+        </trigger>
+        <trigger ref="Delete">
+          <label>Delete</label>
+        </trigger>
+      </group>
+    </group>
+  </h:body>
+</h:html>
+

@@ -1,0 +1,1350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSchema>
+  <RelationshipElement name="TowerTowerPole" type="bidirectional">
+    <description>Implements a 1:N between Tower and Tower Poles</description>
+  </RelationshipElement>
+  <RelationshipElement name="TowerCrossbar" type="bidirectional">
+    <description>Implements a 1:N between Tower and Track Crossbar</description>
+  </RelationshipElement>
+  <RelationshipElement name="TowerHaulRope" type="bidirectional">
+    <description>Implements a 1:N between Tower and Haul Ropes</description>
+  </RelationshipElement>
+  <RelationshipElement name="TowerTowerBolt" type="bidirectional">
+    <description>Implements a 1:N between Tower and Tower Bolt</description>
+  </RelationshipElement>
+  <RelationshipElement name="TensionTensionBolt" type="bidirectional">
+    <description>Implements a 1:N between Tension Station and Tension Station Bolt</description>
+  </RelationshipElement>
+
+  <!-- ARCHENT: Bucket -->
+  <ArchaeologicalElement name="Bucket">
+    <description></description>
+    <property name="Bucket assembly number" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Fitted with anti-tip brackets" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Grip slide present" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Bolt in grip slide" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Grip slide smashed" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+        <term> Right
+          <description>Description TBD</description>
+        </term>
+        <term> Left
+          <description>Description TBD</description>
+        </term>
+        <term> Both
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Grip present" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+        <term> Open
+          <description>Description TBD</description>
+        </term>
+        <term> Closed
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Idler wheel present" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Idler wheel grease cap present" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="LH diagonal" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> None
+          <description>Description TBD</description>
+        </term>
+        <term> Bent Inward
+          <description>Description TBD</description>
+        </term>
+        <term> Bent Outward
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="LH carrier arm" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> None
+          <description>Description TBD</description>
+        </term>
+        <term> Bent Inward
+          <description>Description TBD</description>
+        </term>
+        <term> Bent Outward
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="RH diagonal" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> None
+          <description>Description TBD</description>
+        </term>
+        <term> Bent Inward
+          <description>Description TBD</description>
+        </term>
+        <term> Bent Outward
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="RH carrier arm" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> None
+          <description>Description TBD</description>
+        </term>
+        <term> Bent Inward
+          <description>Description TBD</description>
+        </term>
+        <term> Bent Outward
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Carrier notes" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Carrier latitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Carrier longitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Carrier photos" type="file">
+      <description>Description TBD</description>
+    </property>
+    <property name="Left track damage" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Left track rope wheel" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> None
+          <description>Description TBD</description>
+        </term>
+        <term> Damage
+          <description>Description TBD</description>
+        </term>
+        <term> Undamaged
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Right track damage" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Right track rope wheel" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> None
+          <description>Description TBD</description>
+        </term>
+        <term> Damage
+          <description>Description TBD</description>
+        </term>
+        <term> Undamaged
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Number of bolts" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Carriage notes" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Carriage latitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Carriage longitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Carriage photos" type="file">
+      <description>Description TBD</description>
+    </property>
+    <property name="Hit" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+        <term> Right
+          <description>Description TBD</description>
+        </term>
+        <term> Left
+          <description>Description TBD</description>
+        </term>
+        <term> Both
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Bucket notes" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Bucket latitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Bucket longitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Bucket photos" type="file">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+
+
+  <!-- ARCHENT: Tower -->
+  <ArchaeologicalElement name="Tower">
+    <description></description>
+    <property name="Tower number" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Fourth stabilising pole" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Footing spacing">
+      <description>Description TBD</description>
+    </property>
+    <property name="Tower pole notes">
+      <description>Description TBD</description>
+    </property>
+    <property name="Tower type" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Single Head
+          <description>Description TBD</description>
+        </term>
+        <term> Double Head
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Haul rope cross timber" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Tower hardware notes" type="freetext">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+
+  <!-- ARCHENT: Tower Pole -->
+  <ArchaeologicalElement name="Tower pole">
+    <description>Description TBD</description>
+    <property name="Pole number" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Pole exists" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Length" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Diameter" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Orientation" type="freetext">
+      <description>Compass bearing standing at base - thick end - of pole</description>
+    </property>
+    <property name="Footing" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> None visible
+          <description>Description TBD</description>
+        </term>
+        <term> Rock circle
+          <description>Description TBD</description>
+        </term>
+        <term> Pit in Rock
+          <description>Description TBD</description>
+        </term>
+        <term> Other
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Footing depth" type="float">
+      <description/>
+    </property>
+    <property name="Footing diameter" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Latitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Longitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Photos" type="file">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+
+  <!-- ARCHENT: Haul rope wheel frame -->
+  <ArchaeologicalElement name="Haul rope wheel frame">
+    <description></description>
+    <property name="Frame number" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Wheel" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> 
+          <description>Description TBD</description>
+        </term>
+        <term> 
+          <description>Description TBD</description>
+        </term>
+        <term> 
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Bearings" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Latitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Longitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Photos" type="file">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+
+  <!-- ARCHENT: Tower bolts -->
+  <ArchaeologicalElement name="Tower bolts">
+    <description></description>
+    <property name="Length" type="float" isIdentifier="true">
+      <description>Measurement in mm</description>
+    </property>
+    <property name="Diameter" type="float" isIdentifier="true">
+      <description>Measurement in mm</description>
+    </property>
+    <property name="Type" type="enum" isIdentifier="true">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Bolt
+          <description>Description TBD</description>
+        </term>
+        <term> Screw
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Head" type="enum" isIdentifier="true">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Square
+          <description>Description TBD</description>
+        </term>
+        <term> Hex
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="In situ" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Function" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Tower bracket
+          <description>Description TBD</description>
+        </term>
+        <term> Head plate
+          <description>Description TBD</description>
+        </term>
+        <term> Cross arm
+          <description>Description TBD</description>
+        </term>
+        <term> Rope saddle
+          <description>Description TBD</description>
+        </term>
+        <term> Tower bracket
+          <description>Description TBD</description>
+        </term>
+        <term> Haul rope wheel frame
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Estimated offset" type="float">
+      <description>Measurement in metres</description>
+    </property>
+    <property name="Estimated distance" type="float">
+      <description>Measurement in metres</description>
+    </property>
+    <property name="Nut" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Square
+          <description>Description TBD</description>
+        </term>
+        <term> Hex
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Washer" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Length of bolt" type="float">
+      <description>Measurement in mm</description>
+    </property>
+    <property name="Notes" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Latitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Longitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Photos" type="file">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+
+  <!-- ARCHENT: Tension station -->
+  <ArchaeologicalElement name="Tension station">
+    <description></description>
+    <property name="Pit length" type="float" isIdentifier="true">
+      <description>Measurement in mm</description>
+    </property>
+    <property name="Pit width" type="float" isIdentifier="true">
+      <description>Measurement in mm</description>
+    </property>
+    <property name="Pit depth" type="float" isIdentifier="true">
+      <description/>
+    </property>
+    <property name="Timber frame around top of pit" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Tension pit top rail" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Tension pit top rail hanger" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Chain roller 1 exists" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Chain roller 1 diameter" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Chain roller 1 thickness" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Chain roller 1 shaft diameter" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Chain roller 1 shaft" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Chain roller 1 bearings" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> None
+          <description>Description TBD</description>
+        </term>
+        <term> In Wheel
+          <description>Description TBD</description>
+        </term>
+        <term> In Frame on Shaft
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Chain roller 2 exists" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Chain roller 2 diameter" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Chain roller 2 thickness" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Chain roller 2 shaft diameter" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Chain roller 2 shaft" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Chain roller 2 bearings" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> None
+          <description>Description TBD</description>
+        </term>
+        <term> In Wheel
+          <description>Description TBD</description>
+        </term>
+        <term> In Frame on Shaft
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Chain roller 3 exists" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Chain roller 3 diameter" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Chain roller 3 thickness" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Chain roller 3 shaft diameter" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Chain roller 3 shaft" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Chain roller 3 bearings" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> None
+          <description>Description TBD</description>
+        </term>
+        <term> In Wheel
+          <description>Description TBD</description>
+        </term>
+        <term> In Frame on Shaft
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Chain roller 4 exists" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Chain roller 4 diameter" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Chain roller 4 thickness" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Chain roller 4 shaft diameter" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Chain roller 4 shaft" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Chain roller 4 bearings" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> None
+          <description>Description TBD</description>
+        </term>
+        <term> In Wheel
+          <description>Description TBD</description>
+        </term>
+        <term> In Frame on Shaft
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Cradle 1 exists" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Cradle 1 counterweight count" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 1 counterweight material" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Cast Iron
+          <description>Description TBD</description>
+        </term>
+        <term> Lead
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Cradle 1 counterweight length" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 1 counterweight width" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 1 counterweight thickness" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 1 latitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 1 longitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 1 photos" type="file">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 2 exists" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Cradle 2 counterweight count" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 2 counterweight material" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Cast Iron
+          <description>Description TBD</description>
+        </term>
+        <term> Lead
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Cradle 2 counterweight length" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 2 counterweight width" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 2 counterweight thickness" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 2 latitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 2 longitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 2 photos" type="file">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 3 exists" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Cradle 3 counterweight count" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 3 counterweight material" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Cast Iron
+          <description>Description TBD</description>
+        </term>
+        <term> Lead
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Cradle 3 counterweight length" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 3 counterweight width" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 3 counterweight thickness" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 3 latitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 3 longitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 3 photos" type="file">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 4 exists" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Cradle 4 counterweight count" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 4 counterweight material" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Cast Iron
+          <description>Description TBD</description>
+        </term>
+        <term> Lead
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Cradle 4 counterweight length" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 4 counterweight width" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 4 counterweight thickness" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 4 latitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 4 longitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Cradle 4 photos" type="file">
+      <description>Description TBD</description>
+    </property>
+    <property name="Signal wire insulator" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Notes" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Corner point 1 latitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Corner point 1 longitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Corner point 2 latitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Corner point 2 longitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Corner point 3 latitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Corner point 3 longitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Corner point 4 latitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Corner point 4 longitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Photos" type="file">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+  
+  <!-- ARCHENT: Tension station bolts -->
+  <ArchaeologicalElement name="Tension station bolts">
+    <description></description>
+    <property name="Length" type="float" isIdentifier="true">
+      <description>Measurement in mm</description>
+    </property>
+    <property name="Diameter" type="float" isIdentifier="true">
+      <description>Measurement in mm</description>
+    </property>
+    <property name="Type" type="enum" isIdentifier="true">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Bolt
+          <description>Description TBD</description>
+        </term>
+        <term> Screw
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Head" type="enum" isIdentifier="true">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Square
+          <description>Description TBD</description>
+        </term>
+        <term> Hex
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Location of hold down bolts">
+      <description>Relative to pit corners - which corner, bearing, how far away</description>
+    </property>
+    <property name="Nut" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Square
+          <description>Description TBD</description>
+        </term>
+        <term> Hex
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Washer" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Length of bolt" type="float">
+      <description>Measurement in mm</description>
+    </property>
+  </ArchaeologicalElement>
+  <ArchaeologicalElement name="Track crossbar">
+    <description>Description TBD</description>
+    <property name="Crossbar Number" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Track rope wheel cross bar" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Track rope cross timber present" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="U clamps for track rope wheel cross bar" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Track rope saddle or wheel" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Saddle
+          <description>Description TBD</description>
+          <term> None
+            <description>Description TBD</description>
+          </term>
+          <term> One
+            <description>Description TBD</description>
+          </term>
+          <term> Two
+            <description>Description TBD</description>
+          </term>
+        </term>
+        <term> Wheel
+          <description>Description TBD</description>
+          <term> None
+            <description>Description TBD</description>
+          </term>
+          <term> One
+            <description>Description TBD</description>
+          </term>
+          <term> Two
+            <description>Description TBD</description>
+          </term>
+        </term>
+      </lookup>
+    </property>
+    <property name="Head plate" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Yes
+          <description>Description TBD</description>
+        </term>
+        <term> No
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Cross timber angle bracket" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> None
+          <description>Description TBD</description>
+        </term>
+        <term> One
+          <description>Description TBD</description>
+        </term>
+        <term> Two
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Latitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Longitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Photos" type="file">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+
+  <!-- ARCHENT: Track Rope -->
+  <ArchaeologicalElement name="Track rope">
+    <description></description>
+    <property name="Measurement Number" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Gauge" type="float">
+      <description>Distance between ropes in m</description>
+    </property>
+    <property name="Diameter" type="float">
+      <description>Measurement in mm</description>
+    </property>
+    <property name="Number of outer wires" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Structure" type="freetext">
+      <description>For example, 12/6/1 or 13/12/6/1</description>
+    </property>
+    <property name="Wear from carrier wheels on top" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> None
+          <description>Description TBD</description>
+        </term>
+        <term> 1 wire
+          <description>Description TBD</description>
+        </term>
+        <term> 2-3 wires
+          <description>Description TBD</description>
+        </term>
+        <term> 4-5 wires
+          <description>Description TBD</description>
+        </term>
+        <term> 6-7 wires
+          <description>Description TBD</description>
+        </term>
+        <term> 8+ wires
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Wear from saddle pressure underneath" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> None
+          <description>Description TBD</description>
+        </term>
+        <term> 1 wire
+          <description>Description TBD</description>
+        </term>
+        <term> 2-3 wires
+          <description>Description TBD</description>
+        </term>
+        <term> 4-5 wires
+          <description>Description TBD</description>
+        </term>
+        <term> 6-7 wires
+          <description>Description TBD</description>
+        </term>
+        <term> 8+ wires
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Length of saddle wear zone">
+      <description>Measurement in cm</description>
+    </property>
+    <property name="Rope end condition" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Cut
+          <description>Description TBD</description>
+        </term>
+        <term> Chiselled
+          <description>Description TBD</description>
+        </term>
+        <term> Melted
+          <description>Description TBD</description>
+        </term>
+        <term> Original Fitting in Place
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Notes" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Latitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Longitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Photos" type="file">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+
+  <!-- ARCHENT: Haul rope -->
+  <ArchaeologicalElement name="Haul rope">
+    <description></description>
+    <property name="Direction" type="enum" isIdentifier="true">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Inbound
+          <description>Description TBD</description>
+        </term>
+        <term> Outbound
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Haul rope type" type="enum" isIdentifier="true">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Rope
+          <description>Description TBD</description>
+        </term>
+        <term> End
+          <description>Description TBD</description>
+        </term>
+        <term> Eye
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Length" type="float" isIdentifier="true">
+      <description>Measurement in m</description>
+    </property>
+    <property name="Diameter" type="float">
+      <description>Measurement in mm</description>
+    </property>
+    <property name="Number of outer wires" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Structure" type="freetext">
+      <description># / # / Lay - e.g., 6 / 19 / Right hand = six strands of 19 wires each twisted clockwise along rope</description>
+    </property>
+    <property name="Rope end condition" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Cut
+          <description>Description TBD</description>
+        </term>
+        <term> Chiselled
+          <description>Description TBD</description>
+        </term>
+        <term> Melted
+          <description>Description TBD</description>
+        </term>
+        <term> Original Fitting in Place
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Notes" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Latitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Longitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Photos" type="file">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+
+  <!-- ARCHENT: Rope joiner -->
+  <ArchaeologicalElement name="Rope joiner">
+    <description>Description TBD</description>
+    <property name="Rope joiner" type="enum" isIdentifier="true">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Track rope
+          <description>Description TBD</description>
+        </term>
+        <term> Inbound haul
+          <description>Description TBD</description>
+        </term>
+        <term> Outbound haul
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Notes" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Latitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Longitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Photos" type="file">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+
+  <!-- ARCHENT: Other -->
+  <ArchaeologicalElement name="Other">
+    <description>Description TBD</description>
+    <property name="Othe" type="enum" isIdentifier="true">
+      <description>Description TBD</description>
+      <lookup>
+        <term> Coppiced tree
+          <description>Description TBD</description>
+        </term>
+        <term> Miscellaneous feature
+          <description>Description TBD</description>
+        </term>
+        <term> Miscellaneous artefact
+          <description>Description TBD</description>
+        </term>
+        <term> Grafitti
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Notes" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Latitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Longitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Photos" type="file">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+</dataSchema>
