@@ -2,8 +2,10 @@ startInternalGPS();
 
 User user;
 String userid;
+String feature_id = null;
+String delete_id = null;
 
-onEvent("control", "show", "populateControl()");
+onEvent("control", "show", "populateControl(); feature_id = null;");
 onEvent("control/New_Data/newBucket", "click", "newBucket()");
 onEvent("control/New_Data/newTower", "click", "newTower()");
 onEvent("control/New_Data/newTensionStation", "click", "newTensionStation()");
@@ -29,7 +31,7 @@ searchAll(){
 
 search(){
     populateList("control/Search/Search_Results", fetchAll(""+
-        "SELECT uuid||'='||aenttypename, group_concat(coalesce(measure   || ' '  || vocabname || '('  ||  freetext ||'; '|| (certainty * 100.0) || '% certain)',  "+
+        "SELECT uuid||'='||aenttypename, aenttypename || ': ' || group_concat( coalesce(measure   || ' '  || vocabname || '('  ||  freetext ||'; '|| (certainty * 100.0) || '% certain)',  "+
         "                                     measure   || ' (' || freetext  || '; ' || (certainty * 100.0) || '% certain)',  "+
         "                                     vocabname || ' (' || freetext  || '; ' || (certainty * 100.0) || '% certain)',  "+
         "                                     measure   || ' '  || vocabname || ' (' || (certainty * 100.0) || '% certain)',  "+
@@ -59,29 +61,56 @@ specialLoad(){
         loadBucketFrom(splitString[0]);
     } else if(splitString[1].equals("Tower")) {
         loadTowerFrom(splitString[0]);
-    }
+    } else if(splitString[1].equals("Tower pole")) {
+        loadTowerPoleFrom(splitString[0]);
+    } else if(splitString[1].equals("Haul rope wheel frame")) {
+        loadWheelFrameFrom(splitString[0]);
+    } else if(splitString[1].equals("Tower bolts")) {
+        loadTowerBoltFrom(splitString[0]);
+    } else if(splitString[1].equals("Tension station")) {
+        loadTensionStationFrom(splitString[0]);
+    } else if(splitString[1].equals("Tension station bolts")) {
+        loadTensionStationBoltsFrom(splitString[0]);
+    } else if(splitString[1].equals("Track crossbar")) {
+        loadTrackCrossbarFrom(splitString[0]);
+    } else if(splitString[1].equals("Track rope")) {
+        loadTrackRopeFrom(splitString[0]);
+    } else if(splitString[1].equals("Rope joiner")) {
+        loadRopeJoinerFrom(splitString[0]);
+    } else if(splitString[1].equals("Rope groove")) {
+        loadRopeGrooveFrom(splitString[0]);
+    } else if(splitString[1].equals("Haul rope")) {
+        loadHaulRopeFrom(splitString[0]); 
+    } else if(splitString[1].equals("Other")) {
+        loadOtherFrom(splitString[0]);
+    } else if(splitString[1].equals("Photograph log")) {
+        loadPhotologFrom(splitString[0]);
+    } 
 }
 
 /** ARCHENT: Bucket **/
+onEvent("Bucket", "show", "loadBucketRelated()");
+onEvent("Bucket/Carriage_Details", "show", "setFieldValue(\"Bucket/Carriage_Details/Bucket_assembly_number\", getFieldValue(\"Bucket/Carrier_Details/Bucket_assembly_number\"))");
+onEvent("Bucket/Bucket_Details", "show", "setFieldValue(\"Bucket/Bucket_Details/Bucket_assembly_number\", getFieldValue(\"Bucket/Carrier_Details/Bucket_assembly_number\"))");
 
-onEvent("Bucket/Carrier_Details/Update", "delayclick", "saveBucket()");
-onEvent("Bucket/Carriage_Details/Update", "delayclick", "saveBucket()");
-onEvent("Bucket/Bucket_Details/Update", "delayclick", "saveBucket()");
-
-onEvent("Bucket/Carrier_Details/CalculateGPS", "delayclick", "fillInGPS(\"Bucket/Carrier_Details/Carrier_\")");
-onEvent("Bucket/Carriage_Details/CalculateGPS", "delayclick", "fillInGPS(\"Bucket/Carriages_Details/Carriage_\")");
-onEvent("Bucket/Bucket_Details/CalculateGPS", "delayclick", "fillInGPS(\"Bucket/Bucket_Details/Bucket_\")");
-
-onEvent("Bucket/Carrier_Details/takePhoto", "delayclick", "attachPictureTo(\"Bucket/Carrier_Details/Carrier_photos\")");
-onEvent("Bucket/Carriage_Details/takePhoto", "delayclick", "attachPictureTo(\"Bucket/Carriage_Details/Carriage_photos\")");
-onEvent("Bucket/Bucket_Details/takePhoto", "delayclick", "attachPictureTo(\"Bucket/Bucket_Details/Bucket_photos\")");
+onEvent("Bucket/Carrier_Details/Update", "delayclick", "saveBucket(\"\")");
+onEvent("Bucket/Carriage_Details/Update", "delayclick", "saveBucket(\"\")");
+onEvent("Bucket/Bucket_Details/Update", "delayclick", "saveBucket(\"\")");
 
 onEvent("Bucket/Carrier_Details/Delete", "delayclick", "deleteBucket()");
 onEvent("Bucket/Carriage_Details/Delete", "delayclick", "deleteBucket()");
 onEvent("Bucket/Bucket_Details/Delete", "delayclick", "deleteBucket()");
 
-onEvent("Bucket", "show", "loadBucketAttributes()");
+onEvent("Bucket/PhotoLog/newPhotoLog", "delayclick", "saveBucket(\"feature_id = bucket_id; newPhotolog();\")");
+onEvent("Bucket/PhotoLog/ListPhotoLog", "click", "feature_id = bucket_id; loadPhotolog();");
 
+onEvent("Bucket/Carrier_Details/CalculateGPS", "delayclick", "fillInGPS(\"Bucket/Carrier_Details/Carrier_\")");
+onEvent("Bucket/Carriage_Details/CalculateGPS", "delayclick", "fillInGPS(\"Bucket/Carriage_Details/Carriage_\")");
+onEvent("Bucket/Bucket_Details/CalculateGPS", "delayclick", "fillInGPS(\"Bucket/Bucket_Details/Bucket_\")");
+
+onEvent("Bucket/Carrier_Details/takePhoto", "delayclick", "attachPictureTo(\"Bucket/Carrier_Details/Carrier_photos\")");
+onEvent("Bucket/Carriage_Details/takePhoto", "delayclick", "attachPictureTo(\"Bucket/Carriage_Details/Carriage_photos\")");
+onEvent("Bucket/Bucket_Details/takePhoto", "delayclick", "attachPictureTo(\"Bucket/Bucket_Details/Bucket_photos\")");
 
 String bucket_id;
 
@@ -90,12 +119,14 @@ newBucket(){
     newTabGroup("Bucket");
 }
 
-loadBucketFrom(bucketid) {
-    bucket_id = bucketid;
-    if (isNull(bucket_id)) return;
+loadBucketFrom(archent_id) {
+    bucket_id = archent_id;
+    if (isNull(bucket_id)) {
+        showToast("No record selected");
+        return;
+    }
     
     showTabGroup("Bucket", bucket_id);    
-    loadBucketAttributes();
 }
 
 loadBucketAttributes(){
@@ -117,15 +148,15 @@ loadBucketAttributes(){
     populateRadioGroup("Bucket/Bucket_Details/Hit", makeVocab("Hit"));
 }
 
-saveBucket() {
+saveBucket(String callback) {
     if (isNull(getFieldValue("Bucket/Carrier_Details/Bucket_assembly_number"))) {
-        showWarning("Logic Error", "Cannot save record without Bucket Assembly Number");
+        showWarning("Validation Error", "Cannot save Bucket without Bucket Assembly Number");
         return;
     }
     if (!isNull(bucket_id)) {
         entity = fetchArchEnt(bucket_id);
     }
-    saveTabGroup("Bucket", bucket_id, null, null, "bucket_id = getLastSavedRecordId();");
+    saveTabGroup("Bucket", bucket_id, null, null, "bucket_id = getLastSavedRecordId();" + callback);
 }
 
 deleteBucket(){
@@ -136,22 +167,40 @@ deleteBucket(){
     }
 }
 
-reallyDeleteBucket(){
+reallyDeleteBucket() {
     deleteArchEnt(bucket_id);
     cancelTabGroup("Bucket", false);
 }
 
-/** ARCHENT: Tower **/
+loadBucketRelated() {
+    feature_id = bucket_id;
+    loadRelatedPhotologs("Bucket/PhotoLog/ListPhotoLog");
+}
 
-onEvent("Tower/Tower_pole/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_hardware/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_bolts/Update", "delayclick", "saveTower()");
+/** ARCHENT: Tower **/
+onEvent("Tower", "show", "loadTowerRelated();");
+
+onEvent("Tower/Tower_pole/Update", "delayclick", "saveTower(\"\")");
+onEvent("Tower/Tower_hardware/Update", "delayclick", "saveTower(\"\")");
 
 onEvent("Tower/Tower_pole/Delete", "delayclick", "deleteTower()");
 onEvent("Tower/Tower_hardware/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_bolts/Delete", "delayclick", "deleteTower()");
 
-onEvent("Tower", "show", "loadTowerAttributes()");
+onEvent("Tower/Tower_pole/Add_pole", "delayclick", "saveTower(\"newTowerPole();\")");
+onEvent("Tower/Tower_hardware/Add_track_crossbar", "delayclick", "saveTower(\"newTrackCrossbar();\")");
+onEvent("Tower/Tower_hardware/Add_haul_rope_wheel_frame", "delayclick", "saveTower(\"newWheelFrame();\")");
+onEvent("Tower/Tower_bolts/Add_tower_bolt", "delayclick", "saveTower(\"newTowerBolt();\")");
+onEvent("Tower/PhotoLog/newPhotoLog", "delayclick", "saveTower(\"feature_id = tower_id; newPhotolog();\")");
+
+onEvent("Tower/Tower_pole/Show_pole", "click", "loadTowerPole();");
+onEvent("Tower/Tower_hardware/Show_track_crossbar", "click", "loadTrackCrossbar();");
+onEvent("Tower/Tower_hardware/Show_haul_rope_wheel_frame", "click", "loadWheelFrame();");
+onEvent("Tower/Tower_bolts/List_tower_bolt", "click", "loadTowerBolt();");
+onEvent("Tower/PhotoLog/ListPhotoLog", "click", "feature_id = tower_id; loadPhotolog();");
+
+onEvent("Tower/Tower_pole/Delete_pole", "click", "deleteTowerRel(getFieldValue(\"Tower/Tower_pole/List_poles\"));");
+onEvent("Tower/Tower_hardware/Delete_track_crossbar", "click", "deleteTowerRel(getFieldValue(\"Tower/Tower_hardware/List_track_crossbar\"));");
+onEvent("Tower/Tower_hardware/Delete_haul_rope_wheel_frame", "click", "deleteTowerRel(getFieldValue(\"Tower/Tower_hardware/List_haul_rope_wheel_frame\"));");
 
 String tower_id;
 
@@ -160,14 +209,15 @@ newTower(){
     newTabGroup("Tower");
 }
 
-loadTowerFrom(towerid) {
-    tower_id = towerid;
-    if (isNull(tower_id)) return;
+loadTowerFrom(archent_id) {
+    tower_id = archent_id;
+    if (isNull(tower_id)) {
+        showToast("No record selected");
+        return;
+    }
     
-    showTabGroup("Tower", tower_id);    
-    loadTowerAttributes();
+    showTabGroup("Tower", tower_id);   
 }
-
 
 loadTowerAttributes(){
     populateRadioGroup("Tower/Tower_pole/Fourth_stabilising_pole", makeVocab("Fourth stabilising pole"));
@@ -175,15 +225,15 @@ loadTowerAttributes(){
     populateRadioGroup("Tower/Tower_hardware/Haul_rope_cross_timber", makeVocab("Haul rope cross timber"));    
 }
 
-saveTower() {
+saveTower(String callback) {
     if (isNull(getFieldValue("Tower/Tower_pole/Tower_number"))) {
-        showWarning("Logic Error", "Cannot save record without Tower Number");
+        showWarning("Validation Error", "Cannot save Tower without Tower Number");
         return;
     }
     if (!isNull(tower_id)) {
         entity = fetchArchEnt(tower_id);
     }
-    saveTabGroup("Tower", tower_id, null, null, "tower_id = getLastSavedRecordId();");
+    saveTabGroup("Tower", tower_id, null, null, "tower_id = getLastSavedRecordId();" + callback);
 }
 
 deleteTower(){
@@ -199,7 +249,105 @@ reallyDeleteTower(){
     cancelTabGroup("Tower", false);
 }
 
+deleteTowerRel(String archent_id) {
+    if (!isNull(archent_id)) {
+        delete_id = archent_id;
+        showAlert("Confirm Deletion", "Press OK to Delete this Related Record!", "reallyDeleteTowerRel()", "doNotDelete()");
+    } else {
+        showToast("No record selected");
+    }
+}
+
+reallyDeleteTowerRel() {
+    deleteArchEnt(delete_id);
+    loadTowerRelated();
+}
+
+loadTowerRelated() {
+    feature_id = tower_id;
+    loadRelatedPhotologs("Tower/PhotoLog/ListPhotoLog");
+    Object towerPoles = new ArrayList();
+    Object trackCrossbars = new ArrayList();
+    Object haulRopeWheelFrames = new ArrayList();
+    Object towerBolts = new ArrayList();
+    if (!isNull(tower_id)){
+        towerPoles = fetchAll("select uuid, group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), ' | ') as response, valuetimestamp\n"+
+            "  FROM (  SELECT uuid, attributeid, vocabid, attributename, vocabname, measure, freetext, certainty, attributetype, valuetimestamp, aenttypename\n"+
+            "            FROM latestNonDeletedArchentIdentifiers\n"+
+            "           WHERE aenttypename = 'Tower pole'\n"+
+            "             AND uuid in (select uuid\n"+
+            "                            FROM latestNonDeletedAentReln\n"+
+            "                           where relationshipid in (select relationshipid\n"+
+            "                                                      FROM latestNonDeletedAentReln\n"+
+            "                                                      JOIN relationship using (relationshipid)\n"+
+            "                                                      JOIN relntype using (relntypeid)\n"+
+            "                                                     where uuid = "+tower_id+"\n"+
+            "                                                       and relntypeName = 'TowerTowerPole')\n"+
+            "                             and uuid != "+tower_id+")\n"+
+            "        ORDER BY uuid, attributename ASC)\n"+
+            "group by uuid\n"+
+            "order by valuetimestamp desc, uuid, attributename;");
+        trackCrossbars = fetchAll("select uuid, group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), ' | ') as response, valuetimestamp\n"+
+            "  FROM (  SELECT uuid, attributeid, vocabid, attributename, vocabname, measure, freetext, certainty, attributetype, valuetimestamp, aenttypename\n"+
+            "            FROM latestNonDeletedArchentIdentifiers\n"+
+            "           WHERE aenttypename = 'Track crossbar'\n"+
+            "             AND uuid in (select uuid\n"+
+            "                            FROM latestNonDeletedAentReln\n"+
+            "                           where relationshipid in (select relationshipid\n"+
+            "                                                      FROM latestNonDeletedAentReln\n"+
+            "                                                      JOIN relationship using (relationshipid)\n"+
+            "                                                      JOIN relntype using (relntypeid)\n"+
+            "                                                     where uuid = "+tower_id+"\n"+
+            "                                                       and relntypeName = 'TowerCrossbar')\n"+
+            "                             and uuid != "+tower_id+")\n"+
+            "        ORDER BY uuid, attributename ASC)\n"+
+            "group by uuid\n"+
+            "order by valuetimestamp desc, uuid, attributename;");
+        haulRopeWheelFrames = fetchAll("select uuid, group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), ' | ') as response, valuetimestamp\n"+
+            "  FROM (  SELECT uuid, attributeid, vocabid, attributename, vocabname, measure, freetext, certainty, attributetype, valuetimestamp, aenttypename\n"+
+            "            FROM latestNonDeletedArchentIdentifiers\n"+
+            "           WHERE aenttypename = 'Haul rope wheel frame'\n"+
+            "             AND uuid in (select uuid\n"+
+            "                            FROM latestNonDeletedAentReln\n"+
+            "                           where relationshipid in (select relationshipid\n"+
+            "                                                      FROM latestNonDeletedAentReln\n"+
+            "                                                      JOIN relationship using (relationshipid)\n"+
+            "                                                      JOIN relntype using (relntypeid)\n"+
+            "                                                     where uuid = "+tower_id+"\n"+
+            "                                                       and relntypeName = 'TowerHaulRope')\n"+
+            "                             and uuid != "+tower_id+")\n"+
+            "        ORDER BY uuid, attributename ASC)\n"+
+            "group by uuid\n"+
+            "order by valuetimestamp desc, uuid, attributename;");
+        towerBolts = fetchAll("select uuid, group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), ' | ') as response, valuetimestamp\n"+
+            "  FROM (  SELECT uuid, attributeid, vocabid, attributename, vocabname, measure, freetext, certainty, attributetype, valuetimestamp, aenttypename\n"+
+            "            FROM latestNonDeletedArchentIdentifiers\n"+
+            "           WHERE aenttypename = 'Tower bolts'\n"+
+            "             AND uuid in (select uuid\n"+
+            "                            FROM latestNonDeletedAentReln\n"+
+            "                           where relationshipid in (select relationshipid\n"+
+            "                                                      FROM latestNonDeletedAentReln\n"+
+            "                                                      JOIN relationship using (relationshipid)\n"+
+            "                                                      JOIN relntype using (relntypeid)\n"+
+            "                                                     where uuid = "+tower_id+"\n"+
+            "                                                       and relntypeName = 'TowerTowerBolt')\n"+
+            "                             and uuid != "+tower_id+")\n"+
+            "        ORDER BY uuid, attributename ASC)\n"+
+            "group by uuid\n"+
+            "order by valuetimestamp desc, uuid, attributename;");
+    }
+    populateDropDown("Tower/Tower_pole/List_poles",  towerPoles);
+    populateDropDown("Tower/Tower_hardware/List_track_crossbar",  trackCrossbars);
+    populateDropDown("Tower/Tower_hardware/List_haul_rope_wheel_frame",  haulRopeWheelFrames);
+    populateList("Tower/Tower_bolts/List_tower_bolt",  towerBolts);
+}
+
 /** ARCHENT: Tower Pole **/
+onEvent("Tower_pole/Details/Update", "delayclick", "saveTowerPole()");
+onEvent("Tower_pole/Details/Delete", "delayclick", "deleteTowerPole()");
+
+onEvent("Tower_pole/Details/CalculateGPS", "delayclick", "fillInGPS(\"Tower_pole/Details/\")");
+onEvent("Tower_pole/Details/Attach_photos", "delayclick", "attachPictureTo(\"Tower_pole/Details/Photos\")");
 
 String tower_pole_id;
 
@@ -208,132 +356,118 @@ newTowerPole(){
     newTabGroup("Tower_pole");
 }
 
-/*
-onEvent("Tower/Tower_pole/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_hardware/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_bolts/Update", "delayclick", "saveTower()");
-
-onEvent("Tower/Tower_pole/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_hardware/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_bolts/Delete", "delayclick", "deleteTower()");
-
-String tower_id;
-
-newTower(){
-    tower_id = null;
-    newTabGroup("Tower");
+loadTowerPole() {
+    archent_id = getFieldValue("Tower/Tower_pole/List_poles");
+    loadTowerPoleFrom(archent_id);
 }
 
-loadTowerFrom(towerid) {
-    tower_id = towerid;
-    if (isNull(tower_id)) return;
-    
-    showTabGroup("Tower", tower_id);    
-    loadTowerAttributes();
-}
-
-
-loadTensionStationAttributes(){
-    populateRadioGroup("Tower_pole/Details/Pole_exists", makeVocab("Pole exists"));
-    populateRadioGroup("Tower_pole/Details/Footing", makeVocab("Footing"));
-}
-
-saveTower() {
-    if (isNull(getFieldValue("Tower/Tower_pole/Tower_number"))) {
-        showWarning("Logic Error", "Cannot save record without Tower Number");
+loadTowerPoleFrom(archent_id) {
+    tower_pole_id = archent_id;
+    if (isNull(tower_pole_id)) {
+        showToast("No record selected");
         return;
     }
-    if (!isNull(tower_id)) {
-        entity = fetchArchEnt(tower_id);
-    }
-    saveTabGroup("Tower", tower_id, null, null, "tower_id = getLastSavedRecordId();");
+    
+    showTabGroup("Tower_pole", tower_pole_id);
 }
 
+loadTowerPoleAttributes(){
+    populateRadioGroup("Tower_pole/Details/Pole_exists", makeVocab("Pole exists"));
+    populateDropDown("Tower_pole/Details/Footing", makeVocab("Footing"));
+}
 
-deleteTower(){
-    if (!isNull(tower_id)) {
-        showAlert("Confirm Deletion", "Press OK to Delete this Tower Record!", "reallyDeleteTower()", "doNotDelete()");
+saveTowerPole() {
+    if (isNull(getFieldValue("Tower_pole/Details/Pole_number"))) {
+        showWarning("Validation Error", "Cannot save Tower Pole without Pole Number");
+        return;
+    }
+    if (!isNull(tower_pole_id)) {
+        entity = fetchArchEnt(tower_pole_id);
+    }
+    saveTabGroup("Tower_pole", tower_pole_id, null, null, "tower_pole_id = getLastSavedRecordId();saveEntitiesToRel(\"TowerTowerPole\", tower_id, tower_pole_id);");
+}
+
+deleteTowerPole(){
+    if (!isNull(tower_pole_id)) {
+        showAlert("Confirm Deletion", "Press OK to Delete this Tower Pole Record!", "reallyDeleteTowerPole()", "doNotDelete()");
     } else {
-        cancelTabGroup("Tower", true);
+        cancelTabGroup("Tower_pole", true);
     }
 }
 
-reallyDeleteTower(){
-    deleteArchEnt(tower_id);
-    cancelTabGroup("Tower", false);
+reallyDeleteTowerPole(){
+    deleteArchEnt(tower_pole_id);
+    cancelTabGroup("Tower_pole", false);
 }
-*/
 
 /** ARCHENT: Track Crossbar **/
+onEvent("Track_crossbar/Details/Update", "delayclick", "saveTrackCrossbar()");
+onEvent("Track_crossbar/Details/Delete", "delayclick", "deleteTrackCrossbar()");
+
+onEvent("Track_crossbar/Details/CalculateGPS", "delayclick", "fillInGPS(\"Track_crossbar/Details/\")");
+onEvent("Track_crossbar/Details/Attach_photos", "delayclick", "attachPictureTo(\"Track_crossbar/Details/Photos\")");
 
 String track_crossbar_id;
 
 newTrackCrossbar(){
     track_crossbar_id = null;
-    newTabGroup("Tension_station");
+    newTabGroup("Track_crossbar");
 }
 
-/*
-onEvent("Tower/Tower_pole/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_hardware/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_bolts/Update", "delayclick", "saveTower()");
-
-onEvent("Tower/Tower_pole/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_hardware/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_bolts/Delete", "delayclick", "deleteTower()");
-
-String tower_id;
-
-newTower(){
-    tower_id = null;
-    newTabGroup("Tower");
+loadTrackCrossbar() {
+    archent_id = getFieldValue("Tower/Tower_hardware/List_track_crossbar");
+    loadTrackCrossbarFrom(archent_id);
 }
 
-loadTowerFrom(towerid) {
-    tower_id = towerid;
-    if (isNull(tower_id)) return;
+loadTrackCrossbarFrom(archent_id) {
+    track_crossbar_id = archent_id;
+    if (isNull(track_crossbar_id)) {
+        showToast("No record selected");
+        return;
+    }
     
-    showTabGroup("Tower", tower_id);    
-    loadTowerAttributes();
+    showTabGroup("Track_crossbar", track_crossbar_id);
 }
-
 
 loadTrackCrossbarAttributes(){
     populateRadioGroup("Track_crossbar/Details/Track_rope_wheel_cross_bar", makeVocab("Track rope wheel cross bar"));
     populateRadioGroup("Track_crossbar/Details/Track_rope_cross_timber_present", makeVocab("Track rope cross timber present"));
-    populateDropDown("Track_crossbar/Details/Track_rope_saddle_or_wheel", makeVocab("Track rope saddle or wheel"));
+    populateHierarchicalDropDown("Track_crossbar/Details/Track_rope_saddle_or_wheel", "Track rope saddle or wheel");
     populateRadioGroup("Track_crossbar/Details/Head_plate", makeVocab("Head plate"));
     populateRadioGroup("Track_crossbar/Details/Cross_timber_angle_bracket", makeVocab("Cross timber angle bracket"));
 }
 
-saveTower() {
-    if (isNull(getFieldValue("Tower/Tower_pole/Tower_number"))) {
-        showWarning("Logic Error", "Cannot save record without Tower Number");
+saveTrackCrossbar() {
+    if (isNull(getFieldValue("Track_crossbar/Details/Crossbar_number"))) {
+        showWarning("Validation Error", "Cannot save Track Crossbar without Crossbar Number");
         return;
     }
-    if (!isNull(tower_id)) {
-        entity = fetchArchEnt(tower_id);
+    if (!isNull(track_crossbar_id)) {
+        entity = fetchArchEnt(track_crossbar_id);
     }
-    saveTabGroup("Tower", tower_id, null, null, "tower_id = getLastSavedRecordId();");
+    saveTabGroup("Track_crossbar", track_crossbar_id, null, null, "track_crossbar_id = getLastSavedRecordId();saveEntitiesToRel(\"TowerCrossbar\", tower_id, track_crossbar_id);");
 }
 
 
-deleteTower(){
-    if (!isNull(tower_id)) {
-        showAlert("Confirm Deletion", "Press OK to Delete this Tower Record!", "reallyDeleteTower()", "doNotDelete()");
+deleteTrackCrossbar(){
+    if (!isNull(track_crossbar_id)) {
+        showAlert("Confirm Deletion", "Press OK to Delete this Track Crossbar Record!", "reallyDeleteTrackCrossbar()", "doNotDelete()");
     } else {
-        cancelTabGroup("Tower", true);
+        cancelTabGroup("Track_crossbar", true);
     }
 }
 
-reallyDeleteTower(){
-    deleteArchEnt(tower_id);
-    cancelTabGroup("Tower", false);
+reallyDeleteTrackCrossbar(){
+    deleteArchEnt(track_crossbar_id);
+    cancelTabGroup("Track_crossbar", false);
 }
-*/
-
 
 /** ARCHENT: Haul rope wheel frame **/
+onEvent("Wheel_frame/Details/Update", "delayclick", "saveWheelFrame()");
+onEvent("Wheel_frame/Details/Delete", "delayclick", "deleteWheelFrame()");
+
+onEvent("Wheel_frame/Details/CalculateGPS", "delayclick", "fillInGPS(\"Wheel_frame/Details/\")");
+onEvent("Wheel_frame/Details/Attach_photos", "delayclick", "attachPictureTo(\"Wheel_frame/Details/Photos\")");
 
 String wheel_frame_id;
 
@@ -342,93 +476,78 @@ newWheelFrame(){
     newTabGroup("Wheel_frame");
 }
 
-/*
-onEvent("Tower/Tower_pole/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_hardware/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_bolts/Update", "delayclick", "saveTower()");
-
-onEvent("Tower/Tower_pole/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_hardware/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_bolts/Delete", "delayclick", "deleteTower()");
-
-String tower_id;
-
-newTower(){
-    tower_id = null;
-    newTabGroup("Tower");
+loadWheelFrame() {
+    archent_id = getFieldValue("Tower/Tower_hardware/List_haul_rope_wheel_frame");
+    loadWheelFrameFrom(archent_id);
 }
 
-loadTowerFrom(towerid) {
-    tower_id = towerid;
-    if (isNull(tower_id)) return;
-    
-    showTabGroup("Tower", tower_id);    
-    loadTowerAttributes();
+loadWheelFrameFrom(archent_id) {
+    wheel_frame_id = archent_id;
+    if (isNull(wheel_frame_id)) {
+        showToast("No record selected");
+        return;
+    }
+    showTabGroup("Wheel_frame", wheel_frame_id);
 }
-
 
 loadWheelFrameAttributes(){
     populateDropDown("Wheel_frame/Details/Wheel", makeVocab("Wheel"));
     populateRadioGroup("Wheel_frame/Details/Bearings", makeVocab("Bearings"));
 }
 
-saveTower() {
-    if (isNull(getFieldValue("Tower/Tower_pole/Tower_number"))) {
-        showWarning("Logic Error", "Cannot save record without Tower Number");
+saveWheelFrame() {
+    if (isNull(getFieldValue("Wheel_frame/Details/Frame_number"))) {
+        showWarning("Validation Error", "Cannot save record without Frame Number");
         return;
     }
-    if (!isNull(tower_id)) {
-        entity = fetchArchEnt(tower_id);
+    if (!isNull(wheel_frame_id)) {
+        entity = fetchArchEnt(wheel_frame_id);
     }
-    saveTabGroup("Tower", tower_id, null, null, "tower_id = getLastSavedRecordId();");
+    saveTabGroup("Wheel_frame", wheel_frame_id, null, null, "wheel_frame_id = getLastSavedRecordId();saveEntitiesToRel(\"TowerHaulRope\", tower_id, wheel_frame_id);");
 }
 
 
-deleteTower(){
-    if (!isNull(tower_id)) {
-        showAlert("Confirm Deletion", "Press OK to Delete this Tower Record!", "reallyDeleteTower()", "doNotDelete()");
+deleteWheelFrame(){
+    if (!isNull(wheel_frame_id)) {
+        showAlert("Confirm Deletion", "Press OK to Delete this Wheel Frame Record!", "reallyDeleteWheelFrame()", "doNotDelete()");
     } else {
-        cancelTabGroup("Tower", true);
+        cancelTabGroup("Wheel_frame", true);
     }
 }
 
-reallyDeleteTower(){
-    deleteArchEnt(tower_id);
-    cancelTabGroup("Tower", false);
+reallyDeleteWheelFrame(){
+    deleteArchEnt(wheel_frame_id);
+    cancelTabGroup("Wheel_frame", false);
 }
-*/
 
 /** ARCHENT: Tower Bolt Archent **/
+onEvent("Tower_bolts/Details/Update", "delayclick", "saveTowerBolt(\"\")");
+onEvent("Tower_bolts/Details/Duplicate", "delayclick", "saveTowerBolt(\"tower_bolt_id = null;\")");
+onEvent("Tower_bolts/Details/Delete", "delayclick", "deleteTowerBolt()");
+
+onEvent("Tower_bolts/Details/CalculateGPS", "delayclick", "fillInGPS(\"Tower_bolts/Details/\")");
+onEvent("Tower_bolts/Details/Attach_photos", "delayclick", "attachPictureTo(\"Tower_bolts/Details/Photos\")");
 
 String tower_bolt_id;
 
 newTowerBolt(){
     tower_bolt_id = null;
-    newTabGroup("Tower_bolt");
+    newTabGroup("Tower_bolts");
 }
 
-/*
-onEvent("Tower/Tower_pole/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_hardware/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_bolts/Update", "delayclick", "saveTower()");
-
-onEvent("Tower/Tower_pole/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_hardware/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_bolts/Delete", "delayclick", "deleteTower()");
-
-String tower_id;
-
-newTower(){
-    tower_id = null;
-    newTabGroup("Tower");
+loadTowerBolt() {
+    archent_id = getListItemValue();
+    loadTowerBoltFrom(archent_id);
 }
 
-loadTowerFrom(towerid) {
-    tower_id = towerid;
-    if (isNull(tower_id)) return;
+loadTowerBoltFrom(archent_id) {
+    tower_bolt_id = archent_id;
+    if (isNull(tower_bolt_id)) {
+        showToast("No record selected");
+        return;
+    }
     
-    showTabGroup("Tower", tower_id);    
-    loadTowerAttributes();
+    showTabGroup("Tower_bolts", tower_bolt_id);
 }
 
 
@@ -441,34 +560,63 @@ loadTowerBoltAttributes(){
     populateRadioGroup("Tower_bolts/Details/Washer", makeVocab("Washer"));
 }
 
-saveTower() {
-    if (isNull(getFieldValue("Tower/Tower_pole/Tower_number"))) {
-        showWarning("Logic Error", "Cannot save record without Tower Number");
+saveTowerBolt(String callback) {
+    if (isNull(getFieldValue("Tower_bolts/Details/Length")) || isNull(getFieldValue("Tower_bolts/Details/Diameter"))) {
+        showWarning("Validation Error", "Cannot save Tower Bolt without Length or Diameter");
         return;
     }
-    if (!isNull(tower_id)) {
-        entity = fetchArchEnt(tower_id);
+    if (!isNull(tower_bolt_id)) {
+        entity = fetchArchEnt(tower_bolt_id);
     }
-    saveTabGroup("Tower", tower_id, null, null, "tower_id = getLastSavedRecordId();");
+    saveTabGroup("Tower_bolts", tower_bolt_id, null, null, "tower_bolt_id = getLastSavedRecordId();saveEntitiesToRel(\"TowerTowerBolt\", tower_id, tower_bolt_id);" + callback);
 }
 
-
-deleteTower(){
-    if (!isNull(tower_id)) {
-        showAlert("Confirm Deletion", "Press OK to Delete this Tower Record!", "reallyDeleteTower()", "doNotDelete()");
+deleteTowerBolt(){
+    if (!isNull(tower_bolt_id)) {
+        showAlert("Confirm Deletion", "Press OK to Delete this Tower Bolt Record!", "reallyDeleteTowerBolt()", "doNotDelete()");
     } else {
-        cancelTabGroup("Tower", true);
+        cancelTabGroup("Tower_bolts", true);
     }
 }
 
-reallyDeleteTower(){
-    deleteArchEnt(tower_id);
-    cancelTabGroup("Tower", false);
+reallyDeleteTowerBolt(){
+    deleteArchEnt(tower_bolt_id);
+    cancelTabGroup("Tower_bolts", false);
 }
-*/
-
 
 /** ARCHENT: Tension Station **/
+onEvent("Tension_station", "show", "loadTensionStationRelated()");
+
+onEvent("Tension_station/Details/Update", "delayclick", "saveTensionStation(\"\")");
+onEvent("Tension_station/Chain_rollers/Update", "delayclick", "saveTensionStation(\"\")");
+onEvent("Tension_station/Cradle/Update", "delayclick", "saveTensionStation(\"\")");
+onEvent("Tension_station/Notes/Update", "delayclick", "saveTensionStation(\"\")");
+
+onEvent("Tension_station/Details/Delete", "delayclick", "deleteTensionStation()");
+onEvent("Tension_station/Chain_rollers/Delete", "delayclick", "deleteTensionStation()");
+onEvent("Tension_station/Cradle/Delete", "delayclick", "deleteTensionStation()");
+onEvent("Tension_station/Notes/Delete", "delayclick", "deleteTensionStation()");
+
+onEvent("Tension_station/Cradle/Cradle_1_get_lat_long", "delayclick", "fillInGPS(\"Tension_station/Cradle/Cradle_1_\")");
+onEvent("Tension_station/Cradle/Cradle_1_attach_photos", "delayclick", "attachPictureTo(\"Tension_station/Cradle/Cradle_1_photos\")");
+onEvent("Tension_station/Cradle/Cradle_2_get_lat_long", "delayclick", "fillInGPS(\"Tension_station/Cradle/Cradle_2_\")");
+onEvent("Tension_station/Cradle/Cradle_2_attach_photos", "delayclick", "attachPictureTo(\"Tension_station/Cradle/Cradle_2_photos\")");
+onEvent("Tension_station/Cradle/Cradle_3_get_lat_long", "delayclick", "fillInGPS(\"Tension_station/Cradle/Cradle_3_\")");
+onEvent("Tension_station/Cradle/Cradle_3_attach_photos", "delayclick", "attachPictureTo(\"Tension_station/Cradle/Cradle_3_photos\")");
+onEvent("Tension_station/Cradle/Cradle_4_get_lat_long", "delayclick", "fillInGPS(\"Tension_station/Cradle/Cradle_4_\")");
+onEvent("Tension_station/Cradle/Cradle_4_attach_photos", "delayclick", "attachPictureTo(\"Tension_station/Cradle/Cradle_4_photos\")");
+
+onEvent("Tension_station/Notes/Corner_point_1_lat_long", "delayclick", "fillInGPS(\"Tension_station/Notes/Corner_point_1_\")");
+onEvent("Tension_station/Notes/Corner_point_2_lat_long", "delayclick", "fillInGPS(\"Tension_station/Notes/Corner_point_2_\")");
+onEvent("Tension_station/Notes/Corner_point_3_lat_long", "delayclick", "fillInGPS(\"Tension_station/Notes/Corner_point_3_\")");
+onEvent("Tension_station/Notes/Corner_point_4_lat_long", "delayclick", "fillInGPS(\"Tension_station/Notes/Corner_point_4_\")");
+onEvent("Tension_station/Notes/Attach_photos", "delayclick", "attachPictureTo(\"Tension_station/Notes/Photos\")");
+
+onEvent("Tension_station/Tension_bolts/Add_tension_bolt", "delayclick", "saveTensionStation(\"newTensionStationBolt();\")");
+onEvent("Tension_station/Tension_bolts/List_tension_bolt", "click", "loadTensionStationBolt();");
+
+onEvent("Tension_station/PhotoLog/newPhotoLog", "delayclick", "saveTensionStation(\"feature_id = tension_station_id; newPhotolog();\")");
+onEvent("Tension_station/PhotoLog/ListPhotoLog", "click", "feature_id = tension_station_id; loadPhotolog();");
 
 String tension_station_id;
 
@@ -477,30 +625,20 @@ newTensionStation(){
     newTabGroup("Tension_station");
 }
 
-/*
-onEvent("Tower/Tower_pole/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_hardware/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_bolts/Update", "delayclick", "saveTower()");
-
-onEvent("Tower/Tower_pole/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_hardware/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_bolts/Delete", "delayclick", "deleteTower()");
-
-String tower_id;
-
-newTower(){
-    tower_id = null;
-    newTabGroup("Tower");
+loadTensionStationBolt() {
+    archent_id = getListItemValue();
+    loadTensionStationFrom(archent_id);
 }
 
-loadTowerFrom(towerid) {
-    tower_id = towerid;
-    if (isNull(tower_id)) return;
+loadTensionStationFrom(archent_id) {
+    tension_station_id = archent_id;
+    if (isNull(tension_station_id)) {
+        showToast("No record selected");
+        return;
+    }
     
-    showTabGroup("Tower", tower_id);    
-    loadTowerAttributes();
+    showTabGroup("Tension_station", tension_station_id);
 }
-
 
 loadTensionStationAttributes(){
     populateRadioGroup("Tension_station/Details/Tension_pit_top_rail", makeVocab("Tension pit top rail"));
@@ -527,101 +665,127 @@ loadTensionStationAttributes(){
     populateRadioGroup("Tension_station/Cradle/Cradle_4_counterweight_material", makeVocab("Cradle 4 counterweight material"));
 }
 
-saveTower() {
-    if (isNull(getFieldValue("Tower/Tower_pole/Tower_number"))) {
-        showWarning("Logic Error", "Cannot save record without Tower Number");
+saveTensionStation(String callback) {
+    if (isNull(getFieldValue("Tension_station/Details/Pit_length")) 
+        || isNull(getFieldValue("Tension_station/Details/Pit_width")) 
+        || isNull(getFieldValue("Tension_station/Details/Pit_depth"))) {
+        showWarning("Validation Error", "Cannot save Tension Station without Pit dimensions");
         return;
     }
-    if (!isNull(tower_id)) {
-        entity = fetchArchEnt(tower_id);
+    if (!isNull(tension_station_id)) {
+        entity = fetchArchEnt(tension_station_id);
     }
-    saveTabGroup("Tower", tower_id, null, null, "tower_id = getLastSavedRecordId();");
+    saveTabGroup("Tension_station", tension_station_id, null, null, "tension_station_id = getLastSavedRecordId();" + callback);
 }
 
 
-deleteTower(){
-    if (!isNull(tower_id)) {
-        showAlert("Confirm Deletion", "Press OK to Delete this Tower Record!", "reallyDeleteTower()", "doNotDelete()");
+deleteTensionStation(){
+    if (!isNull(tension_station_id)) {
+        showAlert("Confirm Deletion", "Press OK to Delete this TensionStation Record!", "reallyDeleteTensionStation()", "doNotDelete()");
     } else {
-        cancelTabGroup("Tower", true);
+        cancelTabGroup("Tension_station", true);
     }
 }
 
-reallyDeleteTower(){
-    deleteArchEnt(tower_id);
-    cancelTabGroup("Tower", false);
+reallyDeleteTensionStation() {
+    deleteArchEnt(tension_station_id);
+    cancelTabGroup("Tension_station", false);
 }
-*/
+
+loadTensionStationRelated() {
+    feature_id = tension_station_id;
+    loadRelatedPhotologs("Tension_station/PhotoLog/ListPhotoLog");
+    Object tensionBolts = new ArrayList();
+    if (!isNull(tension_station_id)){
+        tensionBolts = fetchAll("select uuid, group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), ' | ') as response, valuetimestamp\n"+
+            "  FROM (  SELECT uuid, attributeid, vocabid, attributename, vocabname, measure, freetext, certainty, attributetype, valuetimestamp, aenttypename\n"+
+            "            FROM latestNonDeletedArchentIdentifiers\n"+
+            "           WHERE aenttypename = 'Tension station bolts'\n"+
+            "             AND uuid in (select uuid\n"+
+            "                            FROM latestNonDeletedAentReln\n"+
+            "                           where relationshipid in (select relationshipid\n"+
+            "                                                      FROM latestNonDeletedAentReln\n"+
+            "                                                      JOIN relationship using (relationshipid)\n"+
+            "                                                      JOIN relntype using (relntypeid)\n"+
+            "                                                     where uuid = "+tension_station_id+"\n"+
+            "                                                       and relntypeName = 'TensionTensionBolt')\n"+
+            "                             and uuid != "+tension_station_id+")\n"+
+            "        ORDER BY uuid, attributename ASC)\n"+
+            "group by uuid\n"+
+            "order by valuetimestamp desc, uuid, attributename;");
+    }
+    populateList("Tension_station/Tension_bolts/List_tension_bolt",  tensionBolts);
+}
 
 /** ARCHENT: Tension Station Bolt **/
+onEvent("Tension_bolts/Details/Update", "delayclick", "saveTensionStationBolt(\"\")");
+onEvent("Tension_bolts/Details/Duplicate", "delayclick", "saveTensionStationBolt(\"tension_station_bolt_id = null;\")");
+onEvent("Tension_bolts/Details/Delete", "delayclick", "deleteTensionStationBolt()");
 
 String tension_station_bolt_id;
 
-newTensionStation(){
+newTensionStationBolt(){
     tension_station_bolt_id = null;
-    newTabGroup("Tension_station_bolt");
+    newTabGroup("Tension_bolts");
 }
 
-/*
-onEvent("Tower/Tower_pole/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_hardware/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_bolts/Update", "delayclick", "saveTower()");
-
-onEvent("Tower/Tower_pole/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_hardware/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_bolts/Delete", "delayclick", "deleteTower()");
-
-String tower_id;
-
-newTower(){
-    tower_id = null;
-    newTabGroup("Tower");
+loadTensionStationBolt() {
+    archent_id = getListItemValue();
+    loadTensionStationBoltFrom(archent_id);
 }
 
-loadTowerFrom(towerid) {
-    tower_id = towerid;
-    if (isNull(tower_id)) return;
+loadTensionStationBoltFrom(archent_id) {
+    tension_station_bolt_id = archent_id;
+    if (isNull(tension_station_bolt_id)) {
+        showToast("No record selected");
+        return;
+    }
     
-    showTabGroup("Tower", tower_id);    
-    loadTowerAttributes();
+    showTabGroup("Tension_bolts", tension_station_bolt_id);
 }
-
 
 loadTensionStationBoltAttributes(){
-    populateRadioGroup("Tension_bolts/Details/Tension_station_type", makeVocab("Tension station type"));
+    populateRadioGroup("Tension_bolts/Details/Tension_station_bolt_type", makeVocab("Tension station bolt type"));
     populateRadioGroup("Tension_bolts/Details/Head", makeVocab("Head"));
     populateRadioGroup("Tension_bolts/Details/Nut", makeVocab("Nut"));
     populateRadioGroup("Tension_bolts/Details/Washer", makeVocab("Washer"));
 }
 
-saveTower() {
-    if (isNull(getFieldValue("Tower/Tower_pole/Tower_number"))) {
-        showWarning("Logic Error", "Cannot save record without Tower Number");
+saveTensionStationBolt(String callback) {
+    if (isNull(getFieldValue("Tension_bolts/Details/Length")) || isNull(getFieldValue("Tension_bolts/Details/Diameter"))) {
+        showWarning("Validation Error", "Cannot save Tension bolt without Length or Diameter");
         return;
     }
-    if (!isNull(tower_id)) {
-        entity = fetchArchEnt(tower_id);
+    if (!isNull(tension_station_bolt_id)) {
+        entity = fetchArchEnt(tension_station_bolt_id);
     }
-    saveTabGroup("Tower", tower_id, null, null, "tower_id = getLastSavedRecordId();");
+    saveTabGroup("Tension_bolts", tension_station_bolt_id, null, null, "tension_station_bolt_id = getLastSavedRecordId();saveEntitiesToRel(\"TensionTensionBolt\", tension_station_id, tension_station_bolt_id);" + callback);
 }
 
-
-deleteTower(){
-    if (!isNull(tower_id)) {
-        showAlert("Confirm Deletion", "Press OK to Delete this Tower Record!", "reallyDeleteTower()", "doNotDelete()");
+deleteTensionStationBolt(){
+    if (!isNull(tension_station_bolt_id)) {
+        showAlert("Confirm Deletion", "Press OK to Delete this Tension Station Bolt Record!", "reallyDeleteTensionStationBolt()", "doNotDelete()");
     } else {
-        cancelTabGroup("Tower", true);
+        cancelTabGroup("Tension_bolts", true);
     }
 }
 
-reallyDeleteTower(){
-    deleteArchEnt(tower_id);
-    cancelTabGroup("Tower", false);
+reallyDeleteTensionStationBolt(){
+    deleteArchEnt(tension_station_bolt_id);
+    cancelTabGroup("Tension_bolts", false);
 }
-*/
-
 
 /** ARCHENT: Track Rope **/
+onEvent("Track_rope", "show", "loadTrackRopeRelated()");
+
+onEvent("Track_rope/Details/Update", "delayclick", "saveTrackRope(\"\")");
+onEvent("Track_rope/Details/Delete", "delayclick", "deleteTrackRope()");
+
+onEvent("Track_rope/Details/CalculateGPS", "delayclick", "fillInGPS(\"Track_rope/Details/\")");
+onEvent("Track_rope/Details/Attach_photos", "delayclick", "attachPictureTo(\"Track_rope/Details/Photos\")");
+
+onEvent("Track_rope/PhotoLog/newPhotoLog", "delayclick", "saveTrackRope(\"feature_id = track_rope_id; newPhotolog();\")");
+onEvent("Track_rope/PhotoLog/ListPhotoLog", "click", "feature_id = track_rope_id; loadPhotolog();");
 
 String track_rope_id;
 
@@ -630,28 +794,14 @@ newTrackRope(){
     newTabGroup("Track_rope");
 }
 
-/*
-onEvent("Tower/Tower_pole/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_hardware/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_bolts/Update", "delayclick", "saveTower()");
-
-onEvent("Tower/Tower_pole/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_hardware/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_bolts/Delete", "delayclick", "deleteTower()");
-
-String tower_id;
-
-newTower(){
-    tower_id = null;
-    newTabGroup("Tower");
-}
-
-loadTowerFrom(towerid) {
-    tower_id = towerid;
-    if (isNull(tower_id)) return;
+loadTrackRopeFrom(archent_id) {
+    track_rope_id = archent_id;
+    if (isNull(track_rope_id)) {
+        showToast("No record selected");
+        return;
+    }
     
-    showTabGroup("Tower", tower_id);    
-    loadTowerAttributes();
+    showTabGroup("Track_rope", track_rope_id);
 }
 
 
@@ -661,101 +811,115 @@ loadTrackRopeAttributes(){
     populateDropDown("Track_rope/Details/Rope_end_condition", makeVocab("Rope end condition"));
 }
 
-saveTower() {
-    if (isNull(getFieldValue("Tower/Tower_pole/Tower_number"))) {
-        showWarning("Logic Error", "Cannot save record without Tower Number");
+saveTrackRope(String callback) {
+    if (isNull(getFieldValue("Track_rope/Details/Measurement_number"))) {
+        showWarning("Validation Error", "Cannot save Track Rope without Measurement Number");
         return;
     }
-    if (!isNull(tower_id)) {
-        entity = fetchArchEnt(tower_id);
+    if (!isNull(track_rope_id)) {
+        entity = fetchArchEnt(track_rope_id);
     }
-    saveTabGroup("Tower", tower_id, null, null, "tower_id = getLastSavedRecordId();");
+    saveTabGroup("Track_rope", track_rope_id, null, null, "track_rope_id = getLastSavedRecordId();" + callback);
 }
 
 
-deleteTower(){
-    if (!isNull(tower_id)) {
-        showAlert("Confirm Deletion", "Press OK to Delete this Tower Record!", "reallyDeleteTower()", "doNotDelete()");
+deleteTrackRope() {
+    if (!isNull(track_rope_id)) {
+        showAlert("Confirm Deletion", "Press OK to Delete this Track Rope Record!", "reallyDeleteTrackRope()", "doNotDelete()");
     } else {
-        cancelTabGroup("Tower", true);
+        cancelTabGroup("Track_rope", true);
     }
 }
 
-reallyDeleteTower(){
-    deleteArchEnt(tower_id);
-    cancelTabGroup("Tower", false);
+reallyDeleteTrackRope() {
+    deleteArchEnt(track_rope_id);
+    cancelTabGroup("Track_rope", false);
 }
-*/
 
+loadTrackRopeRelated() {
+    feature_id = track_rope_id;
+    loadRelatedPhotologs("Track_rope/PhotoLog/ListPhotoLog");
+}
 
 /** ARCHENT: Haul Rope Remnant **/
+onEvent("Haul_rope_remnant", "show", "loadHaulRopeRelated()");
+
+onEvent("Haul_rope_remnant/Details/Update", "delayclick", "saveHaulRope(\"\")");
+onEvent("Haul_rope_remnant/Details/Delete", "delayclick", "deleteHaulRope()");
+
+onEvent("Haul_rope_remnant/Details/CalculateGPS", "delayclick", "fillInGPS(\"Haul_rope_remnant/Details/\")");
+onEvent("Haul_rope_remnant/Details/Attach_photos", "delayclick", "attachPictureTo(\"Haul_rope_remnant/Details/Photos\")");
+
+onEvent("Haul_rope_remnant/PhotoLog/newPhotoLog", "delayclick", "saveHaulRope(\"feature_id = haul_rope_id; newPhotolog();\")");
+onEvent("Haul_rope_remnant/PhotoLog/ListPhotoLog", "click", "feature_id = haul_rope_id; loadPhotolog();");
 
 String haul_rope_id;
 
 newHaulRope(){
     haul_rope_id = null;
-    newTabGroup("Haul_rope");
+    newTabGroup("Haul_rope_remnant");
 }
 
-/*
-
-onEvent("Tower/Tower_pole/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_hardware/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_bolts/Update", "delayclick", "saveTower()");
-
-onEvent("Tower/Tower_pole/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_hardware/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_bolts/Delete", "delayclick", "deleteTower()");
-
-String tower_id;
-
-newTower(){
-    tower_id = null;
-    newTabGroup("Tower");
-}
-
-loadTowerFrom(towerid) {
-    tower_id = towerid;
-    if (isNull(tower_id)) return;
+loadHaulRopeFrom(archent_id) {
+    haul_rope_id = archent_id;
+    if (isNull(haul_rope_id)) {
+        showToast("No record selected");
+        return;
+    }
     
-    showTabGroup("Tower", tower_id);    
-    loadTowerAttributes();
+    showTabGroup("Haul_rope_remnant", haul_rope_id);
 }
-
 
 loadHaulRopeAttributes(){
     populateRadioGroup("Haul_rope_remnant/Details/Direction", makeVocab("Direction"));
-    populateDropDown("Haul_rope_remnant/Details/Haul_rope type", makeVocab("Haul rope type"));
+    populateDropDown("Haul_rope_remnant/Details/Haul_rope_type", makeVocab("Haul rope type"));
     populateDropDown("Haul_rope_remnant/Details/Rope_end_condition", makeVocab("Rope end condition"));
 }
 
-saveTower() {
-    if (isNull(getFieldValue("Tower/Tower_pole/Tower_number"))) {
-        showWarning("Logic Error", "Cannot save record without Tower Number");
+saveHaulRope(String callback) {
+    if (isNull(getFieldValue("Haul_rope_remnant/Details/Direction")) || 
+        isNull(getFieldValue("Haul_rope_remnant/Details/Haul_rope_type")) || 
+        isNull(getFieldValue("Haul_rope_remnant/Details/Length"))) {
+        showWarning("Validation Error", "Cannot save record without Direction, Rope Type or Length");
         return;
     }
-    if (!isNull(tower_id)) {
-        entity = fetchArchEnt(tower_id);
+    if (!isNull(haul_rope_id)) {
+        entity = fetchArchEnt(haul_rope_id);
     }
-    saveTabGroup("Tower", tower_id, null, null, "tower_id = getLastSavedRecordId();");
+    saveTabGroup("Haul_rope_remnant", haul_rope_id, null, null, "haul_rope_id = getLastSavedRecordId();" + callback);
 }
 
 
-deleteTower(){
-    if (!isNull(tower_id)) {
-        showAlert("Confirm Deletion", "Press OK to Delete this Tower Record!", "reallyDeleteTower()", "doNotDelete()");
+deleteHaulRope() {
+    if (!isNull(haul_rope_id)) {
+        showAlert("Confirm Deletion", "Press OK to Delete this Haul Rope Record!", "reallyDeleteHaulRope()", "doNotDelete()");
     } else {
-        cancelTabGroup("Tower", true);
+        cancelTabGroup("Haul_rope_remnant", true);
     }
 }
 
-reallyDeleteTower(){
-    deleteArchEnt(tower_id);
-    cancelTabGroup("Tower", false);
+reallyDeleteHaulRope() {
+    deleteArchEnt(haul_rope_id);
+    cancelTabGroup("Haul_rope_remnant", false);
 }
-*/
+
+loadHaulRopeRelated() {
+    feature_id = haul_rope_id;
+    loadRelatedPhotologs("Haul_rope_remnant/PhotoLog/ListPhotoLog");
+}
+
 
 /** ARCHENT: Rope Joiner **/
+onEvent("Rope_joiner", "show", "loadRopeJoinerRelated()");
+
+onEvent("Rope_joiner/Details/Update", "delayclick", "saveRopeJoiner(\"\")");
+onEvent("Rope_joiner/Details/Delete", "delayclick", "deleteRopeJoiner()");
+
+onEvent("Rope_joiner/Details/CalculateGPS", "delayclick", "fillInGPS(\"Rope_joiner/Details/\")");
+onEvent("Rope_joiner/Details/Attach_photos", "delayclick", "attachPictureTo(\"Rope_joiner/Details/Photos\")");
+
+onEvent("Rope_joiner/PhotoLog/newPhotoLog", "delayclick", "saveRopeJoiner(\"feature_id = rope_joiner_id; newPhotolog();\")");
+onEvent("Rope_joiner/PhotoLog/ListPhotoLog", "click", "feature_id = rope_joiner_id; loadPhotolog();");
 
 String rope_joiner_id;
 
@@ -764,62 +928,61 @@ newRopeJoiner(){
     newTabGroup("Rope_joiner");
 }
 
-/*
-onEvent("Tower/Tower_pole/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_hardware/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_bolts/Update", "delayclick", "saveTower()");
-
-onEvent("Tower/Tower_pole/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_hardware/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_bolts/Delete", "delayclick", "deleteTower()");
-
-String tower_id;
-
-newTower(){
-    tower_id = null;
-    newTabGroup("Tower");
-}
-
-loadTowerFrom(towerid) {
-    tower_id = towerid;
-    if (isNull(tower_id)) return;
-    
-    showTabGroup("Tower", tower_id);    
-    loadTowerAttributes();
-}
-
-
-loadRopeJoinerAttributes(){
-    populateDropDown("Rope_joiner/Details/Rope_joiner type", makeVocab("Rope joiner type"));
-}
-
-saveTower() {
-    if (isNull(getFieldValue("Tower/Tower_pole/Tower_number"))) {
-        showWarning("Logic Error", "Cannot save record without Tower Number");
+loadRopeJoinerFrom(archent_id) {
+    rope_joiner_id = archent_id;
+    if (isNull(rope_joiner_id)) {
+        showToast("No record selected");
         return;
     }
-    if (!isNull(tower_id)) {
-        entity = fetchArchEnt(tower_id);
+    
+    showTabGroup("Rope_joiner", rope_joiner_id);
+}
+
+loadRopeJoinerAttributes(){
+    populateDropDown("Rope_joiner/Details/Rope_joiner_type", makeVocab("Rope joiner type"));
+}
+
+saveRopeJoiner(String callback) {
+    if (isNull(getFieldValue("Rope_joiner/Details/Rope_joiner_type"))) {
+        showWarning("Validation Error", "Cannot save record without Rope Joiner Type");
+        return;
     }
-    saveTabGroup("Tower", tower_id, null, null, "tower_id = getLastSavedRecordId();");
+    if (!isNull(rope_joiner_id)) {
+        entity = fetchArchEnt(rope_joiner_id);
+    }
+    saveTabGroup("Rope_joiner", rope_joiner_id, null, null, "rope_joiner_id = getLastSavedRecordId();" + callback);
 }
 
 
-deleteTower(){
-    if (!isNull(tower_id)) {
-        showAlert("Confirm Deletion", "Press OK to Delete this Tower Record!", "reallyDeleteTower()", "doNotDelete()");
+deleteRopeJoiner() {
+    if (!isNull(rope_joiner_id)) {
+        showAlert("Confirm Deletion", "Press OK to Delete this Rope Joiner Record!", "reallyDeleteRopeJoiner()", "doNotDelete()");
     } else {
-        cancelTabGroup("Tower", true);
+        cancelTabGroup("Rope_joiner", true);
     }
 }
 
-reallyDeleteTower(){
-    deleteArchEnt(tower_id);
-    cancelTabGroup("Tower", false);
+reallyDeleteRopeJoiner() {
+    deleteArchEnt(rope_joiner_id);
+    cancelTabGroup("Rope_joiner", false);
 }
-*/
+
+loadRopeJoinerRelated() {
+    feature_id = rope_joiner_id;
+    loadRelatedPhotologs("Rope_joiner/PhotoLog/ListPhotoLog");
+}
 
 /** ARCHENT: Rope Groove **/
+onEvent("Rope_groove", "show", "loadRopeGrooveRelated()");
+
+onEvent("Rope_groove/Details/Update", "delayclick", "saveRopeGroove(\"\")");
+onEvent("Rope_groove/Details/Delete", "delayclick", "deleteRopeGroove()");
+
+onEvent("Rope_groove/Details/CalculateGPS", "delayclick", "fillInGPS(\"Rope_groove/Details/\")");
+onEvent("Rope_groove/Details/Attach_photos", "delayclick", "attachPictureTo(\"Rope_groove/Details/Photos\")");
+
+onEvent("Rope_groove/PhotoLog/newPhotoLog", "delayclick", "saveRopeGroove(\"feature_id = rope_groove_id; newPhotolog();\")");
+onEvent("Rope_groove/PhotoLog/ListPhotoLog", "click", "feature_id = rope_groove_id; loadPhotolog();");
 
 String rope_groove_id;
 
@@ -828,61 +991,59 @@ newRopeGroove(){
     newTabGroup("Rope_groove");
 }
 
-/*
-onEvent("Tower/Tower_pole/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_hardware/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_bolts/Update", "delayclick", "saveTower()");
-
-onEvent("Tower/Tower_pole/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_hardware/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_bolts/Delete", "delayclick", "deleteTower()");
-
-String tower_id;
-
-newTower(){
-    tower_id = null;
-    newTabGroup("Tower");
-}
-
-loadTowerFrom(towerid) {
-    tower_id = towerid;
-    if (isNull(tower_id)) return;
-    
-    showTabGroup("Tower", tower_id);    
-    loadTowerAttributes();
-}
-
-
-loadTowerAttributes(){
-}
-
-saveTower() {
-    if (isNull(getFieldValue("Tower/Tower_pole/Tower_number"))) {
-        showWarning("Logic Error", "Cannot save record without Tower Number");
+loadRopeGrooveFrom(archent_id) {
+    rope_groove_id = archent_id;
+    if (isNull(rope_groove_id)) {
+        showToast("No record selected");
         return;
     }
-    if (!isNull(tower_id)) {
-        entity = fetchArchEnt(tower_id);
-    }
-    saveTabGroup("Tower", tower_id, null, null, "tower_id = getLastSavedRecordId();");
+    
+    showTabGroup("Rope_groove", rope_groove_id);
 }
 
 
-deleteTower(){
-    if (!isNull(tower_id)) {
-        showAlert("Confirm Deletion", "Press OK to Delete this Tower Record!", "reallyDeleteTower()", "doNotDelete()");
+saveRopeGroove(String callback) {
+    if (isNull(getFieldValue("Rope_groove/Details/Width")) || 
+        isNull(getFieldValue("Rope_groove/Details/Depth"))) {
+        showWarning("Validation Error", "Cannot save Rope Groove without Width and Depth");
+        return;
+    }
+    if (!isNull(rope_groove_id)) {
+        entity = fetchArchEnt(rope_groove_id);
+    }
+    saveTabGroup("Rope_groove", rope_groove_id, null, null, "rope_groove_id = getLastSavedRecordId();" + callback);
+}
+
+
+deleteRopeGroove(){
+    if (!isNull(rope_groove_id)) {
+        showAlert("Confirm Deletion", "Press OK to Delete this Rope Groove Record!", "reallyDeleteRopeGroove()", "doNotDelete()");
     } else {
-        cancelTabGroup("Tower", true);
+        cancelTabGroup("Rope_groove", true);
     }
 }
 
-reallyDeleteTower(){
-    deleteArchEnt(tower_id);
-    cancelTabGroup("Tower", false);
+reallyDeleteRopeGroove(){
+    deleteArchEnt(rope_groove_id);
+    cancelTabGroup("Rope_groove", false);
 }
-*/
+
+loadRopeGrooveRelated() {
+    feature_id = rope_groove_id;
+    loadRelatedPhotologs("Rope_groove/PhotoLog/ListPhotoLog");
+}
 
 /** ARCHENT: Other **/
+onEvent("Other", "show", "loadOtherRelated()");
+
+onEvent("Other/Details/Update", "delayclick", "saveOther(\"\")");
+onEvent("Other/Details/Delete", "delayclick", "deleteOther()");
+
+onEvent("Other/Details/CalculateGPS", "delayclick", "fillInGPS(\"Other/Details/\")");
+onEvent("Other/Details/Attach_photos", "delayclick", "attachPictureTo(\"Other/Details/Photos\")");
+
+onEvent("Other/PhotoLog/newPhotoLog", "delayclick", "saveRopeGroove(\"feature_id = other_id; newPhotolog();\")");
+onEvent("Other/PhotoLog/ListPhotoLog", "click", "feature_id = other_id; loadPhotolog();");
 
 String other_id;
 
@@ -891,62 +1052,52 @@ newOther(){
     newTabGroup("Other");
 }
 
-/*
-onEvent("Tower/Tower_pole/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_hardware/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_bolts/Update", "delayclick", "saveTower()");
-
-onEvent("Tower/Tower_pole/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_hardware/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_bolts/Delete", "delayclick", "deleteTower()");
-
-String tower_id;
-
-newTower(){
-    tower_id = null;
-    newTabGroup("Tower");
-}
-
-loadTowerFrom(towerid) {
-    tower_id = towerid;
-    if (isNull(tower_id)) return;
-    
-    showTabGroup("Tower", tower_id);    
-    loadTowerAttributes();
-}
-
-
-loadOtherAttributes(){
-    populateDropDown("Other/Details/Other type", makeVocab("Other type"));
-}
-
-saveTower() {
-    if (isNull(getFieldValue("Tower/Tower_pole/Tower_number"))) {
-        showWarning("Logic Error", "Cannot save record without Tower Number");
+loadOtherFrom(archent_id) {
+    other_id = archent_id;
+    if (isNull(other_id)) {
+        showToast("No record selected");
         return;
     }
-    if (!isNull(tower_id)) {
-        entity = fetchArchEnt(tower_id);
-    }
-    saveTabGroup("Tower", tower_id, null, null, "tower_id = getLastSavedRecordId();");
+    
+    showTabGroup("Other", other_id);
 }
 
+loadOtherAttributes(){
+    populateDropDown("Other/Details/Other_type", makeVocab("Other type"));
+}
 
-deleteTower(){
-    if (!isNull(tower_id)) {
-        showAlert("Confirm Deletion", "Press OK to Delete this Tower Record!", "reallyDeleteTower()", "doNotDelete()");
+saveOther(String callback) {
+    if (isNull(getFieldValue("Other/Details/Other_type"))) {
+        showWarning("Validation Error", "Cannot save record without Other Type");
+        return;
+    }
+    if (!isNull(other_id)) {
+        entity = fetchArchEnt(other_id);
+    }
+    saveTabGroup("Other", other_id, null, null, "other_id = getLastSavedRecordId();" + callback);
+}
+
+deleteOther(){
+    if (!isNull(other_id)) {
+        showAlert("Confirm Deletion", "Press OK to Delete this Other Record!", "reallyDeleteOther()", "doNotDelete()");
     } else {
-        cancelTabGroup("Tower", true);
+        cancelTabGroup("Other", true);
     }
 }
 
-reallyDeleteTower(){
-    deleteArchEnt(tower_id);
-    cancelTabGroup("Tower", false);
+reallyDeleteOther(){
+    deleteArchEnt(other_id);
+    cancelTabGroup("Other", false);
 }
-*/
+
+loadOtherRelated() {
+    feature_id = other_id;
+    loadRelatedPhotologs("Other/PhotoLog/ListPhotoLog");
+}
 
 /*** Arch Ent: PhotoLog ***/
+onEvent("Photograph_log/Photograph_log/Update", "delayclick", "savePhotolog()");
+onEvent("Photograph_log/Photograph_log/Delete", "delayclick", "deletePhotolog()");
 
 String photolog_id;
 
@@ -955,60 +1106,77 @@ newPhotolog(){
     newTabGroup("Photograph_log");
 }
 
-/*
-onEvent("Tower/Tower_pole/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_hardware/Update", "delayclick", "saveTower()");
-onEvent("Tower/Tower_bolts/Update", "delayclick", "saveTower()");
-
-onEvent("Tower/Tower_pole/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_hardware/Delete", "delayclick", "deleteTower()");
-onEvent("Tower/Tower_bolts/Delete", "delayclick", "deleteTower()");
-
-String tower_id;
-
-newTower(){
-    tower_id = null;
-    newTabGroup("Tower");
+loadPhotolog() {
+    archent_id = getListItemValue();
+    loadPhotologFrom(archent_id);
 }
 
-loadTowerFrom(towerid) {
-    tower_id = towerid;
-    if (isNull(tower_id)) return;
+loadPhotologFrom(archent_id) {
+    photolog_id = archent_id;
+    if (isNull(photolog_id)) {
+        showToast("No record selected");
+        return;
+    }
     
-    showTabGroup("Tower", tower_id);    
-    loadTowerAttributes();
+    showTabGroup("Photograph_log", photolog_id);
 }
 
-
-loadPhotoLogAttributes(){
+loadPhotologAttributes(){
     populateDropDown("Photograph_log/Photograph_log/Scene_type", makeVocab("Scene type"));
 }
 
-saveTower() {
-    if (isNull(getFieldValue("Tower/Tower_pole/Tower_number"))) {
-        showWarning("Logic Error", "Cannot save record without Tower Number");
+savePhotolog() {
+    if (isNull(getFieldValue("Photograph_log/Photograph_log/Photograph_reference_ID"))) {
+        showWarning("Validation Error", "Cannot save Photo log without Photograph Reference ID");
         return;
     }
-    if (!isNull(tower_id)) {
-        entity = fetchArchEnt(tower_id);
+    if (!isNull(photolog_id)) {
+        entity = fetchArchEnt(photolog_id);
     }
-    saveTabGroup("Tower", tower_id, null, null, "tower_id = getLastSavedRecordId();");
-}
-
-
-deleteTower(){
-    if (!isNull(tower_id)) {
-        showAlert("Confirm Deletion", "Press OK to Delete this Tower Record!", "reallyDeleteTower()", "doNotDelete()");
+    if(!isNull(feature_id)) {
+        saveTabGroup("Photograph_log", photolog_id, null, null, "photolog_id = getLastSavedRecordId();saveEntitiesToRel(\"FeaturePhotographLog\", feature_id, photolog_id);");    
     } else {
-        cancelTabGroup("Tower", true);
+        saveTabGroup("Photograph_log", photolog_id, null, null, "photolog_id = getLastSavedRecordId();");
+    }
+    
+}
+
+
+deletePhotolog(){
+    if (!isNull(photolog_id)) {
+        showAlert("Confirm Deletion", "Press OK to Delete this Photolog Record!", "reallyDeletePhotolog()", "doNotDelete()");
+    } else {
+        cancelTabGroup("Photograph_log", true);
     }
 }
 
-reallyDeleteTower(){
-    deleteArchEnt(tower_id);
-    cancelTabGroup("Tower", false);
+reallyDeletePhotolog(){
+    deleteArchEnt(photolog_id);
+    cancelTabGroup("Photograph_log", false);
 }
-*/
+
+loadRelatedPhotologs(String path){
+    Object photologs = new ArrayList();
+    if (!isNull(feature_id)){
+        photologs = fetchAll("select uuid, group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), ' | ') as response, valuetimestamp\n"+
+            "  FROM (  SELECT uuid, attributeid, vocabid, attributename, vocabname, measure, freetext, certainty, attributetype, valuetimestamp, aenttypename\n"+
+            "            FROM latestNonDeletedArchentIdentifiers\n"+
+            "           WHERE aenttypename = 'Photograph log'\n"+
+            "             AND uuid in (select uuid\n"+
+            "                            FROM latestNonDeletedAentReln\n"+
+            "                           where relationshipid in (select relationshipid\n"+
+            "                                                      FROM latestNonDeletedAentReln\n"+
+            "                                                      JOIN relationship using (relationshipid)\n"+
+            "                                                      JOIN relntype using (relntypeid)\n"+
+            "                                                     where uuid = "+feature_id+"\n"+
+            "                                                       and relntypeName = 'FeaturePhotographLog')\n"+
+            "                             and uuid != "+feature_id+")\n"+
+            "        ORDER BY uuid, attributename ASC)\n"+
+            "group by uuid\n"+
+            "order by valuetimestamp desc, uuid, attributename;");
+    }
+    populateList(path,  photologs);
+}
 
 // MISC FUNCTIONS    
 
@@ -1028,22 +1196,17 @@ makePictureGallery(String attrib){
     fetchAll("select vocabid, vocabname, pictureurl from vocabulary left join attributekey using (attributeid) where attributename = '" + attrib + "' order by vocabname;");
 }
 
-
 fillInGPS(String path){
     Object position = getGPSPositionProjected();
     Object projPosition = getGPSPositionProjected();
     if (projPosition != null ){
         Double latitude = projPosition.getLatitude();
         Double longitude = projPosition.getLongitude();
-        setFieldValue(path+"latitude", latitude);
-        setFieldValue(path+"longitude", longitude);
+        setFieldValue(path+"Latitude", latitude);
+        setFieldValue(path+"Longitude", longitude);
     } else {
         showToast("GPS Not initialized");
     }
-}
-
-doNotDelete(){
-    showToast("Delete Cancelled.");
 }
 
 /*** SYNC ***/
@@ -1095,3 +1258,17 @@ doNotDelete(){
 }
 
 onEvent("user/usertab/users", "click", "login()");
+
+loadBucketAttributes();
+loadTowerAttributes();
+loadTowerPoleAttributes();
+loadTrackCrossbarAttributes();
+loadWheelFrameAttributes();
+loadTowerBoltAttributes();
+loadTensionStationAttributes();
+loadTensionStationBoltAttributes();
+loadTrackRopeAttributes();
+loadHaulRopeAttributes();
+loadRopeJoinerAttributes();
+loadOtherAttributes();
+loadPhotologAttributes();

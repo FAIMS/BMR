@@ -395,13 +395,13 @@
     <property name="Wheel" type="enum">
       <description>Description TBD</description>
       <lookup>
-        <term> 
+        <term> No wheel
           <description>Description TBD</description>
         </term>
-        <term> 
+        <term> Original wheel
           <description>Description TBD</description>
         </term>
-        <term> 
+        <term> Replacement wheel
           <description>Description TBD</description>
         </term>
       </lookup>
@@ -437,7 +437,7 @@
     <property name="Diameter" type="float" isIdentifier="true">
       <description>Measurement in mm</description>
     </property>
-    <property name="Type" type="enum" isIdentifier="true">
+    <property name="Tower bolt type" type="enum" isIdentifier="true">
       <description>Description TBD</description>
       <lookup>
         <term> Bolt
@@ -971,7 +971,7 @@
     <property name="Diameter" type="float" isIdentifier="true">
       <description>Measurement in mm</description>
     </property>
-    <property name="Type" type="enum" isIdentifier="true">
+    <property name="Tension station bolt type" type="enum" isIdentifier="true">
       <description>Description TBD</description>
       <lookup>
         <term> Bolt
@@ -1289,7 +1289,7 @@
   <!-- ARCHENT: Rope joiner -->
   <ArchaeologicalElement name="Rope joiner">
     <description>Description TBD</description>
-    <property name="Rope joiner" type="enum" isIdentifier="true">
+    <property name="Rope joiner type" type="enum" isIdentifier="true">
       <description>Description TBD</description>
       <lookup>
         <term> Track rope
@@ -1317,10 +1317,33 @@
     </property>
   </ArchaeologicalElement>
 
+  <!-- ARCHENT: Rope joiner -->
+  <ArchaeologicalElement name="Rope groove">
+    <description>Description TBD</description>
+    <property name="Width" type="float" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Depth" type="float" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Notes" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Latitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Longitude" type="float">
+      <description>Description TBD</description>
+    </property>
+    <property name="Photos" type="file">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+
   <!-- ARCHENT: Other -->
   <ArchaeologicalElement name="Other">
     <description>Description TBD</description>
-    <property name="Othe" type="enum" isIdentifier="true">
+    <property name="Other type" type="enum" isIdentifier="true">
       <description>Description TBD</description>
       <lookup>
         <term> Coppiced tree
@@ -1354,9 +1377,6 @@
   <!-- ARCHENT: Photograph log -->
   <ArchaeologicalElement name="Photograph log">
     <description>A record of images created and stored on another device, eg by a professional site photographer.</description>
-    <property name="ContextID" type="freetext">
-      <description>Unique number or code for each Context</description>
-    </property>
     <property name="Photograph reference ID" isIdentifier= "true" type="freetext">
       <description>Unique number or code allocated by creator of the image. It could be a filename or a reference number</description>
     </property>
