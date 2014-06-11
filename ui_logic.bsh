@@ -29,6 +29,53 @@ searchAll(){
     search();
 }
 
+
+getCounterWithParent(table, parent){
+    counter = fetchOne("select group_concat(freetext,' ') as outfoo from ( "+
+"select freetext || ' - ' || '"+table+"' as freetext, 1 as odr  "+
+" from latestnondeletedarchentidentifiers  "+
+"where uuid = "+parent+" "+
+"union "+
+"select count(distinct uuid)+1, 2 from ( "+
+"select distinct child.uuid as uuid, aenttypename "+
+"  from (select '' as dual), latestnondeletedaentreln parent  "+
+"  join latestnondeletedaentreln child using (relationshipid)  "+
+"  join latestnondeletedarchent ae on (ae.uuid = child.uuid)  "+
+"  join latestnondeletedrelationship using (relationshipid)  "+
+"  join relntype using (relntypeid) "+
+"  join aenttype using (aenttypeid) "+
+" where parent.uuid != child.uuid  "+
+" and parent.uuid = "+parent+" "+
+" and aenttypename = '"+table+"') "+
+"order by odr "+
+"); ");
+     if(isNull(counter)){
+        return "Something went wrong";
+    } else {
+        counterText = counter.get(0);
+        check = fetchOne("select freetext from latestnondeletedaentvalue where freetext = '"+counterText+"'");
+        if(isNull(check))
+            return counterText;
+        else
+            return "Error: One or more of your identifiers is missing.";
+    }
+
+
+}
+
+getCounter(table){
+    counter = fetchOne(" select aenttypename || ' ' || foo from (select count(distinct uuid)+1 as foo, aenttypename from  aenttype left outer join latestnondeletedarchent using (aenttypeid) where aenttypename = '"+table+"');");
+    if(isNull(counter)){
+        return "Something went wrong";
+    } else {
+        counterText = counter.get(0);
+        check = fetchOne("select freetext from latestnondeletedaentvalue where freetext = '"+counterText+"'");
+        if(isNull(check))
+            return counterText;
+        else
+            return "Error: One or more of your identifiers is missing.";
+    }
+}
 search(){
     populateList("control/Search/Search_Results", fetchAll(""+
         "SELECT uuid||'='||aenttypename, aenttypename || ': ' || group_concat( coalesce(measure   || ' '  || vocabname || '('  ||  freetext ||'; '|| (certainty * 100.0) || '% certain)',  "+
@@ -117,6 +164,7 @@ String bucket_id;
 newBucket(){
     bucket_id = null;
     newTabGroup("Bucket");
+    setFieldValue("Bucket/Carrier_Details/Bucket_assembly_number", getCounter("Bucket"));
 }
 
 loadBucketFrom(archent_id) {
@@ -207,6 +255,8 @@ String tower_id;
 newTower(){
     tower_id = null;
     newTabGroup("Tower");
+    setFieldValue("Tower/Tower_pole/Tower_number", getCounter("Tower"));
+
 }
 
 loadTowerFrom(archent_id) {
@@ -354,6 +404,8 @@ String tower_pole_id;
 newTowerPole(){
     tower_pole_id = null;
     newTabGroup("Tower_pole");
+    setFieldValue("Tower_pole/Details/Pole_number", getCounterWithParent("Tower pole", tower_id));
+
 }
 
 loadTowerPole() {
@@ -412,6 +464,8 @@ String track_crossbar_id;
 newTrackCrossbar(){
     track_crossbar_id = null;
     newTabGroup("Track_crossbar");
+    setFieldValue("Track_crossbar/Details/Crossbar_number", getCounterWithParent("Track crossbar", tower_id));
+
 }
 
 loadTrackCrossbar() {
@@ -474,6 +528,8 @@ String wheel_frame_id;
 newWheelFrame(){
     wheel_frame_id = null;
     newTabGroup("Wheel_frame");
+    setFieldValue("Wheel_frame/Details/Frame_number", getCounterWithParent("Haul rope wheel frame", tower_id));
+
 }
 
 loadWheelFrame() {
@@ -533,6 +589,7 @@ String tower_bolt_id;
 newTowerBolt(){
     tower_bolt_id = null;
     newTabGroup("Tower_bolts");
+
 }
 
 loadTowerBolt() {
@@ -623,6 +680,7 @@ String tension_station_id;
 newTensionStation(){
     tension_station_id = null;
     newTabGroup("Tension_station");
+
 }
 
 loadTensionStationBolt() {
@@ -792,6 +850,8 @@ String track_rope_id;
 newTrackRope(){
     track_rope_id = null;
     newTabGroup("Track_rope");
+    setFieldValue("Track_rope/Details/Measurement_number", getCounter("Track rope"));
+
 }
 
 loadTrackRopeFrom(archent_id) {
@@ -858,6 +918,7 @@ String haul_rope_id;
 newHaulRope(){
     haul_rope_id = null;
     newTabGroup("Haul_rope_remnant");
+
 }
 
 loadHaulRopeFrom(archent_id) {
@@ -926,6 +987,7 @@ String rope_joiner_id;
 newRopeJoiner(){
     rope_joiner_id = null;
     newTabGroup("Rope_joiner");
+
 }
 
 loadRopeJoinerFrom(archent_id) {
@@ -1050,6 +1112,7 @@ String other_id;
 newOther(){
     other_id = null;
     newTabGroup("Other");
+
 }
 
 loadOtherFrom(archent_id) {
@@ -1104,6 +1167,9 @@ String photolog_id;
 newPhotolog(){
     photolog_id = null;
     newTabGroup("Photograph_log");
+    setFieldValue("Photograph_log/Photograph_log/Photograph_reference_ID", getCounter("Photograph log"));
+
+
 }
 
 loadPhotolog() {
@@ -1122,7 +1188,7 @@ loadPhotologFrom(archent_id) {
 }
 
 loadPhotologAttributes(){
-    populateDropDown("Photograph_log/Photograph_log/Scene_type", makeVocab("Scene type"));
+   
 }
 
 savePhotolog() {

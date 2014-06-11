@@ -603,6 +603,7 @@
       <bind nodeset="/faims/Other/Details/Latitude" type="decimal"/>
       <bind nodeset="/faims/Other/Details/Longitude" type="decimal"/>
       <bind nodeset="/faims/Other/Details/Notes" type="string"/>
+      <bind nodeset="/faims/Photograph_log/Photograph_log/Scene_type" type="string"/>
     </model>
   </h:head>
 
@@ -2280,13 +2281,10 @@ Counterweight hanger/ cradle 4</label>
             <input faims_attribute_name="Photograph reference ID" faims_attribute_type="freetext" faims_read_only="false" ref="Photograph_reference_ID" faims_certainty="false">
               <label>Photograph Log ID</label>
             </input>
-          <select1 faims_attribute_name="Scene type" faims_attribute_type="vocab" faims_certainty="false" faims_read_only="false" ref="Scene_type">
-            <label>Scene Type</label>
-            <item>
-              <label>placeholder</label>
-              <value>placeholder</value>
-            </item>
-          </select1>
+          <input faims_attribute_name="Scene type" faims_attribute_type="freetext" faims_certainty="false" faims_read_only="false" ref="Scene_type">
+            <label>Description</label>
+           
+          </input>
           <trigger ref="Update">
             <label>Save Record</label>
           </trigger>
