@@ -28,6 +28,7 @@
     <property name="Fitted with anti-tip brackets" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -39,6 +40,7 @@
     <property name="Grip slide present" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -50,6 +52,7 @@
     <property name="Bolt in grip slide" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -61,6 +64,7 @@
     <property name="Grip slide smashed" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> No
           <description>Description TBD</description>
         </term>
@@ -78,6 +82,7 @@
     <property name="Grip present" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> No
           <description>Description TBD</description>
         </term>
@@ -92,6 +97,7 @@
     <property name="Idler wheel present" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -103,6 +109,7 @@
     <property name="Idler wheel grease cap present" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -114,6 +121,7 @@
     <property name="LH diagonal" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> None
           <description>Description TBD</description>
         </term>
@@ -128,6 +136,7 @@
     <property name="LH carrier arm" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> None
           <description>Description TBD</description>
         </term>
@@ -142,6 +151,7 @@
     <property name="RH diagonal" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> None
           <description>Description TBD</description>
         </term>
@@ -156,6 +166,7 @@
     <property name="RH carrier arm" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> None
           <description>Description TBD</description>
         </term>
@@ -182,6 +193,7 @@
     <property name="Left track damage" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -193,6 +205,7 @@
     <property name="Left track rope wheel" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> None
           <description>Description TBD</description>
         </term>
@@ -207,6 +220,7 @@
     <property name="Right track damage" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -218,6 +232,7 @@
     <property name="Right track rope wheel" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> None
           <description>Description TBD</description>
         </term>
@@ -247,6 +262,7 @@
     <property name="Hit" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> No
           <description>Description TBD</description>
         </term>
@@ -285,6 +301,7 @@
     <property name="Fourth stabilising pole" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -302,6 +319,7 @@
     <property name="Tower type" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Single Head
           <description>Description TBD</description>
         </term>
@@ -313,6 +331,7 @@
     <property name="Haul rope cross timber" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -335,6 +354,7 @@
     <property name="Pole exists" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -355,6 +375,7 @@
     <property name="Footing" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> None visible
           <description>Description TBD</description>
         </term>
@@ -370,7 +391,7 @@
       </lookup>
     </property>
     <property name="Footing depth" type="float">
-      <description/>
+      <description>Description TBD</description>
     </property>
     <property name="Footing diameter" type="float">
       <description>Description TBD</description>
@@ -395,6 +416,7 @@
     <property name="Wheel" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> No wheel
           <description>Description TBD</description>
         </term>
@@ -409,6 +431,7 @@
     <property name="Bearings" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -440,6 +463,7 @@
     <property name="Tower bolt type" type="enum" isIdentifier="true">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Bolt
           <description>Description TBD</description>
         </term>
@@ -451,6 +475,7 @@
     <property name="Head" type="enum" isIdentifier="true">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Square
           <description>Description TBD</description>
         </term>
@@ -462,6 +487,7 @@
     <property name="In situ" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -473,6 +499,7 @@
     <property name="Function" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Tower bracket
           <description>Description TBD</description>
         </term>
@@ -502,6 +529,7 @@
     <property name="Nut" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Square
           <description>Description TBD</description>
         </term>
@@ -513,6 +541,7 @@
     <property name="Washer" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -556,6 +585,7 @@
     <property name="Tension pit top rail" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -567,6 +597,7 @@
     <property name="Tension pit top rail hanger" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -578,6 +609,7 @@
     <property name="Chain roller 1 exists" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -598,6 +630,7 @@
     <property name="Chain roller 1 shaft" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -609,6 +642,7 @@
     <property name="Chain roller 1 bearings" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> None
           <description>Description TBD</description>
         </term>
@@ -623,6 +657,7 @@
     <property name="Chain roller 2 exists" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -643,6 +678,7 @@
     <property name="Chain roller 2 shaft" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -654,6 +690,7 @@
     <property name="Chain roller 2 bearings" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> None
           <description>Description TBD</description>
         </term>
@@ -668,6 +705,7 @@
     <property name="Chain roller 3 exists" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -688,6 +726,7 @@
     <property name="Chain roller 3 shaft" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -699,6 +738,7 @@
     <property name="Chain roller 3 bearings" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> None
           <description>Description TBD</description>
         </term>
@@ -713,6 +753,7 @@
     <property name="Chain roller 4 exists" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -733,6 +774,7 @@
     <property name="Chain roller 4 shaft" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -744,6 +786,7 @@
     <property name="Chain roller 4 bearings" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> None
           <description>Description TBD</description>
         </term>
@@ -758,6 +801,7 @@
     <property name="Cradle 1 exists" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -772,6 +816,7 @@
     <property name="Cradle 1 counterweight material" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Cast Iron
           <description>Description TBD</description>
         </term>
@@ -801,6 +846,7 @@
     <property name="Cradle 2 exists" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -815,6 +861,7 @@
     <property name="Cradle 2 counterweight material" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Cast Iron
           <description>Description TBD</description>
         </term>
@@ -844,6 +891,7 @@
     <property name="Cradle 3 exists" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -858,6 +906,7 @@
     <property name="Cradle 3 counterweight material" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Cast Iron
           <description>Description TBD</description>
         </term>
@@ -887,6 +936,7 @@
     <property name="Cradle 4 exists" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -901,6 +951,7 @@
     <property name="Cradle 4 counterweight material" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Cast Iron
           <description>Description TBD</description>
         </term>
@@ -974,6 +1025,7 @@
     <property name="Tension station bolt type" type="enum" isIdentifier="true">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Bolt
           <description>Description TBD</description>
         </term>
@@ -985,6 +1037,7 @@
     <property name="Head" type="enum" isIdentifier="true">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Square
           <description>Description TBD</description>
         </term>
@@ -999,6 +1052,7 @@
     <property name="Nut" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Square
           <description>Description TBD</description>
         </term>
@@ -1010,6 +1064,7 @@
     <property name="Washer" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -1030,6 +1085,7 @@
     <property name="Track rope wheel cross bar" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -1041,6 +1097,7 @@
     <property name="Track rope cross timber present" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -1055,6 +1112,7 @@
     <property name="Track rope saddle or wheel" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Saddle
           <description>Description TBD</description>
           <term> None
@@ -1084,6 +1142,7 @@
     <property name="Head plate" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Yes
           <description>Description TBD</description>
         </term>
@@ -1095,6 +1154,7 @@
     <property name="Cross timber angle bracket" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> None
           <description>Description TBD</description>
         </term>
@@ -1138,6 +1198,7 @@
     <property name="Wear from carrier wheels on top" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> None
           <description>Description TBD</description>
         </term>
@@ -1161,6 +1222,7 @@
     <property name="Wear from saddle pressure underneath" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> None
           <description>Description TBD</description>
         </term>
@@ -1187,6 +1249,7 @@
     <property name="Rope end condition" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Cut
           <description>Description TBD</description>
         </term>
@@ -1221,6 +1284,7 @@
     <property name="Direction" type="enum" isIdentifier="true">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Inbound
           <description>Description TBD</description>
         </term>
@@ -1232,6 +1296,7 @@
     <property name="Haul rope type" type="enum" isIdentifier="true">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Rope
           <description>Description TBD</description>
         </term>
@@ -1258,6 +1323,7 @@
     <property name="Rope end condition" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Cut
           <description>Description TBD</description>
         </term>
@@ -1292,6 +1358,7 @@
     <property name="Rope joiner type" type="enum" isIdentifier="true">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Track rope
           <description>Description TBD</description>
         </term>
@@ -1346,6 +1413,7 @@
     <property name="Other type" type="enum" isIdentifier="true">
       <description>Description TBD</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Coppiced tree
           <description>Description TBD</description>
         </term>
@@ -1383,6 +1451,7 @@
     <property name="Scene type" type="enum">
       <description>The type of scene captured, eg opening or closing view of the Context. (Vocab: Open, Close, Other)</description>
       <lookup>
+        <term> {0_No_Observation}<description/> </term>
         <term> Open
           <description/>
         </term>

@@ -733,7 +733,7 @@
       <label>Bucket</label>
       <group ref="Carrier_Details">
         <label>Carrier Details</label>
-        <input ref="Bucket_assembly_number" faims_attribute_name="Bucket assembly number" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+        <input ref="Bucket_assembly_number" faims_attribute_name="Bucket assembly number" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false" faims_read_only="false">
           <label>Assembly Number</label>
         </input>
         <select1 appearance="full" ref="Fitted_with_anti-tip_brackets" faims_attribute_name="Fitted with anti-tip brackets" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
@@ -813,13 +813,13 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Carrier_notes" faims_attribute_name="Carrier notes" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+        <input ref="Carrier_notes" faims_attribute_name="Carrier notes" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false" faims_read_only="false">
           <label>Notes</label>
         </input>
-        <input ref="Carrier_Latitude" faims_attribute_name="Carrier Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true" faims_read_only="false">
+        <input ref="Carrier_Latitude" faims_attribute_name="Carrier Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>Latitude</label>
         </input>
-        <input ref="Carrier_Longitude" faims_attribute_name="Carrier Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true" faims_read_only="false">
+        <input ref="Carrier_Longitude" faims_attribute_name="Carrier Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>Longitude</label>
         </input>
         <trigger ref="CalculateGPS">
@@ -845,7 +845,7 @@
       
       <group ref="Carriage_Details">
         <label>Carriage Details</label>
-        <input ref="Bucket_assembly_number" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+        <input ref="Bucket_assembly_number" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false" faims_read_only="true">
           <label>Assembly Number</label>
         </input>
         <select1 appearance="full" ref="Left_track_damage" faims_attribute_name="Left track damage" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
@@ -879,13 +879,13 @@
         <input ref="Number_of_bolts" faims_attribute_name="Number of bolts" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>Number of bolts</label>
         </input>
-        <input ref="Carriage_notes" faims_attribute_name="Carriage notes" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+        <input ref="Carriage_notes" faims_attribute_name="Carriage notes" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false" faims_read_only="false">
           <label>Notes</label>
         </input>
-        <input ref="Carriage_Latitude" faims_attribute_name="Carriage Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true" faims_read_only="false">
+        <input ref="Carriage_Latitude" faims_attribute_name="Carriage Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>Latitude</label>
         </input>
-        <input ref="Carriage_Longitude" faims_attribute_name="Carriage Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true" faims_read_only="false">
+        <input ref="Carriage_Longitude" faims_attribute_name="Carriage Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>Longitude</label>
         </input>
         <trigger ref="CalculateGPS">
@@ -910,7 +910,7 @@
       </group>
       <group ref="Bucket_Details">
         <label>Bucket Details</label>
-        <input ref="Bucket_assembly_number" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+        <input ref="Bucket_assembly_number" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false" faims_read_only="true">
           <label>Assembly Number</label>
         </input>
         <select1 appearance="full" ref="Hit" faims_attribute_name="Hit" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
@@ -920,13 +920,13 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Bucket_notes" faims_attribute_name="Bucket notes" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+        <input ref="Bucket_notes" faims_attribute_name="Bucket notes" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false" faims_read_only="false">
           <label>Notes</label>
         </input>
-        <input ref="Bucket_Latitude" faims_attribute_name="Bucket Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true" faims_read_only="false">
+        <input ref="Bucket_Latitude" faims_attribute_name="Bucket Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>Latitude</label>
         </input>
-        <input ref="Bucket_Longitude" faims_attribute_name="Bucket Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true" faims_read_only="false">
+        <input ref="Bucket_Longitude" faims_attribute_name="Bucket Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>Longitude</label>
         </input>
         <trigger ref="CalculateGPS">
@@ -967,7 +967,7 @@
       <label>Tower</label>
       <group ref="Tower_pole">
         <label>Tower Pole</label>
-        <input ref="Tower_number" faims_attribute_name="Tower number" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+        <input ref="Tower_number" faims_attribute_name="Tower number" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Tower Number</label>
         </input>
         <select1 appearance="full" ref="Fourth_stabilising_pole" faims_attribute_name="Fourth stabilising pole" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
@@ -993,10 +993,10 @@
         <trigger ref="Delete_pole" faims_certainty="false" faims_annotation="false">
           <label>Delete Pole</label>
         </trigger>
-        <input ref="Footing_spacing" faims_attribute_name="Footing spacing" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Footing_spacing" faims_attribute_name="Footing spacing" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Footing spacing</label>
         </input>
-        <input ref="Tower_pole_notes" faims_attribute_name="Tower pole notes" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+        <input ref="Tower_pole_notes" faims_attribute_name="Tower pole notes" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Notes</label>
         </input>
         <trigger ref="Update">
@@ -1008,7 +1008,7 @@
       </group>
       <group ref="Tower_hardware">
         <label>Tower hardware</label>
-        <select1 appearance="full" ref="Tower_type" faims_attribute_name="Tower type" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="true">
+        <select1 appearance="full" ref="Tower_type" faims_attribute_name="Tower type" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
           <label>Tower type</label>
           <item>
             <label>placeholder</label>
@@ -1029,9 +1029,9 @@
           <label>Load Track Crossbar</label>
         </trigger>
         <trigger ref="Delete_track_crossbar">
-          <label>Delete Tack Crossbar</label>
+          <label>Delete Track Crossbar</label>
         </trigger>
-        <select1 appearance="full" ref="Haul_rope_cross_timber" faims_attribute_name="Haul rope cross timber" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="true">
+        <select1 appearance="full" ref="Haul_rope_cross_timber" faims_attribute_name="Haul rope cross timber" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
           <label>Haul rope cross timber</label>
           <item>
             <label>placeholder</label>
@@ -1054,7 +1054,7 @@
         <trigger ref="Delete_haul_rope_wheel_frame">
           <label>Delete Haul Rope Wheel Frame</label>
         </trigger>
-        <input ref="Tower_hardware_notes" faims_attribute_name="Tower hardware notes" faims_certainty="false" faims_annotation="false">
+        <input ref="Tower_hardware_notes" faims_attribute_name="Tower hardware notes" faims_certainty="true" faims_annotation="false">
           <label>Notes</label>
         </input>
         <trigger ref="Update">
@@ -1095,7 +1095,7 @@
       <label>Tower Pole</label>
       <group ref="Details">
         <label>Details</label>
-        <input ref="Pole_number" faims_attribute_name="Pole number" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+        <input ref="Pole_number" faims_attribute_name="Pole number" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Pole number</label>
         </input>
         <select1 appearance="full" ref="Pole_exists" faims_attribute_name="Pole exists" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
@@ -1105,13 +1105,13 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Length" faims_attribute_name="Length" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Length" faims_attribute_name="Length" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Length</label>
         </input>
-        <input ref="Diameter" faims_attribute_name="Diameter" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Diameter" faims_attribute_name="Diameter" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Diameter</label>
         </input>
-        <input ref="Orientation" faims_attribute_name="Orientation" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+        <input ref="Orientation" faims_attribute_name="Orientation" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Orientation</label>
         </input>
         <select1 ref="Footing" faims_attribute_name="Footing" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
@@ -1121,16 +1121,16 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Footing_depth" faims_attribute_name="Footing depth" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Footing_depth" faims_attribute_name="Footing depth" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Footing depth</label>
         </input>
-        <input ref="Footing_diameter" faims_attribute_name="Footing diameter" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Footing_diameter" faims_attribute_name="Footing diameter" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Footing diameter</label>
         </input>
-        <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Latitude</label>
         </input>
-        <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Longitude</label>
         </input>
         <trigger ref="CalculateGPS">
@@ -1158,7 +1158,7 @@
       <label>Track Crossbar</label>
       <group ref="Details">
         <label>Details</label>
-        <input ref="Crossbar_number" faims_attribute_name="Crossbar number" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+        <input ref="Crossbar_number" faims_attribute_name="Crossbar number" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Crossbar Number</label>
         </input>
         <select1 appearance="full" ref="Track_rope_wheel_cross_bar" faims_attribute_name="Track rope wheel cross bar" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
@@ -1175,10 +1175,10 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="U_clamps" faims_attribute_name="U clamps for track rope wheel cross bar" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="U_clamps" faims_attribute_name="U clamps for track rope wheel cross bar" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>U clamps for track rope wheel cross bar</label>
         </input>
-        <select1 ref="Track_rope_saddle_or_wheel" faims_attribute_name="Track rope saddle or wheel" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="true">
+        <select1 ref="Track_rope_saddle_or_wheel" faims_attribute_name="Track rope saddle or wheel" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
           <label>Track rope saddle or wheel</label>
           <item>
             <label>placeholder</label>
@@ -1199,10 +1199,10 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Latitude</label>
         </input>
-        <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Longitude</label>
         </input>
         <trigger ref="CalculateGPS">
@@ -1230,7 +1230,7 @@
       <label>Haul rope wheel frame</label>
       <group ref="Details">
         <label>Details</label>
-        <input ref="Frame_number" faims_attribute_name="Frame number" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+        <input ref="Frame_number" faims_attribute_name="Frame number" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Frame number</label>
         </input>
         <select1 ref="Wheel" faims_attribute_name="Wheel" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
@@ -1247,10 +1247,10 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Latitude</label>
         </input>
-        <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Longitude</label>
         </input>
         <trigger ref="CalculateGPS">
@@ -1278,20 +1278,20 @@
       <label>Tower Bolts</label>
       <group ref="Details">
         <label>Details</label>
-        <input ref="Length" faims_attribute_name="Length" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Length" faims_attribute_name="Length" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Length</label>
         </input>
-        <input ref="Diameter" faims_attribute_name="Diameter" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Diameter" faims_attribute_name="Diameter" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Diameter</label>
         </input>
-        <select1 appearance="full" ref="Type" faims_attribute_name="Tower bolt type" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="true">
+        <select1 appearance="full" ref="Type" faims_attribute_name="Tower bolt type" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
           <label>Type</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <select1 appearance="full" ref="Head" faims_attribute_name="Head" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="true">
+        <select1 appearance="full" ref="Head" faims_attribute_name="Head" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
           <label>Head</label>
           <item>
             <label>placeholder</label>
@@ -1312,10 +1312,10 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Estimated_offset" faims_attribute_name="Estimated offset" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Estimated_offset" faims_attribute_name="Estimated offset" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Estimated offset from centerline</label>
         </input>
-        <input ref="Estimated_distance" faims_attribute_name="Estimated distance" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Estimated_distance" faims_attribute_name="Estimated distance" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Estimated distance north or south of supposed centre of tower</label>
         </input>
         <select1 appearance="full" ref="Nut" faims_attribute_name="Nut" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
@@ -1332,16 +1332,16 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Length_of_bolt" faims_attribute_name="Length of bolt" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Length_of_bolt" faims_attribute_name="Length of bolt" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Length of bolt between head and nut / washe</label>
         </input>
-        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Notes</label>
         </input>
-        <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Latitude</label>
         </input>
-        <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Longitude</label>
         </input>
         <trigger ref="CalculateGPS">
@@ -1372,16 +1372,16 @@
       <label>Tension station</label>
       <group ref="Details">
         <label>Details</label>
-        <input ref="Pit_length" faims_attribute_name="Pit length" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Pit_length" faims_attribute_name="Pit length" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Pit length</label>
         </input>
-        <input ref="Pit_width" faims_attribute_name="Pit width" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Pit_width" faims_attribute_name="Pit width" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Pit width</label>
         </input>
-        <input ref="Pit_depth" faims_attribute_name="Pit depth" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Pit_depth" faims_attribute_name="Pit depth" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Pit depth</label>
         </input>
-        <input ref="Timber_frame_around_top_of_pit" faims_attribute_name="Timber frame around top of pit" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+        <input ref="Timber_frame_around_top_of_pit" faims_attribute_name="Timber frame around top of pit" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Timber frame around top of pit</label>
         </input>
         <select1 appearance="full" ref="Tension_pit_top_rail" faims_attribute_name="Tension pit top rail" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
@@ -1424,13 +1424,13 @@ Chain Roller 1
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Chain_roller_1_diameter" faims_attribute_name="Chain roller 1 diameter" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Chain_roller_1_diameter" faims_attribute_name="Chain roller 1 diameter" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Diameter</label>
         </input>
-        <input ref="Chain_roller_1_thickness" faims_attribute_name="Chain roller 1 thickness" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Chain_roller_1_thickness" faims_attribute_name="Chain roller 1 thickness" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Thickness</label>
         </input>
-        <input ref="Chain_roller_1_shaft_diameter" faims_attribute_name="Chain roller 1 shaft diameter" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Chain_roller_1_shaft_diameter" faims_attribute_name="Chain roller 1 shaft diameter" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Shaft Diameter</label>
         </input>
         <select1 appearance="full" ref="Chain_roller_1_shaft" faims_attribute_name="Chain roller 1 shaft" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
@@ -1464,13 +1464,13 @@ Chain Roller 2</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Chain_roller_2_diameter" faims_attribute_name="Chain roller 2 diameter" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Chain_roller_2_diameter" faims_attribute_name="Chain roller 2 diameter" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Diameter</label>
         </input>
-        <input ref="Chain_roller_2_thickness" faims_attribute_name="Chain roller 2 thickness" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Chain_roller_2_thickness" faims_attribute_name="Chain roller 2 thickness" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Thickness</label>
         </input>
-        <input ref="Chain_roller_2_shaft_diameter" faims_attribute_name="Chain roller 2 shaft diameter" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Chain_roller_2_shaft_diameter" faims_attribute_name="Chain roller 2 shaft diameter" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Shaft Diameter</label>
         </input>
         <select1 appearance="full" ref="Chain_roller_2_shaft" faims_attribute_name="Chain roller 2 shaft" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
@@ -1504,13 +1504,13 @@ Chain Roller 3</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Chain_roller_3_diameter" faims_attribute_name="Chain roller 3 diameter" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Chain_roller_3_diameter" faims_attribute_name="Chain roller 3 diameter" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Diameter</label>
         </input>
-        <input ref="Chain_roller_3_thickness" faims_attribute_name="Chain roller 3 thickness" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Chain_roller_3_thickness" faims_attribute_name="Chain roller 3 thickness" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Thickness</label>
         </input>
-        <input ref="Chain_roller_3_shaft_diameter" faims_attribute_name="Chain roller 3 shaft diameter" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Chain_roller_3_shaft_diameter" faims_attribute_name="Chain roller 3 shaft diameter" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Shaft Diameter</label>
         </input>
         <select1 appearance="full" ref="Chain_roller_3_shaft" faims_attribute_name="Chain roller 3 shaft" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
@@ -1544,13 +1544,13 @@ Chain Roller 4</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Chain_roller_4_diameter" faims_attribute_name="Chain roller 4 diameter" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Chain_roller_4_diameter" faims_attribute_name="Chain roller 4 diameter" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Diameter</label>
         </input>
-        <input ref="Chain_roller_4_thickness" faims_attribute_name="Chain roller 4 thickness" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Chain_roller_4_thickness" faims_attribute_name="Chain roller 4 thickness" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Thickness</label>
         </input>
-        <input ref="Chain_roller_4_shaft_diameter" faims_attribute_name="Chain roller 4 shaft diameter" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Chain_roller_4_shaft_diameter" faims_attribute_name="Chain roller 4 shaft diameter" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Shaft Diameter</label>
         </input>
         <select1 appearance="full" ref="Chain_roller_4_shaft" faims_attribute_name="Chain roller 4 shaft" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
@@ -1593,7 +1593,7 @@ Counterweight hanger/ cradle 1
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Cradle_1_counterweight_count" faims_attribute_name="Cradle 1 counterweight count" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_1_counterweight_count" faims_attribute_name="Cradle 1 counterweight count" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Counterweight count</label>
         </input>
         <select1 appearance="full" ref="Cradle_1_counterweight_material" faims_attribute_name="Cradle 1 counterweight material" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
@@ -1603,19 +1603,19 @@ Counterweight hanger/ cradle 1
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Cradle_1_counterweight_length" faims_attribute_name="Cradle 1 counterweight length" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_1_counterweight_length" faims_attribute_name="Cradle 1 counterweight length" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Counterweight length</label>
         </input>
-        <input ref="Cradle_1_counterweight_width" faims_attribute_name="Cradle 1 counterweight width" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_1_counterweight_width" faims_attribute_name="Cradle 1 counterweight width" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Counterweight width</label>
         </input>
-        <input ref="Cradle_1_counterweight_thickness" faims_attribute_name="Cradle 1 counterweight thickness" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_1_counterweight_thickness" faims_attribute_name="Cradle 1 counterweight thickness" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Counterweight thickness</label>
         </input>
-        <input ref="Cradle_1_Latitude" faims_attribute_name="Cradle 1 Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_1_Latitude" faims_attribute_name="Cradle 1 Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Latitude</label>
         </input>
-        <input ref="Cradle_1_Longitude" faims_attribute_name="Cradle 1 Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_1_Longitude" faims_attribute_name="Cradle 1 Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Longitude</label>
         </input>
         <trigger ref="Cradle_1_get_lat_long">
@@ -1648,7 +1648,7 @@ Counterweight hanger/ cradle 2</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Cradle_2_counterweight_count" faims_attribute_name="Cradle 2 counterweight count" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_2_counterweight_count" faims_attribute_name="Cradle 2 counterweight count" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Counterweight count</label>
         </input>
         <select1 appearance="full" ref="Cradle_2_counterweight_material" faims_attribute_name="Cradle 2 counterweight material" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
@@ -1658,19 +1658,19 @@ Counterweight hanger/ cradle 2</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Cradle_2_counterweight_length" faims_attribute_name="Cradle 2 counterweight length" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_2_counterweight_length" faims_attribute_name="Cradle 2 counterweight length" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Counterweight length</label>
         </input>
-        <input ref="Cradle_2_counterweight_width" faims_attribute_name="Cradle 2 counterweight width" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_2_counterweight_width" faims_attribute_name="Cradle 2 counterweight width" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Counterweight width</label>
         </input>
-        <input ref="Cradle_2_counterweight_thickness" faims_attribute_name="Cradle 2 counterweight thickness" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_2_counterweight_thickness" faims_attribute_name="Cradle 2 counterweight thickness" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Counterweight thickness</label>
         </input>
-        <input ref="Cradle_2_Latitude" faims_attribute_name="Cradle 2 Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_2_Latitude" faims_attribute_name="Cradle 2 Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Latitude</label>
         </input>
-        <input ref="Cradle_2_Longitude" faims_attribute_name="Cradle 2 Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_2_Longitude" faims_attribute_name="Cradle 2 Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Longitude</label>
         </input>
         <trigger ref="Cradle_2_get_lat_long">
@@ -1703,7 +1703,7 @@ Counterweight hanger/ cradle 3</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Cradle_3_counterweight_count" faims_attribute_name="Cradle 3 counterweight count" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_3_counterweight_count" faims_attribute_name="Cradle 3 counterweight count" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Counterweight count</label>
         </input>
         <select1 appearance="full" ref="Cradle_3_counterweight_material" faims_attribute_name="Cradle 3 counterweight material" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
@@ -1713,19 +1713,19 @@ Counterweight hanger/ cradle 3</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Cradle_3_counterweight_length" faims_attribute_name="Cradle 3 counterweight length" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_3_counterweight_length" faims_attribute_name="Cradle 3 counterweight length" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Counterweight length</label>
         </input>
-        <input ref="Cradle_3_counterweight_width" faims_attribute_name="Cradle 3 counterweight width" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_3_counterweight_width" faims_attribute_name="Cradle 3 counterweight width" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Counterweight width</label>
         </input>
-        <input ref="Cradle_3_counterweight_thickness" faims_attribute_name="Cradle 3 counterweight thickness" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_3_counterweight_thickness" faims_attribute_name="Cradle 3 counterweight thickness" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Counterweight thickness</label>
         </input>
-        <input ref="Cradle_3_Latitude" faims_attribute_name="Cradle 3 Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_3_Latitude" faims_attribute_name="Cradle 3 Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Latitude</label>
         </input>
-        <input ref="Cradle_3_Longitude" faims_attribute_name="Cradle 3 Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_3_Longitude" faims_attribute_name="Cradle 3 Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Longitude</label>
         </input>
         <trigger ref="Cradle_3_get_lat_long">
@@ -1758,7 +1758,7 @@ Counterweight hanger/ cradle 4</label>
             <value>Help</value>
           </item>
         </select1>
-        <input ref="Cradle_4_counterweight_count" faims_attribute_name="Cradle 4 counterweight count" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_4_counterweight_count" faims_attribute_name="Cradle 4 counterweight count" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Counterweight count</label>
         </input>
         <select1 appearance="full" ref="Cradle_4_counterweight_material" faims_attribute_name="Cradle 4 counterweight material" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
@@ -1768,19 +1768,19 @@ Counterweight hanger/ cradle 4</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Cradle_4_counterweight_length" faims_attribute_name="Cradle 4 counterweight length" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_4_counterweight_length" faims_attribute_name="Cradle 4 counterweight length" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Counterweight length</label>
         </input>
-        <input ref="Cradle_4_counterweight_width" faims_attribute_name="Cradle 4 counterweight width" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_4_counterweight_width" faims_attribute_name="Cradle 4 counterweight width" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Counterweight width</label>
         </input>
-        <input ref="Cradle_4_counterweight_thickness" faims_attribute_name="Cradle 4 counterweight thickness" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_4_counterweight_thickness" faims_attribute_name="Cradle 4 counterweight thickness" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Counterweight thickness</label>
         </input>
-        <input ref="Cradle_4_Latitude" faims_attribute_name="Cradle 4 Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_4_Latitude" faims_attribute_name="Cradle 4 Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Latitude</label>
         </input>
-        <input ref="Cradle_4_Longitude" faims_attribute_name="Cradle 4 Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Cradle_4_Longitude" faims_attribute_name="Cradle 4 Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Longitude</label>
         </input>
         <trigger ref="Cradle_4_get_lat_long">
@@ -1805,43 +1805,43 @@ Counterweight hanger/ cradle 4</label>
       </group>
       <group ref="Notes">
         <label>Notes</label>
-        <input ref="Signal_wire_insulator" faims_attribute_name="Signal wire insulator" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Signal_wire_insulator" faims_attribute_name="Signal wire insulator" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Signal wire insulator</label>
         </input>
-        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Notes</label>
         </input>
-        <input ref="Corner_point_1_Latitude" faims_attribute_name="Corner point 1 Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Corner_point_1_Latitude" faims_attribute_name="Corner point 1 Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Corner point 1 Latitude</label>
         </input>
-        <input ref="Corner_point_1_Longitude" faims_attribute_name="Corner point 1 Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Corner_point_1_Longitude" faims_attribute_name="Corner point 1 Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Corner point 1 Longitude</label>
         </input>
         <trigger ref="Corner_point_1_lat_long">
           <label>Calculate GPS</label>
         </trigger>
-        <input ref="Corner_point_2_Latitude" faims_attribute_name="Corner point 2 Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Corner_point_2_Latitude" faims_attribute_name="Corner point 2 Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Corner point 2 Latitude</label>
         </input>
-        <input ref="Corner_point_2_Longitude" faims_attribute_name="Corner point 2 Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Corner_point_2_Longitude" faims_attribute_name="Corner point 2 Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Corner point 2 Longitude</label>
         </input>
         <trigger ref="Corner_point_2_lat_long">
           <label>Calculate GPS</label>
         </trigger>
-        <input ref="Corner_point_3_Latitude" faims_attribute_name="Corner point 3 Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Corner_point_3_Latitude" faims_attribute_name="Corner point 3 Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Corner point 3 Latitude</label>
         </input>
-        <input ref="Corner_point_3_Longitude" faims_attribute_name="Corner point 3 Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Corner_point_3_Longitude" faims_attribute_name="Corner point 3 Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Corner point 3 Longitude</label>
         </input>
         <trigger ref="Corner_point_3_lat_long">
           <label>Calculate GPS</label>
         </trigger>
-        <input ref="Corner_point_4_Latitude" faims_attribute_name="Corner point 4 Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Corner_point_4_Latitude" faims_attribute_name="Corner point 4 Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Corner point 4 Latitude</label>
         </input>
-        <input ref="Corner_point_4_Longitude" faims_attribute_name="Corner point 4 Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Corner_point_4_Longitude" faims_attribute_name="Corner point 4 Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Corner point 4 Longitude</label>
         </input>
         <trigger ref="Corner_point_4_lat_long">
@@ -1895,27 +1895,27 @@ Counterweight hanger/ cradle 4</label>
       <label>Tension Station Bolts</label>
       <group ref="Details">
         <label>Details</label>
-        <input ref="Length" faims_attribute_name="Length" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false">
+        <input ref="Length" faims_attribute_name="Length" faims_attribute_type="measure" faims_certainty="true" faims_annotation="false">
           <label>Length</label>
         </input>
-        <input ref="Diameter" faims_attribute_name="Diameter" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false">
+        <input ref="Diameter" faims_attribute_name="Diameter" faims_attribute_type="measure" faims_certainty="true" faims_annotation="false">
           <label>Diameter</label>
         </input>
-        <select1 appearance="full" ref="Tension_station_bolt_type" faims_attribute_name="Tension station bolt type" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false">
+        <select1 appearance="full" ref="Tension_station_bolt_type" faims_attribute_name="Tension station bolt type" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="false">
           <label>Tension station type</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <select1 appearance="full" ref="Head" faims_attribute_name="Head" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false">
+        <select1 appearance="full" ref="Head" faims_attribute_name="Head" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="false">
           <label>Head</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Location_of_hold_down_bolts" faims_attribute_name="Location of hold down bolts" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="true">
+        <input ref="Location_of_hold_down_bolts" faims_attribute_name="Location of hold down bolts" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="true">
           <label>Location of hold-down bolts</label>
         </input>
         <select1 appearance="full" ref="Nut" faims_attribute_name="Nut" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
@@ -1932,7 +1932,7 @@ Counterweight hanger/ cradle 4</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Length_of_bolt" faims_attribute_name="Length of bolt" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Length_of_bolt" faims_attribute_name="Length of bolt" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Length of bolt between head and nut / washer</label>
         </input>
         <trigger ref="Update">
@@ -1950,19 +1950,19 @@ Counterweight hanger/ cradle 4</label>
       <label>Track rope</label>
       <group ref="Details">
         <label>Details</label>
-        <input ref="Measurement_number" faims_attribute_name="Measurement number" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+        <input ref="Measurement_number" faims_attribute_name="Measurement number" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Measurement Number</label>
         </input>
-        <input ref="Gauge" faims_attribute_name="Gauge" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Gauge" faims_attribute_name="Gauge" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Gauge</label>
         </input>
-        <input ref="Diameter" faims_attribute_name="Diameter" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Diameter" faims_attribute_name="Diameter" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Diameter</label>
         </input>
-        <input ref="Number_of_outer_wires" faims_attribute_name="Number of outer wires" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Number_of_outer_wires" faims_attribute_name="Number of outer wires" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Number of outer wires</label>
         </input>
-        <input ref="Structure" faims_attribute_name="Structure" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+        <input ref="Structure" faims_attribute_name="Structure" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Structure</label>
         </input>
         <select1 ref="Wear_from_carrier_wheels_on_top" faims_attribute_name="Wear from carrier wheels on top" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
@@ -1979,23 +1979,23 @@ Counterweight hanger/ cradle 4</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Length_of_saddle_wear_zone" faims_attribute_name="Length of saddle wear zone" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Length_of_saddle_wear_zone" faims_attribute_name="Length of saddle wear zone" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Length of saddle wear zone</label>
         </input>
-        <select1 ref="Rope_end_condition" faims_attribute_name="Rope end condition" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+        <select1 ref="Rope_end_condition" faims_attribute_name="Rope end condition" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Rope end condition</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Notes</label>
         </input>
-        <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Latitude</label>
         </input>
-        <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Longitude</label>
         </input>
         <trigger ref="CalculateGPS">
@@ -2036,30 +2036,30 @@ Counterweight hanger/ cradle 4</label>
       <label>Haul Rope Remnant Details</label>
       <group ref="Details">
         <label>Details</label>
-        <select1 appearance="full" ref="Direction" faims_attribute_name="Direction" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false">
+        <select1 appearance="full" ref="Direction" faims_attribute_name="Direction" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="false">
           <label>Direction</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <select1 ref="Haul_rope_type" faims_attribute_name="Haul rope type" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="true">
+        <select1 ref="Haul_rope_type" faims_attribute_name="Haul rope type" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
           <label>Haul rope type</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Length" faims_attribute_name="Length" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Length" faims_attribute_name="Length" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Length</label>
         </input>
-        <input ref="Diameter" faims_attribute_name="Diameter" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Diameter" faims_attribute_name="Diameter" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Diameter</label>
         </input>
-        <input ref="Number_of_outer_wires" faims_attribute_name="Number of outer wires" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Number_of_outer_wires" faims_attribute_name="Number of outer wires" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Number of outer wires</label>
         </input>
-        <input ref="Structure" faims_attribute_name="Structure" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+        <input ref="Structure" faims_attribute_name="Structure" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Structure</label>
         </input>
         <select1 ref="Rope_end_condition" faims_attribute_name="Rope end condition" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
@@ -2069,13 +2069,13 @@ Counterweight hanger/ cradle 4</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Notes</label>
         </input>
-        <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Latitude</label>
         </input>
-        <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Longitude</label>
         </input>
         <trigger ref="CalculateGPS">
@@ -2116,20 +2116,20 @@ Counterweight hanger/ cradle 4</label>
       <label>Rope Joiner</label>
       <group ref="Details">
         <label>Details</label>
-        <select1 ref="Rope_joiner_type" faims_attribute_name="Rope joiner type" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="true">
+        <select1 ref="Rope_joiner_type" faims_attribute_name="Rope joiner type" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
           <label>Rope joiner type</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Notes</label>
         </input>
-        <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Latitude</label>
         </input>
-        <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Longitude</label>
         </input>
         <trigger ref="CalculateGPS">
@@ -2170,19 +2170,19 @@ Counterweight hanger/ cradle 4</label>
       <label>Rope Groove</label>
       <group ref="Details">
         <label>Details</label>
-        <input ref="Width" faims_attribute_name="Width" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false">
+        <input ref="Width" faims_attribute_name="Width" faims_attribute_type="measure" faims_certainty="true" faims_annotation="false">
           <label>Width</label>
         </input>
-        <input ref="Depth" faims_attribute_name="Depth" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false">
+        <input ref="Depth" faims_attribute_name="Depth" faims_attribute_type="measure" faims_certainty="true" faims_annotation="false">
           <label>Depth</label>
         </input>
-        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Notes</label>
         </input>
-        <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Latitude</label>
         </input>
-        <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Longitude</label>
         </input>
         <trigger ref="CalculateGPS">
@@ -2223,20 +2223,20 @@ Counterweight hanger/ cradle 4</label>
       <label>Other</label>
       <group ref="Details">
         <label>Details</label>
-        <select1 ref="Other_type" faims_attribute_name="Other type" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="true">
+        <select1 ref="Other_type" faims_attribute_name="Other type" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
           <label>Type</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
+        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Notes</label>
         </input>
-        <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Latitude</label>
         </input>
-        <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+        <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Longitude</label>
         </input>
         <trigger ref="CalculateGPS">
@@ -2278,10 +2278,10 @@ Counterweight hanger/ cradle 4</label>
       <label>Photograph Log</label>
         <group ref="Photograph_log">
           <label>Photograph Log</label>
-            <input faims_attribute_name="Photograph reference ID" faims_attribute_type="freetext" faims_read_only="false" ref="Photograph_reference_ID" faims_certainty="false">
+            <input faims_attribute_name="Photograph reference ID" faims_attribute_type="freetext" faims_read_only="false" ref="Photograph_reference_ID" faims_certainty="true">
               <label>Photograph Log ID</label>
             </input>
-          <input faims_attribute_name="Scene type" faims_attribute_type="freetext" faims_certainty="false" faims_read_only="false" ref="Scene_type">
+          <input faims_attribute_name="Scene type" faims_attribute_type="freetext" faims_certainty="true" faims_read_only="false" ref="Scene_type">
             <label>Description</label>
            
           </input>
