@@ -59,6 +59,7 @@
               <stopsync/>
             </gps>
           </control>
+
           <Bucket>
             <Carrier_Details>
               <Bucket_assembly_number/>
@@ -79,7 +80,12 @@
               <CalculateGPS/>
               <Carrier_photos/>
               <takePhoto/>
+              <Creation_Date/>
+              <Created_By/>
               <Update/>
+              <Duplicate/>
+              <New/>
+              <Close/>
               <Delete/>
             </Carrier_Details>
             <Carriage_Details>
@@ -96,6 +102,9 @@
               <Carriage_photos/>
               <takePhoto/>
               <Update/>
+              <Duplicate/>
+              <New/>
+              <Close/>
               <Delete/>
             </Carriage_Details>
             <Bucket_Details>
@@ -108,6 +117,9 @@
               <Bucket_photos/>
               <takePhoto/>
               <Update/>
+              <Duplicate/>
+              <New/>
+              <Close/>
               <Delete/>
             </Bucket_Details>
             <PhotoLog>
@@ -126,7 +138,12 @@
               <Delete_pole/>
               <Footing_spacing/>
               <Tower_pole_notes/>
+              <Creation_Date/>
+              <Created_By/>
               <Update/>
+              <Duplicate/>
+              <New/>
+              <Close/>
               <Delete/>
             </Tower_pole>
             <Tower_hardware>
@@ -142,13 +159,14 @@
               <Delete_haul_rope_wheel_frame/>
               <Tower_hardware_notes/>
               <Update/>
+              <Duplicate/>
+              <New/>
+              <Close/>
               <Delete/>
             </Tower_hardware>
             <Tower_bolts>
               <Add_tower_bolt/>
               <List_tower_bolt/>
-              <Update/>
-              <Delete/>
             </Tower_bolts>
             <PhotoLog>
               <newPhotoLog/>
@@ -171,7 +189,12 @@
               <CalculateGPS/>
               <Photos/>
               <Attach_photos/>
+              <Creation_Date/>
+              <Created_By/>
               <Update/>
+              <Duplicate/>
+              <New/>
+              <Close/>
               <Delete/>
             </Details>
           </Tower_pole>
@@ -190,7 +213,12 @@
               <CalculateGPS/>
               <Photos/>
               <Attach_photos/>
+              <Creation_Date/>
+              <Created_By/>
               <Update/>
+              <Duplicate/>
+              <New/>
+              <Close/>
               <Delete/>
             </Details>
           </Track_crossbar>
@@ -205,7 +233,12 @@
               <CalculateGPS/>
               <Photos/>
               <Attach_photos/>
+              <Creation_Date/>
+              <Created_By/>
               <Update/>
+              <Duplicate/>
+              <New/>
+              <Close/>
               <Delete/>
             </Details>
           </Wheel_frame>
@@ -233,8 +266,12 @@
               <ListPhotoLog/>
               <loadPhotoLog/>
               <deletePhotoLog/>
+              <Creation_Date/>
+              <Created_By/>
               <Update/>
               <Duplicate/>
+              <New/>
+              <Close/>
               <Delete/>
             </Details>
           </Tower_bolts>
@@ -247,7 +284,12 @@
               <Timber_frame_around_top_of_pit/>
               <Tension_pit_top_rail/>
               <Tension_pit_top_rail_hanger/>
+              <Creation_Date/>
+              <Created_By/>
               <Update/>
+              <Duplicate/>
+              <New/>
+              <Close/>
               <Delete/>
             </Details>
             <Chain_rollers>
@@ -280,6 +322,9 @@
               <Chain_roller_4_shaft/>
               <Chain_roller_4_bearings/>
               <Update/>
+              <Duplicate/>
+              <New/>
+              <Close/>
               <Delete/>
             </Chain_rollers>
             <Cradle>
@@ -332,6 +377,9 @@
               <Cradle_4_photos/>
               <Cradle_4_attach_photos/>
               <Update/>
+              <Duplicate/>
+              <New/>
+              <Close/>
               <Delete/>
             </Cradle>
             <Notes>
@@ -352,6 +400,9 @@
               <Photos/>
               <Attach_photos/>
               <Update/>
+              <Duplicate/>
+              <New/>
+              <Close/>
               <Delete/>
             </Notes>
             <Tension_bolts>
@@ -374,8 +425,12 @@
               <Nut/>
               <Washer/>
               <Length_of_bolt/>
+              <Creation_Date/>
+              <Created_By/>
               <Update/>
               <Duplicate/>
+              <New/>
+              <Close/>
               <Delete/>
             </Details>
           </Tension_bolts>
@@ -397,7 +452,12 @@
               <CalculateGPS/>
               <Photos/>
               <Attach_photos/>
+              <Creation_Date/>
+              <Created_By/>
               <Update/>
+              <Duplicate/>
+              <New/>
+              <Close/>
               <Delete/>
             </Details>
             <PhotoLog>
@@ -421,7 +481,12 @@
               <CalculateGPS/>
               <Photos/>
               <Attach_photos/>
+              <Creation_Date/>
+              <Created_By/>
               <Update/>
+              <Duplicate/>
+              <New/>
+              <Close/>
               <Delete/>
             </Details>
             <PhotoLog>
@@ -439,7 +504,12 @@
               <CalculateGPS/>
               <Photos/>
               <Attach_photos/>
+              <Creation_Date/>
+              <Created_By/>
               <Update/>
+              <Duplicate/>
+              <New/>
+              <Close/>
               <Delete/>
             </Details>
             <PhotoLog>
@@ -458,7 +528,12 @@
               <CalculateGPS/>
               <Photos/>
               <Attach_photos/>
+              <Creation_Date/>
+              <Created_By/>
               <Update/>
+              <Duplicate/>
+              <New/>
+              <Close/>
               <Delete/>
             </Details>
             <PhotoLog>
@@ -476,7 +551,12 @@
               <CalculateGPS/>
               <Photos/>
               <Attach_photos/>
+              <Creation_Date/>
+              <Created_By/>
               <Update/>
+              <Duplicate/>
+              <New/>
+              <Close/>
               <Delete/>
             </Details>
             <PhotoLog>
@@ -489,7 +569,12 @@
             <Photograph_log>
               <Photograph_reference_ID/>
               <Scene_type/>
+              <Creation_Date/>
+              <Created_By/>
               <Update/>
+              <Duplicate/>
+              <New/>
+              <Close/>
               <Delete/>
             </Photograph_log>
           </Photograph_log>
@@ -606,7 +691,6 @@
       <bind nodeset="/faims/Photograph_log/Photograph_log/Scene_type" type="string"/>
     </model>
   </h:head>
-
     <h:body>
     <!--Describes controls for each tabgroup and its nested tabs-->
     <group ref="style">
@@ -729,6 +813,7 @@
         </trigger>
       </group>
     </group>
+
     <group ref="Bucket" faims_archent_type="Bucket">
       <label>Bucket</label>
       <group ref="Carrier_Details">
@@ -816,16 +901,16 @@
         <input ref="Carrier_notes" faims_attribute_name="Carrier notes" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false" faims_read_only="false">
           <label>Notes</label>
         </input>
-        <input ref="Carrier_Latitude" faims_attribute_name="Carrier Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <input ref="Carrier_Latitude" faims_attribute_name="Carrier latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>Latitude</label>
         </input>
-        <input ref="Carrier_Longitude" faims_attribute_name="Carrier Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <input ref="Carrier_Longitude" faims_attribute_name="Carrier longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>Longitude</label>
         </input>
         <trigger ref="CalculateGPS">
           <label>Calculate GPS</label>
         </trigger>
-        <select type="camera" ref="Carrier_photos" faims_attribute_name="Carrier photos" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="true" faims_read_only="false">
+        <select type="camera" faims_sync="true" ref="Carrier_photos" faims_attribute_name="Carrier photos" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="true" faims_read_only="false">
           <label>Carrier Photos</label>
           <item>
             <label>placeholder</label>
@@ -835,8 +920,23 @@
         <trigger ref="takePhoto">
           <label>Take Photo</label>
         </trigger>
+        <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
+          <label>Date Created</label>
+        </input>
+        <input faims_certainty="false" faims_read_only="true" ref="Created_By">
+          <label>Created By</label>
+        </input>
         <trigger ref="Update">
           <label>Save Record</label>
+        </trigger>
+        <trigger ref="Duplicate">
+          <label>Save and Duplicate Record</label>
+        </trigger>
+        <trigger ref="New">
+          <label>Save and New Record</label>
+        </trigger>
+        <trigger ref="Close">
+          <label>Save and Close Record</label>
         </trigger>
         <trigger ref="Delete">
           <label>Delete Record</label>
@@ -882,16 +982,16 @@
         <input ref="Carriage_notes" faims_attribute_name="Carriage notes" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false" faims_read_only="false">
           <label>Notes</label>
         </input>
-        <input ref="Carriage_Latitude" faims_attribute_name="Carriage Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <input ref="Carriage_Latitude" faims_attribute_name="Carriage latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>Latitude</label>
         </input>
-        <input ref="Carriage_Longitude" faims_attribute_name="Carriage Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <input ref="Carriage_Longitude" faims_attribute_name="Carriage longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>Longitude</label>
         </input>
         <trigger ref="CalculateGPS">
           <label>Calculate GPS</label>
         </trigger>
-        <select type="camera" ref="Carriage_photos" faims_attribute_name="Carriage photos" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="true" faims_read_only="false">
+        <select type="camera" faims_sync="true" ref="Carriage_photos" faims_attribute_name="Carriage photos" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="true" faims_read_only="false">
           <label>Carriage Photos</label>
           <item>
             <label>placeholder</label>
@@ -903,6 +1003,15 @@
         </trigger>
         <trigger ref="Update">
           <label>Save Record</label>
+        </trigger>
+        <trigger ref="Duplicate">
+          <label>Save and Duplicate Record</label>
+        </trigger>
+        <trigger ref="New">
+          <label>Save and New Record</label>
+        </trigger>
+        <trigger ref="Close">
+          <label>Save and Close Record</label>
         </trigger>
         <trigger ref="Delete">
           <label>Delete Record</label>
@@ -923,16 +1032,16 @@
         <input ref="Bucket_notes" faims_attribute_name="Bucket notes" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false" faims_read_only="false">
           <label>Notes</label>
         </input>
-        <input ref="Bucket_Latitude" faims_attribute_name="Bucket Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <input ref="Bucket_Latitude" faims_attribute_name="Bucket latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>Latitude</label>
         </input>
-        <input ref="Bucket_Longitude" faims_attribute_name="Bucket Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <input ref="Bucket_Longitude" faims_attribute_name="Bucket longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>Longitude</label>
         </input>
         <trigger ref="CalculateGPS">
           <label>Calculate GPS</label>
         </trigger>
-        <select type="camera" ref="Bucket_photos" faims_attribute_name="Bucket photos" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="true" faims_read_only="false">
+        <select type="camera" faims_sync="true" ref="Bucket_photos" faims_attribute_name="Bucket photos" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="true" faims_read_only="false">
           <label>Bucket Photos</label>
           <item>
             <label>placeholder</label>
@@ -944,6 +1053,15 @@
         </trigger>
         <trigger ref="Update">
           <label>Save Record</label>
+        </trigger>
+        <trigger ref="Duplicate">
+          <label>Save and Duplicate Record</label>
+        </trigger>
+        <trigger ref="New">
+          <label>Save and New Record</label>
+        </trigger>
+        <trigger ref="Close">
+          <label>Save and Close Record</label>
         </trigger>
         <trigger ref="Delete">
           <label>Delete Record</label>
@@ -963,6 +1081,7 @@
         </select1>
       </group>
     </group>
+
     <group ref="Tower" faims_archent_type="Tower">
       <label>Tower</label>
       <group ref="Tower_pole">
@@ -999,8 +1118,23 @@
         <input ref="Tower_pole_notes" faims_attribute_name="Tower pole notes" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Notes</label>
         </input>
+        <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
+          <label>Date Created</label>
+        </input>
+        <input faims_certainty="false" faims_read_only="true" ref="Created_By">
+          <label>Created By</label>
+        </input>
         <trigger ref="Update">
           <label>Save Record</label>
+        </trigger>
+        <trigger ref="Duplicate">
+          <label>Save and Duplicate Record</label>
+        </trigger>
+        <trigger ref="New">
+          <label>Save and New Record</label>
+        </trigger>
+        <trigger ref="Close">
+          <label>Save and Close Record</label>
         </trigger>
         <trigger ref="Delete">
           <label>Delete Record</label>
@@ -1060,6 +1194,15 @@
         <trigger ref="Update">
           <label>Save Record</label>
         </trigger>
+        <trigger ref="Duplicate">
+          <label>Save and Duplicate Record</label>
+        </trigger>
+        <trigger ref="New">
+          <label>Save and New Record</label>
+        </trigger>
+        <trigger ref="Close">
+          <label>Save and Close Record</label>
+        </trigger>
         <trigger ref="Delete">
           <label>Delete Record</label>
         </trigger>
@@ -1091,6 +1234,7 @@
         </select1>
       </group>
     </group>
+
     <group ref="Tower_pole" faims_archent_type="Tower pole">
       <label>Tower Pole</label>
       <group ref="Details">
@@ -1136,7 +1280,7 @@
         <trigger ref="CalculateGPS">
           <label>Get GPS coordinates</label>
         </trigger>
-        <select type="camera" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="camera" faims_certainty="false" faims_annotation="false">
+        <select type="camera" faims_sync="true" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
           <label>Photos</label>
           <item>
             <label>placeholder</label>
@@ -1146,19 +1290,36 @@
         <trigger ref="Attach_photos">
           <label>Attach Photos</label>
         </trigger>
+        <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
+          <label>Date Created</label>
+        </input>
+        <input faims_certainty="false" faims_read_only="true" ref="Created_By">
+          <label>Created By</label>
+        </input>
         <trigger ref="Update">
           <label>Save Record</label>
+        </trigger>
+        <trigger ref="Duplicate">
+          <label>Save and Duplicate Record</label>
+        </trigger>
+        <trigger ref="New">
+          <label>Save and New Record</label>
+        </trigger>
+        <trigger ref="Close">
+          <label>Save and Close Record</label>
         </trigger>
         <trigger ref="Delete">
           <label>Delete Record</label>
         </trigger>
       </group>
     </group>
+
+
     <group ref="Track_crossbar" faims_archent_type="Track crossbar">
       <label>Track Crossbar</label>
       <group ref="Details">
         <label>Details</label>
-        <input ref="Crossbar_number" faims_attribute_name="Crossbar number" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
+        <input ref="Crossbar_number" faims_attribute_name="Crossbar Number" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Crossbar Number</label>
         </input>
         <select1 appearance="full" ref="Track_rope_wheel_cross_bar" faims_attribute_name="Track rope wheel cross bar" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
@@ -1208,7 +1369,7 @@
         <trigger ref="CalculateGPS">
           <label>Get GPS coordinates</label>
         </trigger>
-        <select type="camera" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="camera" faims_certainty="false" faims_annotation="false">
+        <select type="camera" faims_sync="true" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
           <label>Photos</label>
           <item>
             <label>placeholder</label>
@@ -1218,14 +1379,31 @@
         <trigger ref="Attach_photos">
           <label>Attach Photos</label>
         </trigger>
+        <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
+          <label>Date Created</label>
+        </input>
+        <input faims_certainty="false" faims_read_only="true" ref="Created_By">
+          <label>Created By</label>
+        </input>
         <trigger ref="Update">
           <label>Save Record</label>
+        </trigger>
+        <trigger ref="Duplicate">
+          <label>Save and Duplicate Record</label>
+        </trigger>
+        <trigger ref="New">
+          <label>Save and New Record</label>
+        </trigger>
+        <trigger ref="Close">
+          <label>Save and Close Record</label>
         </trigger>
         <trigger ref="Delete">
           <label>Delete Record</label>
         </trigger>
       </group>
     </group>
+
+
     <group ref="Wheel_frame" faims_archent_type="Haul rope wheel frame">
       <label>Haul rope wheel frame</label>
       <group ref="Details">
@@ -1256,7 +1434,7 @@
         <trigger ref="CalculateGPS">
           <label>Get GPS coordinates</label>
         </trigger>
-        <select type="camera" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="camera" faims_certainty="false" faims_annotation="false">
+        <select type="camera" faims_sync="true" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
           <label>Photos</label>
           <item>
             <label>placeholder</label>
@@ -1266,14 +1444,30 @@
         <trigger ref="Attach_photos">
           <label>Attach Photos</label>
         </trigger>
+        <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
+          <label>Date Created</label>
+        </input>
+        <input faims_certainty="false" faims_read_only="true" ref="Created_By">
+          <label>Created By</label>
+        </input>
         <trigger ref="Update">
           <label>Save Record</label>
+        </trigger>
+        <trigger ref="Duplicate">
+          <label>Save and Duplicate Record</label>
+        </trigger>
+        <trigger ref="New">
+          <label>Save and New Record</label>
+        </trigger>
+        <trigger ref="Close">
+          <label>Save and Close Record</label>
         </trigger>
         <trigger ref="Delete">
           <label>Delete Record</label>
         </trigger>
       </group>
     </group>
+
     <group ref="Tower_bolts" faims_archent_type="Tower bolts">
       <label>Tower Bolts</label>
       <group ref="Details">
@@ -1347,7 +1541,7 @@
         <trigger ref="CalculateGPS">
           <label>Get GPS coordinates</label>
         </trigger>
-        <select type="camera" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="camera" faims_certainty="false" faims_annotation="false">
+        <select type="camera" faims_sync="true" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
           <label>Photos</label>
           <item>
             <label>placeholder</label>
@@ -1357,17 +1551,30 @@
         <trigger ref="Attach_photos">
           <label>Attach Photos</label>
         </trigger>
+        <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
+          <label>Date Created</label>
+        </input>
+        <input faims_certainty="false" faims_read_only="true" ref="Created_By">
+          <label>Created By</label>
+        </input>
         <trigger ref="Update">
           <label>Save Record</label>
         </trigger>
         <trigger ref="Duplicate">
-          <label>Duplicate Record</label>
+          <label>Save and Duplicate Record</label>
+        </trigger>
+        <trigger ref="New">
+          <label>Save and New Record</label>
+        </trigger>
+        <trigger ref="Close">
+          <label>Save and Close Record</label>
         </trigger>
         <trigger ref="Delete">
           <label>Delete Record</label>
         </trigger>
       </group>
     </group>
+
     <group ref="Tension_station" faims_archent_type="Tension station">
       <label>Tension station</label>
       <group ref="Details">
@@ -1398,8 +1605,23 @@
             <value>placeholder</value>
           </item>
         </select1>
+        <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
+          <label>Date Created</label>
+        </input>
+        <input faims_certainty="false" faims_read_only="true" ref="Created_By">
+          <label>Created By</label>
+        </input>
         <trigger ref="Update">
           <label>Save Record</label>
+        </trigger>
+        <trigger ref="Duplicate">
+          <label>Save and Duplicate Record</label>
+        </trigger>
+        <trigger ref="New">
+          <label>Save and New Record</label>
+        </trigger>
+        <trigger ref="Close">
+          <label>Save and Close Record</label>
         </trigger>
         <trigger ref="Delete">
           <label>Delete Record</label>
@@ -1570,6 +1792,15 @@ Chain Roller 4</label>
         <trigger ref="Update">
           <label>Save Record</label>
         </trigger>
+        <trigger ref="Duplicate">
+          <label>Save and Duplicate Record</label>
+        </trigger>
+        <trigger ref="New">
+          <label>Save and New Record</label>
+        </trigger>
+        <trigger ref="Close">
+          <label>Save and Close Record</label>
+        </trigger>
         <trigger ref="Delete">
           <label>Delete Record</label>
         </trigger>
@@ -1612,16 +1843,16 @@ Counterweight hanger/ cradle 1
         <input ref="Cradle_1_counterweight_thickness" faims_attribute_name="Cradle 1 counterweight thickness" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Counterweight thickness</label>
         </input>
-        <input ref="Cradle_1_Latitude" faims_attribute_name="Cradle 1 Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
+        <input ref="Cradle_1_Latitude" faims_attribute_name="Cradle 1 latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Latitude</label>
         </input>
-        <input ref="Cradle_1_Longitude" faims_attribute_name="Cradle 1 Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
+        <input ref="Cradle_1_Longitude" faims_attribute_name="Cradle 1 longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Longitude</label>
         </input>
         <trigger ref="Cradle_1_get_lat_long">
           <label>Get GPS coordinates</label>
         </trigger>
-        <select type="camera" ref="Cradle_1_photos" faims_attribute_name="Cradle 1 photos" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false">
+        <select type="camera" faims_sync="true" ref="Cradle_1_photos" faims_attribute_name="Cradle 1 photos" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
           <label>Photos</label>
           <item>
             <label>placeholder</label>
@@ -1667,16 +1898,16 @@ Counterweight hanger/ cradle 2</label>
         <input ref="Cradle_2_counterweight_thickness" faims_attribute_name="Cradle 2 counterweight thickness" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Counterweight thickness</label>
         </input>
-        <input ref="Cradle_2_Latitude" faims_attribute_name="Cradle 2 Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
+        <input ref="Cradle_2_Latitude" faims_attribute_name="Cradle 2 latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Latitude</label>
         </input>
-        <input ref="Cradle_2_Longitude" faims_attribute_name="Cradle 2 Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
+        <input ref="Cradle_2_Longitude" faims_attribute_name="Cradle 2 longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Longitude</label>
         </input>
         <trigger ref="Cradle_2_get_lat_long">
           <label>Get GPS coordinates</label>
         </trigger>
-        <select type="camera" ref="Cradle_2_photos" faims_attribute_name="Cradle 2 photos" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false">
+        <select type="camera" faims_sync="true" ref="Cradle_2_photos" faims_attribute_name="Cradle 2 photos" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
           <label>Photos</label>
           <item>
             <label>placeholder</label>
@@ -1722,16 +1953,16 @@ Counterweight hanger/ cradle 3</label>
         <input ref="Cradle_3_counterweight_thickness" faims_attribute_name="Cradle 3 counterweight thickness" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Counterweight thickness</label>
         </input>
-        <input ref="Cradle_3_Latitude" faims_attribute_name="Cradle 3 Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
+        <input ref="Cradle_3_Latitude" faims_attribute_name="Cradle 3 latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Latitude</label>
         </input>
-        <input ref="Cradle_3_Longitude" faims_attribute_name="Cradle 3 Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
+        <input ref="Cradle_3_Longitude" faims_attribute_name="Cradle 3 longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Longitude</label>
         </input>
         <trigger ref="Cradle_3_get_lat_long">
           <label>Get GPS coordinates</label>
         </trigger>
-        <select type="camera" ref="Cradle_3_photos" faims_attribute_name="Cradle 3 photos" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false">
+        <select type="camera" faims_sync="true" ref="Cradle_3_photos" faims_attribute_name="Cradle 3 photos" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
           <label>Photos</label>
           <item>
             <label>placeholder</label>
@@ -1777,16 +2008,16 @@ Counterweight hanger/ cradle 4</label>
         <input ref="Cradle_4_counterweight_thickness" faims_attribute_name="Cradle 4 counterweight thickness" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Counterweight thickness</label>
         </input>
-        <input ref="Cradle_4_Latitude" faims_attribute_name="Cradle 4 Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
+        <input ref="Cradle_4_Latitude" faims_attribute_name="Cradle 4 latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Latitude</label>
         </input>
-        <input ref="Cradle_4_Longitude" faims_attribute_name="Cradle 4 Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
+        <input ref="Cradle_4_Longitude" faims_attribute_name="Cradle 4 longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Longitude</label>
         </input>
         <trigger ref="Cradle_4_get_lat_long">
           <label>Get GPS coordinates</label>
         </trigger>
-        <select type="camera" ref="Cradle_4_photos" faims_attribute_name="Cradle 4 photos" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false">
+        <select type="camera" faims_sync="true" ref="Cradle_4_photos" faims_attribute_name="Cradle 4 photos" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
           <label>Photos</label>
           <item>
             <label>placeholder</label>
@@ -1798,6 +2029,15 @@ Counterweight hanger/ cradle 4</label>
         </trigger>
         <trigger ref="Update">
           <label>Save Record</label>
+        </trigger>
+        <trigger ref="Duplicate">
+          <label>Save and Duplicate Record</label>
+        </trigger>
+        <trigger ref="New">
+          <label>Save and New Record</label>
+        </trigger>
+        <trigger ref="Close">
+          <label>Save and Close Record</label>
         </trigger>
         <trigger ref="Delete">
           <label>Delete Record</label>
@@ -1811,43 +2051,43 @@ Counterweight hanger/ cradle 4</label>
         <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Notes</label>
         </input>
-        <input ref="Corner_point_1_Latitude" faims_attribute_name="Corner point 1 Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
+        <input ref="Corner_point_1_Latitude" faims_attribute_name="Corner point 1 latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Corner point 1 Latitude</label>
         </input>
-        <input ref="Corner_point_1_Longitude" faims_attribute_name="Corner point 1 Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
+        <input ref="Corner_point_1_Longitude" faims_attribute_name="Corner point 1 longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Corner point 1 Longitude</label>
         </input>
         <trigger ref="Corner_point_1_lat_long">
           <label>Calculate GPS</label>
         </trigger>
-        <input ref="Corner_point_2_Latitude" faims_attribute_name="Corner point 2 Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
+        <input ref="Corner_point_2_Latitude" faims_attribute_name="Corner point 2 latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Corner point 2 Latitude</label>
         </input>
-        <input ref="Corner_point_2_Longitude" faims_attribute_name="Corner point 2 Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
+        <input ref="Corner_point_2_Longitude" faims_attribute_name="Corner point 2 longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Corner point 2 Longitude</label>
         </input>
         <trigger ref="Corner_point_2_lat_long">
           <label>Calculate GPS</label>
         </trigger>
-        <input ref="Corner_point_3_Latitude" faims_attribute_name="Corner point 3 Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
+        <input ref="Corner_point_3_Latitude" faims_attribute_name="Corner point 3 latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Corner point 3 Latitude</label>
         </input>
-        <input ref="Corner_point_3_Longitude" faims_attribute_name="Corner point 3 Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
+        <input ref="Corner_point_3_Longitude" faims_attribute_name="Corner point 3 longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Corner point 3 Longitude</label>
         </input>
         <trigger ref="Corner_point_3_lat_long">
           <label>Calculate GPS</label>
         </trigger>
-        <input ref="Corner_point_4_Latitude" faims_attribute_name="Corner point 4 Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
+        <input ref="Corner_point_4_Latitude" faims_attribute_name="Corner point 4 latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Corner point 4 Latitude</label>
         </input>
-        <input ref="Corner_point_4_Longitude" faims_attribute_name="Corner point 4 Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
+        <input ref="Corner_point_4_Longitude" faims_attribute_name="Corner point 4 longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Corner point 4 Longitude</label>
         </input>
         <trigger ref="Corner_point_4_lat_long">
           <label>Calculate GPS</label>
         </trigger>
-        <select type="camera" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false">
+        <select type="camera" faims_sync="true" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
           <label>Photos</label>
           <item>
             <label>placeholder</label>
@@ -1859,6 +2099,15 @@ Counterweight hanger/ cradle 4</label>
         </trigger>
         <trigger ref="Update">
           <label>Save Record</label>
+        </trigger>
+        <trigger ref="Duplicate">
+          <label>Save and Duplicate Record</label>
+        </trigger>
+        <trigger ref="New">
+          <label>Save and New Record</label>
+        </trigger>
+        <trigger ref="Close">
+          <label>Save and Close Record</label>
         </trigger>
         <trigger ref="Delete">
           <label>Delete Record</label>
@@ -1891,6 +2140,8 @@ Counterweight hanger/ cradle 4</label>
         </select1>
       </group>
     </group>
+
+
     <group ref="Tension_bolts" faims_archent_type="Tension station bolts">
       <label>Tension Station Bolts</label>
       <group ref="Details">
@@ -1901,14 +2152,14 @@ Counterweight hanger/ cradle 4</label>
         <input ref="Diameter" faims_attribute_name="Diameter" faims_attribute_type="measure" faims_certainty="true" faims_annotation="false">
           <label>Diameter</label>
         </input>
-        <select1 appearance="full" ref="Tension_station_bolt_type" faims_attribute_name="Tension station bolt type" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="false">
+        <select1 appearance="full" ref="Tension_station_bolt_type" faims_attribute_name="Tension station bolt type" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
           <label>Tension station type</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select1>
-        <select1 appearance="full" ref="Head" faims_attribute_name="Head" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="false">
+        <select1 appearance="full" ref="Head" faims_attribute_name="Head" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
           <label>Head</label>
           <item>
             <label>placeholder</label>
@@ -1935,17 +2186,30 @@ Counterweight hanger/ cradle 4</label>
         <input ref="Length_of_bolt" faims_attribute_name="Length of bolt" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Length of bolt between head and nut / washer</label>
         </input>
+        <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
+          <label>Date Created</label>
+        </input>
+        <input faims_certainty="false" faims_read_only="true" ref="Created_By">
+          <label>Created By</label>
+        </input>
         <trigger ref="Update">
           <label>Save Record</label>
         </trigger>
         <trigger ref="Duplicate">
-          <label>Duplicate Record</label>
+          <label>Save and Duplicate Record</label>
+        </trigger>
+        <trigger ref="New">
+          <label>Save and New Record</label>
+        </trigger>
+        <trigger ref="Close">
+          <label>Save and Close Record</label>
         </trigger>
         <trigger ref="Delete">
           <label>Delete Record</label>
         </trigger>
       </group>
     </group>
+
     <group ref="Track_rope" faims_archent_type="Track rope">
       <label>Track rope</label>
       <group ref="Details">
@@ -1982,7 +2246,7 @@ Counterweight hanger/ cradle 4</label>
         <input ref="Length_of_saddle_wear_zone" faims_attribute_name="Length of saddle wear zone" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Length of saddle wear zone</label>
         </input>
-        <select1 ref="Rope_end_condition" faims_attribute_name="Rope end condition" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
+        <select1 ref="Rope_end_condition" faims_attribute_name="Rope end condition" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
           <label>Rope end condition</label>
           <item>
             <label>placeholder</label>
@@ -2001,7 +2265,7 @@ Counterweight hanger/ cradle 4</label>
         <trigger ref="CalculateGPS">
           <label>Calculate GPS</label>
         </trigger>
-        <select type="camera" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="camera" faims_certainty="false" faims_annotation="false">
+        <select type="camera" faims_sync="true" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
           <label>Photos</label>
           <item>
             <label>placeholder</label>
@@ -2011,8 +2275,23 @@ Counterweight hanger/ cradle 4</label>
         <trigger ref="Attach_photos">
           <label>Attach Photos</label>
         </trigger>
+        <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
+          <label>Date Created</label>
+        </input>
+        <input faims_certainty="false" faims_read_only="true" ref="Created_By">
+          <label>Created By</label>
+        </input>
         <trigger ref="Update">
           <label>Save Record</label>
+        </trigger>
+        <trigger ref="Duplicate">
+          <label>Save and Duplicate Record</label>
+        </trigger>
+        <trigger ref="New">
+          <label>Save and New Record</label>
+        </trigger>
+        <trigger ref="Close">
+          <label>Save and Close Record</label>
         </trigger>
         <trigger ref="Delete">
           <label>Delete Record</label>
@@ -2032,11 +2311,12 @@ Counterweight hanger/ cradle 4</label>
         </select1>
       </group>
     </group>
+
     <group ref="Haul_rope_remnant" faims_archent_type="Haul rope">
       <label>Haul Rope Remnant Details</label>
       <group ref="Details">
         <label>Details</label>
-        <select1 appearance="full" ref="Direction" faims_attribute_name="Direction" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="false">
+        <select1 appearance="full" ref="Direction" faims_attribute_name="Direction" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
           <label>Direction</label>
           <item>
             <label>placeholder</label>
@@ -2081,7 +2361,7 @@ Counterweight hanger/ cradle 4</label>
         <trigger ref="CalculateGPS">
           <label>Calculate GPS</label>
         </trigger>
-        <select type="camera" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="camera" faims_certainty="false" faims_annotation="false">
+        <select type="camera" faims_sync="true" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
           <label>Photos</label>
           <item>
             <label>placeholder</label>
@@ -2091,8 +2371,23 @@ Counterweight hanger/ cradle 4</label>
         <trigger ref="Attach_photos">
           <label>Attach Photos</label>
         </trigger>
+        <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
+          <label>Date Created</label>
+        </input>
+        <input faims_certainty="false" faims_read_only="true" ref="Created_By">
+          <label>Created By</label>
+        </input>
         <trigger ref="Update">
           <label>Save Record</label>
+        </trigger>
+        <trigger ref="Duplicate">
+          <label>Save and Duplicate Record</label>
+        </trigger>
+        <trigger ref="New">
+          <label>Save and New Record</label>
+        </trigger>
+        <trigger ref="Close">
+          <label>Save and Close Record</label>
         </trigger>
         <trigger ref="Delete">
           <label>Delete Record</label>
@@ -2112,6 +2407,7 @@ Counterweight hanger/ cradle 4</label>
         </select1>
       </group>
     </group>
+
     <group ref="Rope_joiner" faims_archent_type="Rope joiner">
       <label>Rope Joiner</label>
       <group ref="Details">
@@ -2135,7 +2431,7 @@ Counterweight hanger/ cradle 4</label>
         <trigger ref="CalculateGPS">
           <label>Calculate GPS</label>
         </trigger>
-        <select type="camera" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="camera" faims_certainty="false" faims_annotation="false">
+        <select type="camera" faims_sync="true" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
           <label>Photos</label>
           <item>
             <label>placeholder</label>
@@ -2145,8 +2441,23 @@ Counterweight hanger/ cradle 4</label>
         <trigger ref="Attach_photos">
           <label>Attach Photos</label>
         </trigger>
+        <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
+          <label>Date Created</label>
+        </input>
+        <input faims_certainty="false" faims_read_only="true" ref="Created_By">
+          <label>Created By</label>
+        </input>
         <trigger ref="Update">
           <label>Save Record</label>
+        </trigger>
+        <trigger ref="Duplicate">
+          <label>Save and Duplicate Record</label>
+        </trigger>
+        <trigger ref="New">
+          <label>Save and New Record</label>
+        </trigger>
+        <trigger ref="Close">
+          <label>Save and Close Record</label>
         </trigger>
         <trigger ref="Delete">
           <label>Delete Record</label>
@@ -2166,6 +2477,7 @@ Counterweight hanger/ cradle 4</label>
         </select1>
       </group>
     </group>
+
     <group ref="Rope_groove" faims_archent_type="Rope groove">
       <label>Rope Groove</label>
       <group ref="Details">
@@ -2188,7 +2500,7 @@ Counterweight hanger/ cradle 4</label>
         <trigger ref="CalculateGPS">
           <label>Calculate GPS</label>
         </trigger>
-        <select type="camera" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="camera" faims_certainty="false" faims_annotation="false">
+        <select type="camera" faims_sync="true" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
           <label>Photos</label>
           <item>
             <label>placeholder</label>
@@ -2198,8 +2510,23 @@ Counterweight hanger/ cradle 4</label>
         <trigger ref="Attach_photos">
           <label>Attach Photos</label>
         </trigger>
+        <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
+          <label>Date Created</label>
+        </input>
+        <input faims_certainty="false" faims_read_only="true" ref="Created_By">
+          <label>Created By</label>
+        </input>
         <trigger ref="Update">
           <label>Save Record</label>
+        </trigger>
+        <trigger ref="Duplicate">
+          <label>Save and Duplicate Record</label>
+        </trigger>
+        <trigger ref="New">
+          <label>Save and New Record</label>
+        </trigger>
+        <trigger ref="Close">
+          <label>Save and Close Record</label>
         </trigger>
         <trigger ref="Delete">
           <label>Delete Record</label>
@@ -2242,7 +2569,7 @@ Counterweight hanger/ cradle 4</label>
         <trigger ref="CalculateGPS">
           <label>Calculate GPS</label>
         </trigger>
-        <select type="camera" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="camera" faims_certainty="false" faims_annotation="false">
+        <select type="camera" faims_sync="true" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false">
           <label>Photos</label>
           <item>
             <label>placeholder</label>
@@ -2252,8 +2579,23 @@ Counterweight hanger/ cradle 4</label>
         <trigger ref="Attach_photos">
           <label>Attach Photos</label>
         </trigger>
+        <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
+          <label>Date Created</label>
+        </input>
+        <input faims_certainty="false" faims_read_only="true" ref="Created_By">
+          <label>Created By</label>
+        </input>
         <trigger ref="Update">
           <label>Save Record</label>
+        </trigger>
+        <trigger ref="Duplicate">
+          <label>Save and Duplicate Record</label>
+        </trigger>
+        <trigger ref="New">
+          <label>Save and New Record</label>
+        </trigger>
+        <trigger ref="Close">
+          <label>Save and Close Record</label>
         </trigger>
         <trigger ref="Delete">
           <label>Delete Record</label>
@@ -2273,25 +2615,41 @@ Counterweight hanger/ cradle 4</label>
         </select1>
       </group>
     </group>
+
+
     <!-- ArchEnt: Photograph Log -->
     <group ref="Photograph_log" faims_archent_type="Photograph log">
       <label>Photograph Log</label>
-        <group ref="Photograph_log">
-          <label>Photograph Log</label>
-            <input faims_attribute_name="Photograph reference ID" faims_attribute_type="freetext" faims_read_only="false" ref="Photograph_reference_ID" faims_certainty="true">
-              <label>Photograph Log ID</label>
-            </input>
-          <input faims_attribute_name="Scene type" faims_attribute_type="freetext" faims_certainty="true" faims_read_only="false" ref="Scene_type">
-            <label>Description</label>
-           
-          </input>
-          <trigger ref="Update">
-            <label>Save Record</label>
-          </trigger>
-          <trigger ref="Delete">
-            <label>Delete Record</label>
-          </trigger>
-        </group>
+      <group ref="Photograph_log">
+        <label>Photograph Log</label>
+        <input faims_attribute_name="Photograph reference ID" faims_attribute_type="freetext" faims_read_only="false" ref="Photograph_reference_ID" faims_certainty="true">
+          <label>Photograph Log ID</label>
+        </input>
+        <input faims_attribute_name="Scene type" faims_attribute_type="freetext" faims_certainty="true" faims_read_only="false" ref="Scene_type">
+          <label>Description</label>
+        </input>
+        <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
+          <label>Date Created</label>
+        </input>
+        <input faims_certainty="false" faims_read_only="true" ref="Created_By">
+          <label>Created By</label>
+        </input>
+        <trigger ref="Update">
+        <label>Save Record</label>
+        </trigger>
+        <trigger ref="Duplicate">
+          <label>Save and Duplicate Record</label>
+        </trigger>
+        <trigger ref="New">
+          <label>Save and New Record</label>
+        </trigger>
+        <trigger ref="Close">
+          <label>Save and Close Record</label>
+        </trigger>
+        <trigger ref="Delete">
+          <label>Delete Record</label>
+        </trigger>
+      </group>
     </group>
   </h:body>
 </h:html>

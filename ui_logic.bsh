@@ -3,7 +3,17 @@ startInternalGPS();
 User user;
 String userid;
 String feature_id = null;
+String feature_type = null;
 String delete_id = null;
+
+brianMagic(){
+    fetchOne("drop view if exists identifierAsSpreadsheet;");
+    fetchOne("create view identifierAsSpreadsheet as select uuid, group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), '-') as response " +
+    "from (select * from latestNonDeletedArchentIdentifiers order by  attributename) group by uuid;");
+}
+
+brianMagic();
+
 
 onEvent("control", "show", "populateControl(); feature_id = null;");
 onEvent("control/New_Data/newBucket", "click", "newBucket()");
@@ -76,25 +86,21 @@ getCounter(table){
             return "Error: One or more of your identifiers is missing.";
     }
 }
-search(){
+
+search () {
+    table = getFieldValue("control/Search/Dropdown");
+    searchField = getFieldValue("control/Search/Search_Bar");
+
+
     populateList("control/Search/Search_Results", fetchAll(""+
-        "SELECT uuid||'='||aenttypename, aenttypename || ': ' || group_concat( coalesce(measure   || ' '  || vocabname || '('  ||  freetext ||'; '|| (certainty * 100.0) || '% certain)',  "+
-        "                                     measure   || ' (' || freetext  || '; ' || (certainty * 100.0) || '% certain)',  "+
-        "                                     vocabname || ' (' || freetext  || '; ' || (certainty * 100.0) || '% certain)',  "+
-        "                                     measure   || ' '  || vocabname || ' (' || (certainty * 100.0) || '% certain)',  "+
-        "                                     vocabname || ' (' || freetext  || ')',  "+
-        "                                     measure   || ' (' || freetext  || ')',  "+
-        "                                     measure   || ' (' ||(certainty * 100.0) || '% certain)',  "+
-        "                                     vocabname || ' (' ||(certainty * 100.0) || '% certain)',  "+
-        "                                     freetext  || ' (' ||(certainty * 100.0) || '% certain)',  "+
-        "                                     measure,  "+
-        "                                     vocabname,  "+
-        "                                     freetext), ' ') as response  "+
-        "FROM (select * from latestNonDeletedArchentIdentifiers order by attributename) "+
-        "WHERE aenttypename LIKE '%'||'"+getFieldValue("control/Search/Dropdown")+"' "+
-        "and uuid in (select uuid from latestnondeletedaentvalue left outer join vocabulary using (vocabid) where freetext like '%"+getFieldValue("control/Search/Search_Bar")+"%' or vocabname like '%"+getFieldValue("control/Search/Search_Bar")+"%' or measure like '%"+getFieldValue("control/Search/Search_Bar")+"%') "+
-        "GROUP BY uuid "+
-        "order by response;"));
+        "SELECT uuid||'='||aenttypename, response   "+
+        "FROM identifierAsSpreadsheet join latestnondeletedarchent using (uuid) join aenttype using (aenttypeid) "+
+        "WHERE aenttypename LIKE '%'||'"+table+"'  "+
+        "and uuid in (select uuid from latestnondeletedaentvalue  "+
+        "             left outer join vocabulary using (vocabid) where freetext like '%"+searchField+"%' or vocabname like '%"+searchField+"%' or measure like '%"+searchField+"%')  "+
+        "GROUP BY uuid  "+
+        "order by case '"+table+"' when '' then aenttimestamp else '' end desc, response; "));
+
 }
 
 populateControl(){
@@ -136,7 +142,7 @@ specialLoad(){
 }
 
 /** ARCHENT: Bucket **/
-onEvent("Bucket", "show", "loadBucketRelated()");
+onEvent("Bucket/PhotoLog", "show", "loadBucketRelated()");
 onEvent("Bucket/Carriage_Details", "show", "setFieldValue(\"Bucket/Carriage_Details/Bucket_assembly_number\", getFieldValue(\"Bucket/Carrier_Details/Bucket_assembly_number\"))");
 onEvent("Bucket/Bucket_Details", "show", "setFieldValue(\"Bucket/Bucket_Details/Bucket_assembly_number\", getFieldValue(\"Bucket/Carrier_Details/Bucket_assembly_number\"))");
 
@@ -144,11 +150,23 @@ onEvent("Bucket/Carrier_Details/Update", "delayclick", "saveBucket(\"\")");
 onEvent("Bucket/Carriage_Details/Update", "delayclick", "saveBucket(\"\")");
 onEvent("Bucket/Bucket_Details/Update", "delayclick", "saveBucket(\"\")");
 
+onEvent("Bucket/Carrier_Details/Duplicate", "delayclick", "saveBucket(\"bucket_id=null;autoNumBucket();\")");
+onEvent("Bucket/Carriage_Details/Duplicate", "delayclick", "saveBucket(\"bucket_id=null;autoNumBucket();\")");
+onEvent("Bucket/Bucket_Details/Duplicate", "delayclick", "saveBucket(\"bucket_id=null;autoNumBucket();\")");
+
+onEvent("Bucket/Carrier_Details/New", "delayclick", "saveBucket(\"newBucket();\")");
+onEvent("Bucket/Carriage_Details/New", "delayclick", "saveBucket(\"newBucket();\")");
+onEvent("Bucket/Bucket_Details/New", "delayclick", "saveBucket(\"newBucket();\")");
+
+onEvent("Bucket/Carrier_Details/Close", "delayclick", "saveBucket(\"cancelTabGroup(\\\"Bucket\\\", false);\")");
+onEvent("Bucket/Carriage_Details/Close", "delayclick", "saveBucket(\"cancelTabGroup(\\\"Bucket\\\", false);\")");
+onEvent("Bucket/Bucket_Details/Close", "delayclick", "saveBucket(\"cancelTabGroup(\\\"Bucket\\\", false);\")");
+
 onEvent("Bucket/Carrier_Details/Delete", "delayclick", "deleteBucket()");
 onEvent("Bucket/Carriage_Details/Delete", "delayclick", "deleteBucket()");
 onEvent("Bucket/Bucket_Details/Delete", "delayclick", "deleteBucket()");
 
-onEvent("Bucket/PhotoLog/newPhotoLog", "delayclick", "saveBucket(\"feature_id = bucket_id; newPhotolog();\")");
+onEvent("Bucket/PhotoLog/newPhotoLog", "delayclick", "saveBucket(\"feature_id = bucket_id; feature_type=\\\"Bucket\\\"; newPhotolog();\")");
 onEvent("Bucket/PhotoLog/ListPhotoLog", "click", "feature_id = bucket_id; loadPhotolog();");
 
 onEvent("Bucket/Carrier_Details/CalculateGPS", "delayclick", "fillInGPS(\"Bucket/Carrier_Details/Carrier_\")");
@@ -164,7 +182,17 @@ String bucket_id;
 newBucket(){
     bucket_id = null;
     newTabGroup("Bucket");
+    autoNumBucket();
+    date = fetchOne("select date('now', 'localtime');");
+    setFieldValue("Bucket/Carrier_Details/Creation_Date", date.get(0));
+    setFieldValue("Bucket/Carrier_Details/Created_By", username);
+
+}
+
+autoNumBucket() {
     setFieldValue("Bucket/Carrier_Details/Bucket_assembly_number", getCounter("Bucket"));
+    setFieldValue("Bucket/Carriage_Details/Bucket_assembly_number", getCounter("Bucket"));
+    setFieldValue("Bucket/Bucket_Details/Bucket_assembly_number", getCounter("Bucket"));
 }
 
 loadBucketFrom(archent_id) {
@@ -173,8 +201,12 @@ loadBucketFrom(archent_id) {
         showToast("No record selected");
         return;
     }
-    
     showTabGroup("Bucket", bucket_id);    
+    Object foo = fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '"+bucket_id+"' group by uuid having min(aenttimestamp)");
+    setFieldValue("Bucket/Carrier_Details/Created_By", foo.get(0));
+    Object bar = fetchOne("select uuid, datetime(aentTimestamp, 'localtime')  from archentity where uuid = '"+bucket_id+"' group by uuid having min(aenttimestamp);");
+    setFieldValue("Bucket/Carrier_Details/Creation_Date", bar.get(1));
+
 }
 
 loadBucketAttributes(){
@@ -226,10 +258,22 @@ loadBucketRelated() {
 }
 
 /** ARCHENT: Tower **/
-onEvent("Tower", "show", "loadTowerRelated();");
+onEvent("Tower/Tower_pole", "show", "loadTowerPoleRelated();");
+onEvent("Tower/Tower_hardware", "show", "loadTowerHardwareRelated();");
+onEvent("Tower/Tower_bolts", "show", "loadTowerBoltRelated();");
+onEvent("Tower/PhotoLog", "show", "loadTowerPhotologRelated();");
 
 onEvent("Tower/Tower_pole/Update", "delayclick", "saveTower(\"\")");
 onEvent("Tower/Tower_hardware/Update", "delayclick", "saveTower(\"\")");
+
+onEvent("Tower/Tower_pole/Duplicate", "delayclick", "saveTower(\"tower_id=null;autoNumTower();\")");
+onEvent("Tower/Tower_hardware/Duplicate", "delayclick", "saveTower(\"tower_id=null;autoNumTower();\")");
+
+onEvent("Tower/Tower_pole/New", "delayclick", "saveTower(\"newTower();\")");
+onEvent("Tower/Tower_hardware/New", "delayclick", "saveTower(\"newTower();\")");
+
+onEvent("Tower/Tower_pole/Close", "delayclick", "saveTower(\"cancelTabGroup(\\\"Tower\\\", false);\")");
+onEvent("Tower/Tower_hardware/Close", "delayclick", "saveTower(\"cancelTabGroup(\\\"Tower\\\", false);\")");
 
 onEvent("Tower/Tower_pole/Delete", "delayclick", "deleteTower()");
 onEvent("Tower/Tower_hardware/Delete", "delayclick", "deleteTower()");
@@ -238,7 +282,7 @@ onEvent("Tower/Tower_pole/Add_pole", "delayclick", "saveTower(\"newTowerPole();\
 onEvent("Tower/Tower_hardware/Add_track_crossbar", "delayclick", "saveTower(\"newTrackCrossbar();\")");
 onEvent("Tower/Tower_hardware/Add_haul_rope_wheel_frame", "delayclick", "saveTower(\"newWheelFrame();\")");
 onEvent("Tower/Tower_bolts/Add_tower_bolt", "delayclick", "saveTower(\"newTowerBolt();\")");
-onEvent("Tower/PhotoLog/newPhotoLog", "delayclick", "saveTower(\"feature_id = tower_id; newPhotolog();\")");
+onEvent("Tower/PhotoLog/newPhotoLog", "delayclick", "saveTower(\"feature_id = tower_id; feature_type=\\\"Tower\\\"; newPhotolog();\")");
 
 onEvent("Tower/Tower_pole/Show_pole", "click", "loadTowerPole();");
 onEvent("Tower/Tower_hardware/Show_track_crossbar", "click", "loadTrackCrossbar();");
@@ -246,17 +290,23 @@ onEvent("Tower/Tower_hardware/Show_haul_rope_wheel_frame", "click", "loadWheelFr
 onEvent("Tower/Tower_bolts/List_tower_bolt", "click", "loadTowerBolt();");
 onEvent("Tower/PhotoLog/ListPhotoLog", "click", "feature_id = tower_id; loadPhotolog();");
 
-onEvent("Tower/Tower_pole/Delete_pole", "click", "deleteTowerRel(getFieldValue(\"Tower/Tower_pole/List_poles\"));");
-onEvent("Tower/Tower_hardware/Delete_track_crossbar", "click", "deleteTowerRel(getFieldValue(\"Tower/Tower_hardware/List_track_crossbar\"));");
-onEvent("Tower/Tower_hardware/Delete_haul_rope_wheel_frame", "click", "deleteTowerRel(getFieldValue(\"Tower/Tower_hardware/List_haul_rope_wheel_frame\"));");
+onEvent("Tower/Tower_pole/Delete_pole", "click", "feature_type=\"Tower Pole\";deleteTowerRel(getFieldValue(\"Tower/Tower_pole/List_poles\"));");
+onEvent("Tower/Tower_hardware/Delete_track_crossbar", "click", "feature_type=\"Track Crossbar\";deleteTowerRel(getFieldValue(\"Tower/Tower_hardware/List_track_crossbar\"));");
+onEvent("Tower/Tower_hardware/Delete_haul_rope_wheel_frame", "click", "feature_type=\"Wheel Frame\";deleteTowerRel(getFieldValue(\"Tower/Tower_hardware/List_haul_rope_wheel_frame\"));");
 
 String tower_id;
 
 newTower(){
     tower_id = null;
     newTabGroup("Tower");
-    setFieldValue("Tower/Tower_pole/Tower_number", getCounter("Tower"));
+    autoNumTower();
+    date = fetchOne("select date('now', 'localtime');");
+    setFieldValue("Tower/Tower_pole/Creation_Date", date.get(0));
+    setFieldValue("Tower/Tower_pole/Created_By", username);
+}
 
+autoNumTower() {
+    setFieldValue("Tower/Tower_pole/Tower_number", getCounter("Tower"));
 }
 
 loadTowerFrom(archent_id) {
@@ -266,7 +316,11 @@ loadTowerFrom(archent_id) {
         return;
     }
     
-    showTabGroup("Tower", tower_id);   
+    showTabGroup("Tower", tower_id);
+    Object foo = fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '"+tower_id+"' group by uuid having min(aenttimestamp)");
+    setFieldValue("Tower/Tower_pole/Created_By", foo.get(0));
+    Object bar = fetchOne("select uuid, datetime(aentTimestamp, 'localtime')  from archentity where uuid = '"+tower_id+"' group by uuid having min(aenttimestamp);");
+    setFieldValue("Tower/Tower_pole/Creation_Date", bar.get(1));
 }
 
 loadTowerAttributes(){
@@ -310,16 +364,15 @@ deleteTowerRel(String archent_id) {
 
 reallyDeleteTowerRel() {
     deleteArchEnt(delete_id);
-    loadTowerRelated();
+    if(feature_type.equals("Tower Pole")) {
+        loadTowerPoleRelated();
+    } else {
+        loadTowerHardwareRelated();
+    }
 }
 
-loadTowerRelated() {
-    feature_id = tower_id;
-    loadRelatedPhotologs("Tower/PhotoLog/ListPhotoLog");
+loadTowerPoleRelated() {
     Object towerPoles = new ArrayList();
-    Object trackCrossbars = new ArrayList();
-    Object haulRopeWheelFrames = new ArrayList();
-    Object towerBolts = new ArrayList();
     if (!isNull(tower_id)){
         towerPoles = fetchAll("select uuid, group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), ' | ') as response, valuetimestamp\n"+
             "  FROM (  SELECT uuid, attributeid, vocabid, attributename, vocabname, measure, freetext, certainty, attributetype, valuetimestamp, aenttypename\n"+
@@ -337,6 +390,14 @@ loadTowerRelated() {
             "        ORDER BY uuid, attributename ASC)\n"+
             "group by uuid\n"+
             "order by valuetimestamp desc, uuid, attributename;");
+    }
+    populateDropDown("Tower/Tower_pole/List_poles",  towerPoles);
+}
+
+loadTowerHardwareRelated() {
+    Object trackCrossbars = new ArrayList();
+    Object haulRopeWheelFrames = new ArrayList();
+    if (!isNull(tower_id)){
         trackCrossbars = fetchAll("select uuid, group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), ' | ') as response, valuetimestamp\n"+
             "  FROM (  SELECT uuid, attributeid, vocabid, attributename, vocabname, measure, freetext, certainty, attributetype, valuetimestamp, aenttypename\n"+
             "            FROM latestNonDeletedArchentIdentifiers\n"+
@@ -369,6 +430,14 @@ loadTowerRelated() {
             "        ORDER BY uuid, attributename ASC)\n"+
             "group by uuid\n"+
             "order by valuetimestamp desc, uuid, attributename;");
+    }
+    populateDropDown("Tower/Tower_hardware/List_track_crossbar",  trackCrossbars);
+    populateDropDown("Tower/Tower_hardware/List_haul_rope_wheel_frame",  haulRopeWheelFrames);
+}
+
+loadTowerBoltRelated() {
+    Object towerBolts = new ArrayList();
+    if (!isNull(tower_id)){
         towerBolts = fetchAll("select uuid, group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), ' | ') as response, valuetimestamp\n"+
             "  FROM (  SELECT uuid, attributeid, vocabid, attributename, vocabname, measure, freetext, certainty, attributetype, valuetimestamp, aenttypename\n"+
             "            FROM latestNonDeletedArchentIdentifiers\n"+
@@ -386,14 +455,19 @@ loadTowerRelated() {
             "group by uuid\n"+
             "order by valuetimestamp desc, uuid, attributename;");
     }
-    populateDropDown("Tower/Tower_pole/List_poles",  towerPoles);
-    populateDropDown("Tower/Tower_hardware/List_track_crossbar",  trackCrossbars);
-    populateDropDown("Tower/Tower_hardware/List_haul_rope_wheel_frame",  haulRopeWheelFrames);
     populateList("Tower/Tower_bolts/List_tower_bolt",  towerBolts);
 }
 
+loadTowerPhotologRelated() {
+    feature_id = tower_id;
+    loadRelatedPhotologs("Tower/PhotoLog/ListPhotoLog");
+}
+
 /** ARCHENT: Tower Pole **/
-onEvent("Tower_pole/Details/Update", "delayclick", "saveTowerPole()");
+onEvent("Tower_pole/Details/Update", "delayclick", "saveTowerPole(\"\")");
+onEvent("Tower_pole/Details/Duplicate", "delayclick", "saveTowerPole(\"tower_pole_id=null;autoNumTowerPole();\")");
+onEvent("Tower_pole/Details/New", "delayclick", "saveTowerPole(\"newTowerPole();\")");
+onEvent("Tower_pole/Details/Close", "delayclick", "saveTowerPole(\"cancelTabGroup(\\\"Tower_pole\\\", false);showTab(\\\"Tower/Tower_pole\\\");\")");
 onEvent("Tower_pole/Details/Delete", "delayclick", "deleteTowerPole()");
 
 onEvent("Tower_pole/Details/CalculateGPS", "delayclick", "fillInGPS(\"Tower_pole/Details/\")");
@@ -404,8 +478,14 @@ String tower_pole_id;
 newTowerPole(){
     tower_pole_id = null;
     newTabGroup("Tower_pole");
-    setFieldValue("Tower_pole/Details/Pole_number", getCounterWithParent("Tower pole", tower_id));
+    autoNumTowerPole();
+    date = fetchOne("select date('now', 'localtime');");
+    setFieldValue("Tower_pole/Details/Creation_Date", date.get(0));
+    setFieldValue("Tower_pole/Details/Created_By", username);
+}
 
+autoNumTowerPole() {
+    setFieldValue("Tower_pole/Details/Pole_number", getCounterWithParent("Tower pole", tower_id));
 }
 
 loadTowerPole() {
@@ -421,6 +501,10 @@ loadTowerPoleFrom(archent_id) {
     }
     
     showTabGroup("Tower_pole", tower_pole_id);
+    Object foo = fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '"+tower_pole_id+"' group by uuid having min(aenttimestamp)");
+    setFieldValue("Tower_pole/Details/Created_By", foo.get(0));
+    Object bar = fetchOne("select uuid, datetime(aentTimestamp, 'localtime')  from archentity where uuid = '"+tower_pole_id+"' group by uuid having min(aenttimestamp);");
+    setFieldValue("Tower_pole/Details/Creation_Date", bar.get(1));
 }
 
 loadTowerPoleAttributes(){
@@ -428,7 +512,7 @@ loadTowerPoleAttributes(){
     populateDropDown("Tower_pole/Details/Footing", makeVocab("Footing"));
 }
 
-saveTowerPole() {
+saveTowerPole(String callback) {
     if (isNull(getFieldValue("Tower_pole/Details/Pole_number"))) {
         showWarning("Validation Error", "Cannot save Tower Pole without Pole Number");
         return;
@@ -436,7 +520,7 @@ saveTowerPole() {
     if (!isNull(tower_pole_id)) {
         entity = fetchArchEnt(tower_pole_id);
     }
-    saveTabGroup("Tower_pole", tower_pole_id, null, null, "tower_pole_id = getLastSavedRecordId();saveEntitiesToRel(\"TowerTowerPole\", tower_id, tower_pole_id);");
+    saveTabGroup("Tower_pole", tower_pole_id, null, null, "tower_pole_id = getLastSavedRecordId();saveEntitiesToRel(\"TowerTowerPole\", tower_id, tower_pole_id);" + callback);
 }
 
 deleteTowerPole(){
@@ -453,7 +537,10 @@ reallyDeleteTowerPole(){
 }
 
 /** ARCHENT: Track Crossbar **/
-onEvent("Track_crossbar/Details/Update", "delayclick", "saveTrackCrossbar()");
+onEvent("Track_crossbar/Details/Update", "delayclick", "saveTrackCrossbar(\"\")");
+onEvent("Track_crossbar/Details/Duplicate", "delayclick", "saveTrackCrossbar(\"track_crossbar_id=null;autoNumTrackCrossbar();\")");
+onEvent("Track_crossbar/Details/New", "delayclick", "saveTrackCrossbar(\"newTrackCrossbar();\")");
+onEvent("Track_crossbar/Details/Close", "delayclick", "saveTrackCrossbar(\"cancelTabGroup(\\\"Track_crossbar\\\", false);showTab(\\\"Tower/Tower_hardware\\\");\")");
 onEvent("Track_crossbar/Details/Delete", "delayclick", "deleteTrackCrossbar()");
 
 onEvent("Track_crossbar/Details/CalculateGPS", "delayclick", "fillInGPS(\"Track_crossbar/Details/\")");
@@ -464,8 +551,14 @@ String track_crossbar_id;
 newTrackCrossbar(){
     track_crossbar_id = null;
     newTabGroup("Track_crossbar");
-    setFieldValue("Track_crossbar/Details/Crossbar_number", getCounterWithParent("Track crossbar", tower_id));
+    autoNumTrackCrossbar();
+    date = fetchOne("select date('now', 'localtime');");
+    setFieldValue("Track_crossbar/Details/Creation_Date", date.get(0));
+    setFieldValue("Track_crossbar/Details/Created_By", username);
+}
 
+autoNumTrackCrossbar() {
+    setFieldValue("Track_crossbar/Details/Crossbar_number", getCounterWithParent("Track crossbar", tower_id));
 }
 
 loadTrackCrossbar() {
@@ -479,8 +572,11 @@ loadTrackCrossbarFrom(archent_id) {
         showToast("No record selected");
         return;
     }
-    
     showTabGroup("Track_crossbar", track_crossbar_id);
+    Object foo = fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '"+track_crossbar_id+"' group by uuid having min(aenttimestamp)");
+    setFieldValue("Track_crossbar/Details/Created_By", foo.get(0));
+    Object bar = fetchOne("select uuid, datetime(aentTimestamp, 'localtime')  from archentity where uuid = '"+track_crossbar_id+"' group by uuid having min(aenttimestamp);");
+    setFieldValue("Track_crossbar/Details/Creation_Date", bar.get(1));
 }
 
 loadTrackCrossbarAttributes(){
@@ -491,7 +587,7 @@ loadTrackCrossbarAttributes(){
     populateRadioGroup("Track_crossbar/Details/Cross_timber_angle_bracket", makeVocab("Cross timber angle bracket"));
 }
 
-saveTrackCrossbar() {
+saveTrackCrossbar(String callback) {
     if (isNull(getFieldValue("Track_crossbar/Details/Crossbar_number"))) {
         showWarning("Validation Error", "Cannot save Track Crossbar without Crossbar Number");
         return;
@@ -499,7 +595,7 @@ saveTrackCrossbar() {
     if (!isNull(track_crossbar_id)) {
         entity = fetchArchEnt(track_crossbar_id);
     }
-    saveTabGroup("Track_crossbar", track_crossbar_id, null, null, "track_crossbar_id = getLastSavedRecordId();saveEntitiesToRel(\"TowerCrossbar\", tower_id, track_crossbar_id);");
+    saveTabGroup("Track_crossbar", track_crossbar_id, null, null, "track_crossbar_id = getLastSavedRecordId();saveEntitiesToRel(\"TowerCrossbar\", tower_id, track_crossbar_id);" + callback);
 }
 
 
@@ -517,7 +613,10 @@ reallyDeleteTrackCrossbar(){
 }
 
 /** ARCHENT: Haul rope wheel frame **/
-onEvent("Wheel_frame/Details/Update", "delayclick", "saveWheelFrame()");
+onEvent("Wheel_frame/Details/Update", "delayclick", "saveWheelFrame(\"\")");
+onEvent("Wheel_frame/Details/Duplicate", "delayclick", "saveWheelFrame(\"wheel_frame_id=null;autoNumWheelFrame();\")");
+onEvent("Wheel_frame/Details/New", "delayclick", "saveWheelFrame(\"newWheelFrame();\")");
+onEvent("Wheel_frame/Details/Close", "delayclick", "saveWheelFrame(\"cancelTabGroup(\\\"Wheel_frame\\\", false);showTab(\\\"Tower/Tower_hardware\\\");\")");
 onEvent("Wheel_frame/Details/Delete", "delayclick", "deleteWheelFrame()");
 
 onEvent("Wheel_frame/Details/CalculateGPS", "delayclick", "fillInGPS(\"Wheel_frame/Details/\")");
@@ -528,8 +627,14 @@ String wheel_frame_id;
 newWheelFrame(){
     wheel_frame_id = null;
     newTabGroup("Wheel_frame");
-    setFieldValue("Wheel_frame/Details/Frame_number", getCounterWithParent("Haul rope wheel frame", tower_id));
+    autoNumWheelFrame();
+    date = fetchOne("select date('now', 'localtime');");
+    setFieldValue("Wheel_frame/Details/Creation_Date", date.get(0));
+    setFieldValue("Wheel_frame/Details/Created_By", username);
+}
 
+autoNumWheelFrame() {
+    setFieldValue("Wheel_frame/Details/Frame_number", getCounterWithParent("Haul rope wheel frame", tower_id));
 }
 
 loadWheelFrame() {
@@ -544,6 +649,10 @@ loadWheelFrameFrom(archent_id) {
         return;
     }
     showTabGroup("Wheel_frame", wheel_frame_id);
+    Object foo = fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '"+wheel_frame_id+"' group by uuid having min(aenttimestamp)");
+    setFieldValue("Wheel_frame/Details/Created_By", foo.get(0));
+    Object bar = fetchOne("select uuid, datetime(aentTimestamp, 'localtime')  from archentity where uuid = '"+wheel_frame_id+"' group by uuid having min(aenttimestamp);");
+    setFieldValue("Wheel_frame/Details/Creation_Date", bar.get(1));
 }
 
 loadWheelFrameAttributes(){
@@ -551,7 +660,7 @@ loadWheelFrameAttributes(){
     populateRadioGroup("Wheel_frame/Details/Bearings", makeVocab("Bearings"));
 }
 
-saveWheelFrame() {
+saveWheelFrame(String callback) {
     if (isNull(getFieldValue("Wheel_frame/Details/Frame_number"))) {
         showWarning("Validation Error", "Cannot save record without Frame Number");
         return;
@@ -559,7 +668,7 @@ saveWheelFrame() {
     if (!isNull(wheel_frame_id)) {
         entity = fetchArchEnt(wheel_frame_id);
     }
-    saveTabGroup("Wheel_frame", wheel_frame_id, null, null, "wheel_frame_id = getLastSavedRecordId();saveEntitiesToRel(\"TowerHaulRope\", tower_id, wheel_frame_id);");
+    saveTabGroup("Wheel_frame", wheel_frame_id, null, null, "wheel_frame_id = getLastSavedRecordId();saveEntitiesToRel(\"TowerHaulRope\", tower_id, wheel_frame_id);" + callback);
 }
 
 
@@ -579,6 +688,8 @@ reallyDeleteWheelFrame(){
 /** ARCHENT: Tower Bolt Archent **/
 onEvent("Tower_bolts/Details/Update", "delayclick", "saveTowerBolt(\"\")");
 onEvent("Tower_bolts/Details/Duplicate", "delayclick", "saveTowerBolt(\"tower_bolt_id = null;\")");
+onEvent("Tower_bolts/Details/New", "delayclick", "saveTowerBolt(\"newTowerBolt();\")");
+onEvent("Tower_bolts/Details/Close", "delayclick", "saveTowerBolt(\"cancelTabGroup(\\\"Tower_bolts\\\", false);showTab(\\\"Tower/Tower_bolts\\\");\")");
 onEvent("Tower_bolts/Details/Delete", "delayclick", "deleteTowerBolt()");
 
 onEvent("Tower_bolts/Details/CalculateGPS", "delayclick", "fillInGPS(\"Tower_bolts/Details/\")");
@@ -589,7 +700,9 @@ String tower_bolt_id;
 newTowerBolt(){
     tower_bolt_id = null;
     newTabGroup("Tower_bolts");
-
+    date = fetchOne("select date('now', 'localtime');");
+    setFieldValue("Tower_bolts/Details/Creation_Date", date.get(0));
+    setFieldValue("Tower_bolts/Details/Created_By", username);
 }
 
 loadTowerBolt() {
@@ -605,6 +718,10 @@ loadTowerBoltFrom(archent_id) {
     }
     
     showTabGroup("Tower_bolts", tower_bolt_id);
+    Object foo = fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '"+tower_bolt_id+"' group by uuid having min(aenttimestamp)");
+    setFieldValue("Tower_bolts/Details/Created_By", foo.get(0));
+    Object bar = fetchOne("select uuid, datetime(aentTimestamp, 'localtime')  from archentity where uuid = '"+tower_bolt_id+"' group by uuid having min(aenttimestamp);");
+    setFieldValue("Tower_bolts/Details/Creation_Date", bar.get(1));
 }
 
 
@@ -642,12 +759,28 @@ reallyDeleteTowerBolt(){
 }
 
 /** ARCHENT: Tension Station **/
-onEvent("Tension_station", "show", "loadTensionStationRelated()");
+onEvent("Tension_station/Tension_bolts", "show", "loadTensionStationBoltRelated()");
+onEvent("Tension_station/PhotoLog", "show", "loadTensionStationPhotoLogRelated()");
 
 onEvent("Tension_station/Details/Update", "delayclick", "saveTensionStation(\"\")");
 onEvent("Tension_station/Chain_rollers/Update", "delayclick", "saveTensionStation(\"\")");
 onEvent("Tension_station/Cradle/Update", "delayclick", "saveTensionStation(\"\")");
 onEvent("Tension_station/Notes/Update", "delayclick", "saveTensionStation(\"\")");
+
+onEvent("Tension_station/Details/Duplicate", "delayclick", "saveTensionStation(\"tension_station_id=null;\")");
+onEvent("Tension_station/Chain_rollers/Duplicate", "delayclick", "saveTensionStation(\"tension_station_id=null;\")");
+onEvent("Tension_station/Cradle/Duplicate", "delayclick", "saveTensionStation(\"tension_station_id=null;\")");
+onEvent("Tension_station/Notes/Duplicate", "delayclick", "saveTensionStation(\"tension_station_id=null;\")");
+
+onEvent("Tension_station/Details/New", "delayclick", "saveTensionStation(\"newTensionStation();\")");
+onEvent("Tension_station/Chain_rollers/New", "delayclick", "saveTensionStation(\"newTensionStation();\")");
+onEvent("Tension_station/Cradle/New", "delayclick", "saveTensionStation(\"newTensionStation();\")");
+onEvent("Tension_station/Notes/New", "delayclick", "saveTensionStation(\"newTensionStation();\")");
+
+onEvent("Tension_station/Details/Close", "delayclick", "saveTensionStation(\"cancelTabGroup(\\\"Tension_station\\\", false);\")");
+onEvent("Tension_station/Chain_rollers/Close", "delayclick", "saveTensionStation(\"cancelTabGroup(\\\"Tension_station\\\", false);\")");
+onEvent("Tension_station/Cradle/Close", "delayclick", "saveTensionStation(\"cancelTabGroup(\\\"Tension_station\\\", false);\")");
+onEvent("Tension_station/Notes/Close", "delayclick", "saveTensionStation(\"cancelTabGroup(\\\"Tension_station\\\", false);\")");
 
 onEvent("Tension_station/Details/Delete", "delayclick", "deleteTensionStation()");
 onEvent("Tension_station/Chain_rollers/Delete", "delayclick", "deleteTensionStation()");
@@ -672,7 +805,7 @@ onEvent("Tension_station/Notes/Attach_photos", "delayclick", "attachPictureTo(\"
 onEvent("Tension_station/Tension_bolts/Add_tension_bolt", "delayclick", "saveTensionStation(\"newTensionStationBolt();\")");
 onEvent("Tension_station/Tension_bolts/List_tension_bolt", "click", "loadTensionStationBolt();");
 
-onEvent("Tension_station/PhotoLog/newPhotoLog", "delayclick", "saveTensionStation(\"feature_id = tension_station_id; newPhotolog();\")");
+onEvent("Tension_station/PhotoLog/newPhotoLog", "delayclick", "saveTensionStation(\"feature_id = tension_station_id; feature_type=\\\"Tension_station\\\"; newPhotolog();\")");
 onEvent("Tension_station/PhotoLog/ListPhotoLog", "click", "feature_id = tension_station_id; loadPhotolog();");
 
 String tension_station_id;
@@ -680,7 +813,9 @@ String tension_station_id;
 newTensionStation(){
     tension_station_id = null;
     newTabGroup("Tension_station");
-
+    date = fetchOne("select date('now', 'localtime');");
+    setFieldValue("Tension_station/Details/Creation_Date", date.get(0));
+    setFieldValue("Tension_station/Details/Created_By", username);
 }
 
 loadTensionStationBolt() {
@@ -696,6 +831,10 @@ loadTensionStationFrom(archent_id) {
     }
     
     showTabGroup("Tension_station", tension_station_id);
+    Object foo = fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '"+tension_station_id+"' group by uuid having min(aenttimestamp)");
+    setFieldValue("Tension_station/Details/Created_By", foo.get(0));
+    Object bar = fetchOne("select uuid, datetime(aentTimestamp, 'localtime')  from archentity where uuid = '"+tension_station_id+"' group by uuid having min(aenttimestamp);");
+    setFieldValue("Tension_station/Details/Creation_Date", bar.get(1));
 }
 
 loadTensionStationAttributes(){
@@ -750,9 +889,7 @@ reallyDeleteTensionStation() {
     cancelTabGroup("Tension_station", false);
 }
 
-loadTensionStationRelated() {
-    feature_id = tension_station_id;
-    loadRelatedPhotologs("Tension_station/PhotoLog/ListPhotoLog");
+loadTensionStationBoltRelated() {
     Object tensionBolts = new ArrayList();
     if (!isNull(tension_station_id)){
         tensionBolts = fetchAll("select uuid, group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), ' | ') as response, valuetimestamp\n"+
@@ -775,9 +912,16 @@ loadTensionStationRelated() {
     populateList("Tension_station/Tension_bolts/List_tension_bolt",  tensionBolts);
 }
 
+loadTensionStationPhotoLogRelated() {
+    feature_id = tension_station_id;
+    loadRelatedPhotologs("Tension_station/PhotoLog/ListPhotoLog");
+}
+
 /** ARCHENT: Tension Station Bolt **/
 onEvent("Tension_bolts/Details/Update", "delayclick", "saveTensionStationBolt(\"\")");
 onEvent("Tension_bolts/Details/Duplicate", "delayclick", "saveTensionStationBolt(\"tension_station_bolt_id = null;\")");
+onEvent("Tension_bolts/Details/New", "delayclick", "saveTensionStationBolt(\"newTensionStationBolt();\")");
+onEvent("Tension_bolts/Details/Close", "delayclick", "saveTensionStationBolt(\"cancelTabGroup(\\\"Tension_bolts\\\", false);showTab(\\\"Tension_station/Tension_bolts\\\");\")");
 onEvent("Tension_bolts/Details/Delete", "delayclick", "deleteTensionStationBolt()");
 
 String tension_station_bolt_id;
@@ -785,6 +929,9 @@ String tension_station_bolt_id;
 newTensionStationBolt(){
     tension_station_bolt_id = null;
     newTabGroup("Tension_bolts");
+    date = fetchOne("select date('now', 'localtime');");
+    setFieldValue("Tension_bolts/Details/Creation_Date", date.get(0));
+    setFieldValue("Tension_bolts/Details/Created_By", username);
 }
 
 loadTensionStationBolt() {
@@ -800,6 +947,10 @@ loadTensionStationBoltFrom(archent_id) {
     }
     
     showTabGroup("Tension_bolts", tension_station_bolt_id);
+    Object foo = fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '"+tension_station_bolt_id+"' group by uuid having min(aenttimestamp)");
+    setFieldValue("Tension_bolts/Details/Created_By", foo.get(0));
+    Object bar = fetchOne("select uuid, datetime(aentTimestamp, 'localtime')  from archentity where uuid = '"+tension_station_bolt_id+"' group by uuid having min(aenttimestamp);");
+    setFieldValue("Tension_bolts/Details/Creation_Date", bar.get(1));
 }
 
 loadTensionStationBoltAttributes(){
@@ -834,15 +985,18 @@ reallyDeleteTensionStationBolt(){
 }
 
 /** ARCHENT: Track Rope **/
-onEvent("Track_rope", "show", "loadTrackRopeRelated()");
+onEvent("Track_rope/PhotoLog", "show", "loadTrackRopeRelated()");
 
 onEvent("Track_rope/Details/Update", "delayclick", "saveTrackRope(\"\")");
+onEvent("Track_rope/Details/Duplicate", "delayclick", "saveTrackRope(\"track_rope_id=null;autoNumTrackRope();\")");
+onEvent("Track_rope/Details/New", "delayclick", "saveTrackRope(\"newTrackRope();\")");
+onEvent("Track_rope/Details/Close", "delayclick", "saveTrackRope(\"cancelTabGroup(\\\"Track_rope\\\", false);\")");
 onEvent("Track_rope/Details/Delete", "delayclick", "deleteTrackRope()");
 
 onEvent("Track_rope/Details/CalculateGPS", "delayclick", "fillInGPS(\"Track_rope/Details/\")");
 onEvent("Track_rope/Details/Attach_photos", "delayclick", "attachPictureTo(\"Track_rope/Details/Photos\")");
 
-onEvent("Track_rope/PhotoLog/newPhotoLog", "delayclick", "saveTrackRope(\"feature_id = track_rope_id; newPhotolog();\")");
+onEvent("Track_rope/PhotoLog/newPhotoLog", "delayclick", "saveTrackRope(\"feature_id = track_rope_id; feature_type=\\\"Track_rope\\\"; newPhotolog();\")");
 onEvent("Track_rope/PhotoLog/ListPhotoLog", "click", "feature_id = track_rope_id; loadPhotolog();");
 
 String track_rope_id;
@@ -850,8 +1004,14 @@ String track_rope_id;
 newTrackRope(){
     track_rope_id = null;
     newTabGroup("Track_rope");
-    setFieldValue("Track_rope/Details/Measurement_number", getCounter("Track rope"));
+    autoNumTrackRope();
+    date = fetchOne("select date('now', 'localtime');");
+    setFieldValue("Track_rope/Details/Creation_Date", date.get(0));
+    setFieldValue("Track_rope/Details/Created_By", username);
+}
 
+autoNumTrackRope() {
+    setFieldValue("Track_rope/Details/Measurement_number", getCounter("Track rope"));
 }
 
 loadTrackRopeFrom(archent_id) {
@@ -862,6 +1022,10 @@ loadTrackRopeFrom(archent_id) {
     }
     
     showTabGroup("Track_rope", track_rope_id);
+    Object foo = fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '"+track_rope_id+"' group by uuid having min(aenttimestamp)");
+    setFieldValue("Track_rope/Details/Created_By", foo.get(0));
+    Object bar = fetchOne("select uuid, datetime(aentTimestamp, 'localtime')  from archentity where uuid = '"+track_rope_id+"' group by uuid having min(aenttimestamp);");
+    setFieldValue("Track_rope/Details/Creation_Date", bar.get(1));
 }
 
 
@@ -902,15 +1066,18 @@ loadTrackRopeRelated() {
 }
 
 /** ARCHENT: Haul Rope Remnant **/
-onEvent("Haul_rope_remnant", "show", "loadHaulRopeRelated()");
+onEvent("Haul_rope_remnant/PhotoLog", "show", "loadHaulRopeRelated()");
 
 onEvent("Haul_rope_remnant/Details/Update", "delayclick", "saveHaulRope(\"\")");
+onEvent("Haul_rope_remnant/Details/Duplicate", "delayclick", "saveHaulRope(\"haul_rope_id=null;autoNumHaulRope();\")");
+onEvent("Haul_rope_remnant/Details/New", "delayclick", "saveHaulRope(\"newHaulRope();\")");
+onEvent("Haul_rope_remnant/Details/Close", "delayclick", "saveHaulRope(\"cancelTabGroup(\\\"Haul_rope_remnant\\\", false);\")");
 onEvent("Haul_rope_remnant/Details/Delete", "delayclick", "deleteHaulRope()");
 
 onEvent("Haul_rope_remnant/Details/CalculateGPS", "delayclick", "fillInGPS(\"Haul_rope_remnant/Details/\")");
 onEvent("Haul_rope_remnant/Details/Attach_photos", "delayclick", "attachPictureTo(\"Haul_rope_remnant/Details/Photos\")");
 
-onEvent("Haul_rope_remnant/PhotoLog/newPhotoLog", "delayclick", "saveHaulRope(\"feature_id = haul_rope_id; newPhotolog();\")");
+onEvent("Haul_rope_remnant/PhotoLog/newPhotoLog", "delayclick", "saveHaulRope(\"feature_id = haul_rope_id; feature_type=\\\"Haul_rope_remnant\\\";newPhotolog();\")");
 onEvent("Haul_rope_remnant/PhotoLog/ListPhotoLog", "click", "feature_id = haul_rope_id; loadPhotolog();");
 
 String haul_rope_id;
@@ -918,7 +1085,9 @@ String haul_rope_id;
 newHaulRope(){
     haul_rope_id = null;
     newTabGroup("Haul_rope_remnant");
-
+    date = fetchOne("select date('now', 'localtime');");
+    setFieldValue("Haul_rope_remnant/Details/Creation_Date", date.get(0));
+    setFieldValue("Haul_rope_remnant/Details/Created_By", username);
 }
 
 loadHaulRopeFrom(archent_id) {
@@ -929,6 +1098,10 @@ loadHaulRopeFrom(archent_id) {
     }
     
     showTabGroup("Haul_rope_remnant", haul_rope_id);
+    Object foo = fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '"+haul_rope_id+"' group by uuid having min(aenttimestamp)");
+    setFieldValue("Haul_rope_remnant/Details/Created_By", foo.get(0));
+    Object bar = fetchOne("select uuid, datetime(aentTimestamp, 'localtime')  from archentity where uuid = '"+haul_rope_id+"' group by uuid having min(aenttimestamp);");
+    setFieldValue("Haul_rope_remnant/Details/Creation_Date", bar.get(1));
 }
 
 loadHaulRopeAttributes(){
@@ -938,12 +1111,6 @@ loadHaulRopeAttributes(){
 }
 
 saveHaulRope(String callback) {
-    if (isNull(getFieldValue("Haul_rope_remnant/Details/Direction")) || 
-        isNull(getFieldValue("Haul_rope_remnant/Details/Haul_rope_type")) || 
-        isNull(getFieldValue("Haul_rope_remnant/Details/Length"))) {
-        showWarning("Validation Error", "Cannot save record without Direction, Rope Type or Length");
-        return;
-    }
     if (!isNull(haul_rope_id)) {
         entity = fetchArchEnt(haul_rope_id);
     }
@@ -971,15 +1138,18 @@ loadHaulRopeRelated() {
 
 
 /** ARCHENT: Rope Joiner **/
-onEvent("Rope_joiner", "show", "loadRopeJoinerRelated()");
+onEvent("Rope_joiner/PhotoLog", "show", "loadRopeJoinerRelated()");
 
 onEvent("Rope_joiner/Details/Update", "delayclick", "saveRopeJoiner(\"\")");
+onEvent("Rope_joiner/Details/Duplicate", "delayclick", "saveRopeJoiner(\"rope_joiner_id=null;\")");
+onEvent("Rope_joiner/Details/New", "delayclick", "saveRopeJoiner(\"newRopeJoiner();\")");
+onEvent("Rope_joiner/Details/Close", "delayclick", "saveRopeJoiner(\"cancelTabGroup(\\\"Rope_joiner\\\", false);\")");
 onEvent("Rope_joiner/Details/Delete", "delayclick", "deleteRopeJoiner()");
 
 onEvent("Rope_joiner/Details/CalculateGPS", "delayclick", "fillInGPS(\"Rope_joiner/Details/\")");
 onEvent("Rope_joiner/Details/Attach_photos", "delayclick", "attachPictureTo(\"Rope_joiner/Details/Photos\")");
 
-onEvent("Rope_joiner/PhotoLog/newPhotoLog", "delayclick", "saveRopeJoiner(\"feature_id = rope_joiner_id; newPhotolog();\")");
+onEvent("Rope_joiner/PhotoLog/newPhotoLog", "delayclick", "saveRopeJoiner(\"feature_id = rope_joiner_id; feature_type=\\\"Rope_joiner\\\";newPhotolog();\")");
 onEvent("Rope_joiner/PhotoLog/ListPhotoLog", "click", "feature_id = rope_joiner_id; loadPhotolog();");
 
 String rope_joiner_id;
@@ -987,7 +1157,9 @@ String rope_joiner_id;
 newRopeJoiner(){
     rope_joiner_id = null;
     newTabGroup("Rope_joiner");
-
+    date = fetchOne("select date('now', 'localtime');");
+    setFieldValue("Rope_joiner/Details/Creation_Date", date.get(0));
+    setFieldValue("Rope_joiner/Details/Created_By", username);
 }
 
 loadRopeJoinerFrom(archent_id) {
@@ -998,6 +1170,10 @@ loadRopeJoinerFrom(archent_id) {
     }
     
     showTabGroup("Rope_joiner", rope_joiner_id);
+    Object foo = fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '"+rope_joiner_id+"' group by uuid having min(aenttimestamp)");
+    setFieldValue("Rope_joiner/Details/Created_By", foo.get(0));
+    Object bar = fetchOne("select uuid, datetime(aentTimestamp, 'localtime')  from archentity where uuid = '"+rope_joiner_id+"' group by uuid having min(aenttimestamp);");
+    setFieldValue("Rope_joiner/Details/Creation_Date", bar.get(1));
 }
 
 loadRopeJoinerAttributes(){
@@ -1035,15 +1211,18 @@ loadRopeJoinerRelated() {
 }
 
 /** ARCHENT: Rope Groove **/
-onEvent("Rope_groove", "show", "loadRopeGrooveRelated()");
+onEvent("Rope_groove/PhotoLog", "show", "loadRopeGrooveRelated()");
 
 onEvent("Rope_groove/Details/Update", "delayclick", "saveRopeGroove(\"\")");
+onEvent("Rope_groove/Details/Duplicate", "delayclick", "saveRopeGroove(\"rope_groove_id=null;\")");
+onEvent("Rope_groove/Details/New", "delayclick", "saveRopeGroove(\"newRopeGroove();\")");
+onEvent("Rope_groove/Details/Close", "delayclick", "saveRopeGroove(\"cancelTabGroup(\\\"Rope_groove\\\", false);\")");
 onEvent("Rope_groove/Details/Delete", "delayclick", "deleteRopeGroove()");
 
 onEvent("Rope_groove/Details/CalculateGPS", "delayclick", "fillInGPS(\"Rope_groove/Details/\")");
 onEvent("Rope_groove/Details/Attach_photos", "delayclick", "attachPictureTo(\"Rope_groove/Details/Photos\")");
 
-onEvent("Rope_groove/PhotoLog/newPhotoLog", "delayclick", "saveRopeGroove(\"feature_id = rope_groove_id; newPhotolog();\")");
+onEvent("Rope_groove/PhotoLog/newPhotoLog", "delayclick", "saveRopeGroove(\"feature_id = rope_groove_id; feature_type=\\\"Rope_groove\\\";ewPhotolog();\")");
 onEvent("Rope_groove/PhotoLog/ListPhotoLog", "click", "feature_id = rope_groove_id; loadPhotolog();");
 
 String rope_groove_id;
@@ -1051,6 +1230,9 @@ String rope_groove_id;
 newRopeGroove(){
     rope_groove_id = null;
     newTabGroup("Rope_groove");
+    date = fetchOne("select date('now', 'localtime');");
+    setFieldValue("Rope_groove/Details/Creation_Date", date.get(0));
+    setFieldValue("Rope_groove/Details/Created_By", username);
 }
 
 loadRopeGrooveFrom(archent_id) {
@@ -1061,6 +1243,10 @@ loadRopeGrooveFrom(archent_id) {
     }
     
     showTabGroup("Rope_groove", rope_groove_id);
+    Object foo = fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '"+rope_groove_id+"' group by uuid having min(aenttimestamp)");
+    setFieldValue("Rope_groove/Details/Created_By", foo.get(0));
+    Object bar = fetchOne("select uuid, datetime(aentTimestamp, 'localtime')  from archentity where uuid = '"+rope_groove_id+"' group by uuid having min(aenttimestamp);");
+    setFieldValue("Rope_groove/Details/Creation_Date", bar.get(1));
 }
 
 
@@ -1096,15 +1282,18 @@ loadRopeGrooveRelated() {
 }
 
 /** ARCHENT: Other **/
-onEvent("Other", "show", "loadOtherRelated()");
+onEvent("Other/PhotoLog", "show", "loadOtherRelated()");
 
 onEvent("Other/Details/Update", "delayclick", "saveOther(\"\")");
+onEvent("Other/Details/Duplicate", "delayclick", "saveOther(\"other_id=null;\")");
+onEvent("Other/Details/New", "delayclick", "saveOther(\"newOther();\")");
+onEvent("Other/Details/Close", "delayclick", "saveOther(\"cancelTabGroup(\\\"Other\\\", false);\")");
 onEvent("Other/Details/Delete", "delayclick", "deleteOther()");
 
 onEvent("Other/Details/CalculateGPS", "delayclick", "fillInGPS(\"Other/Details/\")");
 onEvent("Other/Details/Attach_photos", "delayclick", "attachPictureTo(\"Other/Details/Photos\")");
 
-onEvent("Other/PhotoLog/newPhotoLog", "delayclick", "saveRopeGroove(\"feature_id = other_id; newPhotolog();\")");
+onEvent("Other/PhotoLog/newPhotoLog", "delayclick", "saveRopeGroove(\"feature_id = other_id; feature_type=\\\"Other\\\";newPhotolog();\")");
 onEvent("Other/PhotoLog/ListPhotoLog", "click", "feature_id = other_id; loadPhotolog();");
 
 String other_id;
@@ -1112,7 +1301,9 @@ String other_id;
 newOther(){
     other_id = null;
     newTabGroup("Other");
-
+    date = fetchOne("select date('now', 'localtime');");
+    setFieldValue("Other/Details/Creation_Date", date.get(0));
+    setFieldValue("Other/Details/Created_By", username);
 }
 
 loadOtherFrom(archent_id) {
@@ -1123,6 +1314,10 @@ loadOtherFrom(archent_id) {
     }
     
     showTabGroup("Other", other_id);
+    Object foo = fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '"+other_id+"' group by uuid having min(aenttimestamp)");
+    setFieldValue("Other/Details/Created_By", foo.get(0));
+    Object bar = fetchOne("select uuid, datetime(aentTimestamp, 'localtime')  from archentity where uuid = '"+other_id+"' group by uuid having min(aenttimestamp);");
+    setFieldValue("Other/Details/Creation_Date", bar.get(1));
 }
 
 loadOtherAttributes(){
@@ -1130,10 +1325,6 @@ loadOtherAttributes(){
 }
 
 saveOther(String callback) {
-    if (isNull(getFieldValue("Other/Details/Other_type"))) {
-        showWarning("Validation Error", "Cannot save record without Other Type");
-        return;
-    }
     if (!isNull(other_id)) {
         entity = fetchArchEnt(other_id);
     }
@@ -1159,7 +1350,10 @@ loadOtherRelated() {
 }
 
 /*** Arch Ent: PhotoLog ***/
-onEvent("Photograph_log/Photograph_log/Update", "delayclick", "savePhotolog()");
+onEvent("Photograph_log/Photograph_log/Update", "delayclick", "savePhotolog(\"\")");
+onEvent("Photograph_log/Photograph_log/Duplicate", "delayclick", "savePhotolog(\"photolog_id=null;\")");
+onEvent("Photograph_log/Photograph_log/New", "delayclick", "savePhotolog(\"newPhotolog();\")");
+onEvent("Photograph_log/Photograph_log/Close", "delayclick", "savePhotolog(\"closePhotoLog();\")");
 onEvent("Photograph_log/Photograph_log/Delete", "delayclick", "deletePhotolog()");
 
 String photolog_id;
@@ -1167,9 +1361,10 @@ String photolog_id;
 newPhotolog(){
     photolog_id = null;
     newTabGroup("Photograph_log");
-    setFieldValue("Photograph_log/Photograph_log/Photograph_reference_ID", getCounter("Photograph log"));
-
-
+    date = fetchOne("select date('now', 'localtime');");
+    setFieldValue("Photograph_log/Photograph_log/Creation_Date", date.get(0));
+    setFieldValue("Photograph_log/Photograph_log/Created_By", username);
+    //setFieldValue("Photograph_log/Photograph_log/Photograph_reference_ID", getCounter("Photograph log"));
 }
 
 loadPhotolog() {
@@ -1185,13 +1380,17 @@ loadPhotologFrom(archent_id) {
     }
     
     showTabGroup("Photograph_log", photolog_id);
+    Object foo = fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '"+photolog_id+"' group by uuid having min(aenttimestamp)");
+    setFieldValue("Photograph_log/Photograph_log/Created_By", foo.get(0));
+    Object bar = fetchOne("select uuid, datetime(aentTimestamp, 'localtime')  from archentity where uuid = '"+photolog_id+"' group by uuid having min(aenttimestamp);");
+    setFieldValue("Photograph_log/Photograph_log/Creation_Date", bar.get(1));
 }
 
 loadPhotologAttributes(){
    
 }
 
-savePhotolog() {
+savePhotolog(String callback) {
     if (isNull(getFieldValue("Photograph_log/Photograph_log/Photograph_reference_ID"))) {
         showWarning("Validation Error", "Cannot save Photo log without Photograph Reference ID");
         return;
@@ -1200,13 +1399,17 @@ savePhotolog() {
         entity = fetchArchEnt(photolog_id);
     }
     if(!isNull(feature_id)) {
-        saveTabGroup("Photograph_log", photolog_id, null, null, "photolog_id = getLastSavedRecordId();saveEntitiesToRel(\"FeaturePhotographLog\", feature_id, photolog_id);");    
+        saveTabGroup("Photograph_log", photolog_id, null, null, "photolog_id = getLastSavedRecordId();saveEntitiesToRel(\"FeaturePhotographLog\", feature_id, photolog_id);" + callback);    
     } else {
-        saveTabGroup("Photograph_log", photolog_id, null, null, "photolog_id = getLastSavedRecordId();");
+        saveTabGroup("Photograph_log", photolog_id, null, null, "photolog_id = getLastSavedRecordId();" + callback);
     }
     
 }
 
+closePhotoLog() {
+    cancelTabGroup("Photograph_log", false);
+    showTab(feature_type + "/PhotoLog");
+}
 
 deletePhotolog(){
     if (!isNull(photolog_id)) {
@@ -1338,3 +1541,15 @@ loadHaulRopeAttributes();
 loadRopeJoinerAttributes();
 loadOtherAttributes();
 loadPhotologAttributes();
+
+
+
+/*
+
+
+    Object foo = fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '"+context_group_id+"' group by uuid having min(aenttimestamp)");
+    setFieldValue("ContextGroup/ContextGroup_Details/Created_By", foo.get(0));
+    Object bar = fetchOne("select uuid, datetime(aentTimestamp, 'localtime')  from archentity where uuid = '"+context_group_id+"' group by uuid having min(aenttimestamp);");
+    setFieldValue("ContextGroup/ContextGroup_Details/Creation_Date", bar.get(1));
+
+    */
