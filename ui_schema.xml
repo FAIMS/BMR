@@ -1250,10 +1250,10 @@
           </item>
         </select1>
         <input ref="Length" faims_attribute_name="Length" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
-          <label>Length</label>
+          <label>Length (m)</label>
         </input>
         <input ref="Diameter" faims_attribute_name="Diameter" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
-          <label>Diameter</label>
+          <label>Diameter (cm)</label>
         </input>
         <input ref="Orientation" faims_attribute_name="Orientation" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Orientation</label>
@@ -1266,10 +1266,10 @@
           </item>
         </select1>
         <input ref="Footing_depth" faims_attribute_name="Footing depth" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
-          <label>Footing depth</label>
+          <label>Footing depth (cm)</label>
         </input>
         <input ref="Footing_diameter" faims_attribute_name="Footing diameter" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
-          <label>Footing diameter</label>
+          <label>Footing diameter (m)</label>
         </input>
         <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Latitude</label>
@@ -1473,10 +1473,10 @@
       <group ref="Details">
         <label>Details</label>
         <input ref="Length" faims_attribute_name="Length" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
-          <label>Length</label>
+          <label>Length (mm)</label>
         </input>
         <input ref="Diameter" faims_attribute_name="Diameter" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
-          <label>Diameter</label>
+          <label>Diameter (mm)</label>
         </input>
         <select1 appearance="full" ref="Type" faims_attribute_name="Tower bolt type" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
           <label>Type</label>
@@ -1527,7 +1527,7 @@
           </item>
         </select1>
         <input ref="Length_of_bolt" faims_attribute_name="Length of bolt" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
-          <label>Length of bolt between head and nut / washe</label>
+          <label>Length of bolt between head and nut / washer (cm)</label>
         </input>
         <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Notes</label>
@@ -1580,13 +1580,13 @@
       <group ref="Details">
         <label>Details</label>
         <input ref="Pit_length" faims_attribute_name="Pit length" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
-          <label>Pit length</label>
+          <label>Pit length (m)</label>
         </input>
         <input ref="Pit_width" faims_attribute_name="Pit width" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
-          <label>Pit width</label>
+          <label>Pit width (cm)</label>
         </input>
         <input ref="Pit_depth" faims_attribute_name="Pit depth" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
-          <label>Pit depth</label>
+          <label>Pit depth (cm)</label>
         </input>
         <input ref="Timber_frame_around_top_of_pit" faims_attribute_name="Timber frame around top of pit" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
           <label>Timber frame around top of pit</label>
@@ -2146,11 +2146,11 @@ Counterweight hanger/ cradle 4</label>
       <label>Tension Station Bolts</label>
       <group ref="Details">
         <label>Details</label>
-        <input ref="Length" faims_attribute_name="Length" faims_attribute_type="measure" faims_certainty="true" faims_annotation="false">
-          <label>Length</label>
+        <input ref="Length" faims_attribute_name="Length" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
+          <label>Length (mm)</label>
         </input>
-        <input ref="Diameter" faims_attribute_name="Diameter" faims_attribute_type="measure" faims_certainty="true" faims_annotation="false">
-          <label>Diameter</label>
+        <input ref="Diameter" faims_attribute_name="Diameter" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
+          <label>Diameter (mm)</label>
         </input>
         <select1 appearance="full" ref="Tension_station_bolt_type" faims_attribute_name="Tension station bolt type" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
           <label>Tension station type</label>
@@ -2184,7 +2184,7 @@ Counterweight hanger/ cradle 4</label>
           </item>
         </select1>
         <input ref="Length_of_bolt" faims_attribute_name="Length of bolt" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
-          <label>Length of bolt between head and nut / washer</label>
+          <label>Length of bolt between head and nut / washer (cm)</label>
         </input>
         <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
           <label>Date Created</label>
@@ -2218,10 +2218,10 @@ Counterweight hanger/ cradle 4</label>
           <label>Measurement Number</label>
         </input>
         <input ref="Gauge" faims_attribute_name="Gauge" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
-          <label>Gauge</label>
+          <label>Gauge (cm)</label>
         </input>
         <input ref="Diameter" faims_attribute_name="Diameter" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
-          <label>Diameter</label>
+          <label>Diameter (cm)</label>
         </input>
         <input ref="Number_of_outer_wires" faims_attribute_name="Number of outer wires" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Number of outer wires</label>
@@ -2244,7 +2244,7 @@ Counterweight hanger/ cradle 4</label>
           </item>
         </select1>
         <input ref="Length_of_saddle_wear_zone" faims_attribute_name="Length of saddle wear zone" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
-          <label>Length of saddle wear zone</label>
+          <label>Length of saddle wear zone (cm)</label>
         </input>
         <select1 ref="Rope_end_condition" faims_attribute_name="Rope end condition" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
           <label>Rope end condition</label>
@@ -2331,10 +2331,10 @@ Counterweight hanger/ cradle 4</label>
           </item>
         </select1>
         <input ref="Length" faims_attribute_name="Length" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
-          <label>Length</label>
+          <label>Length (cm)</label>
         </input>
         <input ref="Diameter" faims_attribute_name="Diameter" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
-          <label>Diameter</label>
+          <label>Diameter (cm)</label>
         </input>
         <input ref="Number_of_outer_wires" faims_attribute_name="Number of outer wires" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Number of outer wires</label>
