@@ -52,6 +52,9 @@
               </container1>
               <Search_Results/>
             </Search>
+            <MyData>
+              <MyRecords/>
+            </MyData>
             <gps>
               <connectexternal/>
               <connectinternal/>
@@ -544,7 +547,15 @@
 
           <Other>
             <Details>
-              <Other_type/>
+              <container1>
+                <child1>
+                  <Other_type/>
+                </child1>
+                <child2>
+                  <Other_ID/>
+                </child2>
+              </container1>
+              <Dimensions/>
               <Notes/>
               <Latitude/>
               <Longitude/>
@@ -582,17 +593,12 @@
       </instance>
       <bind nodeset="/faims/Bucket/Carrier_Details/Carrier_Latitude" type="decimal"/>
       <bind nodeset="/faims/Bucket/Carrier_Details/Carrier_Longitude" type="decimal"/>
-      <bind nodeset="/faims/Bucket/Carrier_Details/Carrier_notes" type="string"/>
       <bind nodeset="/faims/Bucket/Carriage_Details/Number_of_bolts" type="decimal"/>
       <bind nodeset="/faims/Bucket/Carriage_Details/Carriage_Latitude" type="decimal"/>
       <bind nodeset="/faims/Bucket/Carriage_Details/Carriage_Longitude" type="decimal"/>
-      <bind nodeset="/faims/Bucket/Carriage_notes/Carrier_notes" type="string"/>
       <bind nodeset="/faims/Bucket/Bucket_Details/Bucket_Latitude" type="decimal"/>
       <bind nodeset="/faims/Bucket/Bucket_Details/Bucket_Longitude" type="decimal"/>
-      <bind nodeset="/faims/Bucket/Bucket_notes/Carrier_notes" type="string"/>
       <bind nodeset="/faims/Tower/Tower_pole/Footing_spacing" type="decimal"/>
-      <bind nodeset="/faims/Tower/Tower_pole/Tower_pole_notes" type="string"/>
-      <bind nodeset="/faims/Tower/Tower_hardware/Tower_hardware_notes" type="string"/>
       <bind nodeset="/faims/Tower_pole/Details/Length" type="decimal"/>
       <bind nodeset="/faims/Tower_pole/Details/Diameter" type="decimal"/>
       <bind nodeset="/faims/Tower_pole/Details/Footing_depth" type="decimal"/>
@@ -611,7 +617,6 @@
       <bind nodeset="/faims/Tower_bolts/Details/Length_of_bolt" type="decimal"/>
       <bind nodeset="/faims/Tower_bolts/Details/Latitude" type="decimal"/>
       <bind nodeset="/faims/Tower_bolts/Details/Longitude" type="decimal"/>
-      <bind nodeset="/faims/Tower_bolts/Details/Notes" type="string"/>
       <bind nodeset="/faims/Tension_station/Details/Pit_length" type="decimal"/>
       <bind nodeset="/faims/Tension_station/Details/Pit_width" type="decimal"/>
       <bind nodeset="/faims/Tension_station/Details/Pit_depth" type="decimal"/>
@@ -651,7 +656,6 @@
       <bind nodeset="/faims/Tension_station/Cradle/Cradle_4_counterweight_thickness" type="decimal"/>
       <bind nodeset="/faims/Tension_station/Cradle/Cradle_4_Latitude" type="decimal"/>
       <bind nodeset="/faims/Tension_station/Cradle/Cradle_4_Longitude" type="decimal"/>
-      <bind nodeset="/faims/Tension_station/Notes/Notes" type="string"/>
       <bind nodeset="/faims/Tension_station/Notes/Signal_wire_insulator" type="decimal"/>
       <bind nodeset="/faims/Tension_station/Notes/Corner_point_1_Latitude" type="decimal"/>
       <bind nodeset="/faims/Tension_station/Notes/Corner_point_1_Longitude" type="decimal"/>
@@ -670,25 +674,19 @@
       <bind nodeset="/faims/Track_rope/Details/Length_of_saddle_wear_zone" type="decimal"/>
       <bind nodeset="/faims/Track_rope/Details/Latitude" type="decimal"/>
       <bind nodeset="/faims/Track_rope/Details/Longitude" type="decimal"/>
-      <bind nodeset="/faims/Track_rope/Details/Notes" type="string"/>
       <bind nodeset="/faims/Haul_rope_remnant/Details/Length" type="decimal"/>
       <bind nodeset="/faims/Haul_rope_remnant/Details/Diameter" type="decimal"/>
       <bind nodeset="/faims/Haul_rope_remnant/Details/Number_of_outer_wires" type="decimal"/>
       <bind nodeset="/faims/Haul_rope_remnant/Details/Latitude" type="decimal"/>
       <bind nodeset="/faims/Haul_rope_remnant/Details/Longitude" type="decimal"/>
-      <bind nodeset="/faims/Haul_rope_remnant/Details/Notes" type="string"/>
       <bind nodeset="/faims/Rope_joiner/Details/Latitude" type="decimal"/>
       <bind nodeset="/faims/Rope_joiner/Details/Longitude" type="decimal"/>
-      <bind nodeset="/faims/Rope_joiner/Details/Notes" type="string"/>
       <bind nodeset="/faims/Rope_groove/Details/Width" type="decimal"/>
       <bind nodeset="/faims/Rope_groove/Details/Depth" type="decimal"/>
       <bind nodeset="/faims/Rope_groove/Details/Latitude" type="decimal"/>
       <bind nodeset="/faims/Rope_groove/Details/Longitude" type="decimal"/>
-      <bind nodeset="/faims/Rope_groove/Details/Notes" type="string"/>
       <bind nodeset="/faims/Other/Details/Latitude" type="decimal"/>
       <bind nodeset="/faims/Other/Details/Longitude" type="decimal"/>
-      <bind nodeset="/faims/Other/Details/Notes" type="string"/>
-      <bind nodeset="/faims/Photograph_log/Photograph_log/Scene_type" type="string"/>
     </model>
   </h:head>
     <h:body>
@@ -794,6 +792,16 @@
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
+          </item>
+        </select1>
+      </group>
+      <group ref="MyData" faims_scrollable="false">
+        <label>My Data</label>
+        <select1 ref="MyRecords" faims_annotation="false" faims_certainty="false" appearance="compact">
+          <label>Records created by me:</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholde</value>
           </item>
         </select1>
       </group>
@@ -918,7 +926,7 @@
           </item>
         </select>
         <trigger ref="takePhoto">
-          <label>Take Photo</label>
+          <label>Save and Attach Photo</label>
         </trigger>
         <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
           <label>Date Created</label>
@@ -945,7 +953,7 @@
       
       <group ref="Carriage_Details">
         <label>Carriage Details</label>
-        <input ref="Bucket_assembly_number" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false" faims_read_only="true">
+        <input ref="Bucket_assembly_number" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="true">
           <label>Assembly Number</label>
         </input>
         <select1 appearance="full" ref="Left_track_damage" faims_attribute_name="Left track damage" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
@@ -999,7 +1007,7 @@
           </item>
         </select>
         <trigger ref="takePhoto">
-          <label>Take Photo</label>
+          <label>Save and Attach Photo</label>
         </trigger>
         <trigger ref="Update">
           <label>Save Record</label>
@@ -1019,7 +1027,7 @@
       </group>
       <group ref="Bucket_Details">
         <label>Bucket Details</label>
-        <input ref="Bucket_assembly_number" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false" faims_read_only="true">
+        <input ref="Bucket_assembly_number" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="true">
           <label>Assembly Number</label>
         </input>
         <select1 appearance="full" ref="Hit" faims_attribute_name="Hit" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
@@ -1049,7 +1057,7 @@
           </item>
         </select>
         <trigger ref="takePhoto">
-          <label>Take Photo</label>
+          <label>Save and Attach Photo</label>
         </trigger>
         <trigger ref="Update">
           <label>Save Record</label>
@@ -1288,7 +1296,7 @@
           </item>
         </select>
         <trigger ref="Attach_photos">
-          <label>Attach Photos</label>
+          <label>Save and Attach Photos</label>
         </trigger>
         <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
           <label>Date Created</label>
@@ -1377,7 +1385,7 @@
           </item>
         </select>
         <trigger ref="Attach_photos">
-          <label>Attach Photos</label>
+          <label>Save and Attach Photos</label>
         </trigger>
         <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
           <label>Date Created</label>
@@ -1442,7 +1450,7 @@
           </item>
         </select>
         <trigger ref="Attach_photos">
-          <label>Attach Photos</label>
+          <label>Save and Attach Photos</label>
         </trigger>
         <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
           <label>Date Created</label>
@@ -1549,7 +1557,7 @@
           </item>
         </select>
         <trigger ref="Attach_photos">
-          <label>Attach Photos</label>
+          <label>Save and Attach Photos</label>
         </trigger>
         <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
           <label>Date Created</label>
@@ -1860,7 +1868,7 @@ Counterweight hanger/ cradle 1
           </item>
         </select>
         <trigger ref="Cradle_1_attach_photos">
-          <label>Attach Photos</label>
+          <label>Save and Attach Photos</label>
         </trigger>
         <select1 appearance="compact" ref="Cradle_2" >
               <label></label>
@@ -1915,7 +1923,7 @@ Counterweight hanger/ cradle 2</label>
           </item>
         </select>
         <trigger ref="Cradle_2_attach_photos">
-          <label>Attach Photos</label>
+          <label>Save and Attach Photos</label>
         </trigger>
         <select1 appearance="compact" ref="Cradle_3" >
               <label></label>
@@ -1970,7 +1978,7 @@ Counterweight hanger/ cradle 3</label>
           </item>
         </select>
         <trigger ref="Cradle_3_attach_photos">
-          <label>Attach Photos</label>
+          <label>Save and Attach Photos</label>
         </trigger>
         <select1 appearance="full" ref="Cradle_4_exists" faims_attribute_name="Cradle 4 exists" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
           <label>Exists</label>
@@ -2025,7 +2033,7 @@ Counterweight hanger/ cradle 4</label>
           </item>
         </select>
         <trigger ref="Cradle_4_attach_photos">
-          <label>Attach Photos</label>
+          <label>Save and Attach Photos</label>
         </trigger>
         <trigger ref="Update">
           <label>Save Record</label>
@@ -2095,7 +2103,7 @@ Counterweight hanger/ cradle 4</label>
           </item>
         </select>
         <trigger ref="Attach_photos">
-          <label>Attach Photos</label>
+          <label>Save and Attach Photos</label>
         </trigger>
         <trigger ref="Update">
           <label>Save Record</label>
@@ -2273,7 +2281,7 @@ Counterweight hanger/ cradle 4</label>
           </item>
         </select>
         <trigger ref="Attach_photos">
-          <label>Attach Photos</label>
+          <label>Save and Attach Photos</label>
         </trigger>
         <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
           <label>Date Created</label>
@@ -2369,7 +2377,7 @@ Counterweight hanger/ cradle 4</label>
           </item>
         </select>
         <trigger ref="Attach_photos">
-          <label>Attach Photos</label>
+          <label>Save and Attach Photos</label>
         </trigger>
         <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
           <label>Date Created</label>
@@ -2439,7 +2447,7 @@ Counterweight hanger/ cradle 4</label>
           </item>
         </select>
         <trigger ref="Attach_photos">
-          <label>Attach Photos</label>
+          <label>Save and Attach Photos</label>
         </trigger>
         <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
           <label>Date Created</label>
@@ -2482,10 +2490,10 @@ Counterweight hanger/ cradle 4</label>
       <label>Rope Groove</label>
       <group ref="Details">
         <label>Details</label>
-        <input ref="Width" faims_attribute_name="Width" faims_attribute_type="measure" faims_certainty="true" faims_annotation="false">
+        <input ref="Width" faims_attribute_name="Width" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Width</label>
         </input>
-        <input ref="Depth" faims_attribute_name="Depth" faims_attribute_type="measure" faims_certainty="true" faims_annotation="false">
+        <input ref="Depth" faims_attribute_name="Depth" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>Depth</label>
         </input>
         <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
@@ -2508,7 +2516,7 @@ Counterweight hanger/ cradle 4</label>
           </item>
         </select>
         <trigger ref="Attach_photos">
-          <label>Attach Photos</label>
+          <label>Save and Attach Photos</label>
         </trigger>
         <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
           <label>Date Created</label>
@@ -2550,14 +2558,29 @@ Counterweight hanger/ cradle 4</label>
       <label>Other</label>
       <group ref="Details">
         <label>Details</label>
-        <select1 ref="Other_type" faims_attribute_name="Other type" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
-          <label>Type</label>
-          <item>
-            <label>placeholder</label>
-            <value>placeholder</value>
-          </item>
-        </select1>
-        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false">
+        <group faims_style="orientation" ref="container1">
+          <label/>
+          <group faims_style="even" ref="child1">
+            <label/>
+            <select1 ref="Other_type" faims_attribute_name="Other type" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true">
+              <label>Type</label>
+              <item>
+                <label>placeholder</label>
+                <value>placeholder</value>
+              </item>
+            </select1>
+          </group>
+          <group faims_style="even" ref="child2">
+            <label/>
+            <input ref="Other_ID" faims_certainty="false" faims_annotation="false">
+              <label>Identifier</label>
+            </input>
+          </group>
+        </group>
+        <input ref="Dimensions" faims_certainty="false" faims_annotation="false">
+          <label>Dimensions</label>
+        </input>
+        <input ref="Notes" faims_certainty="false" faims_annotation="false">
           <label>Notes</label>
         </input>
         <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
@@ -2577,7 +2600,7 @@ Counterweight hanger/ cradle 4</label>
           </item>
         </select>
         <trigger ref="Attach_photos">
-          <label>Attach Photos</label>
+          <label>Save and Attach Photos</label>
         </trigger>
         <input faims_certainty="false" faims_read_only="true" ref="Creation_Date">
           <label>Date Created</label>

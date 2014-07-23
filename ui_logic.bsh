@@ -30,6 +30,9 @@ onEvent("control/Search/searchButton", "click", "search()");
 onEvent("control/Search/searchAllButton", "click", "searchAll()");
 onEvent("control/Search/Search_Results", "click", "specialLoad()");
 
+onEvent("control/MyData", "show", "showMyRecords()");
+onEvent("control/MyData/MyRecords", "click", "specialLoad()");
+
 onEvent("control/gps/connectinternal", "click", "startInternalGPS()");
 onEvent("control/gps/connectexternal", "click", "startExternalGPS()");
 
@@ -39,26 +42,25 @@ searchAll(){
     search();
 }
 
-
 getCounterWithParent(table, parent){
     counter = fetchOne("select group_concat(freetext,' ') as outfoo from ( "+
-"select freetext || ' - ' || '"+table+"' as freetext, 1 as odr  "+
-" from latestnondeletedarchentidentifiers  "+
-"where uuid = "+parent+" "+
-"union "+
-"select count(distinct uuid)+1, 2 from ( "+
-"select distinct child.uuid as uuid, aenttypename "+
-"  from (select '' as dual), latestnondeletedaentreln parent  "+
-"  join latestnondeletedaentreln child using (relationshipid)  "+
-"  join latestnondeletedarchent ae on (ae.uuid = child.uuid)  "+
-"  join latestnondeletedrelationship using (relationshipid)  "+
-"  join relntype using (relntypeid) "+
-"  join aenttype using (aenttypeid) "+
-" where parent.uuid != child.uuid  "+
-" and parent.uuid = "+parent+" "+
-" and aenttypename = '"+table+"') "+
-"order by odr "+
-"); ");
+        "select freetext || ' - ' || '"+table+"' as freetext, 1 as odr  "+
+        " from latestnondeletedarchentidentifiers  "+
+        "where uuid = "+parent+" "+
+        "union "+
+        "select count(distinct uuid)+1, 2 from ( "+
+        "select distinct child.uuid as uuid, aenttypename "+
+        "  from (select '' as dual), latestnondeletedaentreln parent  "+
+        "  join latestnondeletedaentreln child using (relationshipid)  "+
+        "  join latestnondeletedarchent ae on (ae.uuid = child.uuid)  "+
+        "  join latestnondeletedrelationship using (relationshipid)  "+
+        "  join relntype using (relntypeid) "+
+        "  join aenttype using (aenttypeid) "+
+        " where parent.uuid != child.uuid  "+
+        " and parent.uuid = "+parent+" "+
+        " and aenttypename = '"+table+"') "+
+        "order by odr "+
+        "); ");
      if(isNull(counter)){
         return "Something went wrong";
     } else {
@@ -93,13 +95,23 @@ search () {
 
 
     populateList("control/Search/Search_Results", fetchAll(""+
-        "SELECT uuid||'='||aenttypename, response   "+
+        "SELECT uuid||'='||aenttypename, response "+
         "FROM identifierAsSpreadsheet join latestnondeletedarchent using (uuid) join aenttype using (aenttypeid) "+
         "WHERE aenttypename LIKE '%'||'"+table+"'  "+
         "and uuid in (select uuid from latestnondeletedaentvalue  "+
         "             left outer join vocabulary using (vocabid) where freetext like '%"+searchField+"%' or vocabname like '%"+searchField+"%' or measure like '%"+searchField+"%')  "+
         "GROUP BY uuid  "+
         "order by case '"+table+"' when '' then aenttimestamp else '' end desc, response; "));
+
+}
+
+showMyRecords() {
+    populateList("control/MyData/MyRecords", fetchAll(""+
+        "SELECT uuid||'='||aenttypename, response "+
+        "FROM identifierAsSpreadsheet join latestnondeletedarchent using (uuid) join aenttype using (aenttypeid) "+
+        "WHERE uuid in (select uuid from latestnondeletedaentvalue where userid = "+userid+")  "+
+        "GROUP BY uuid  "+
+        "order by aenttimestamp desc, response; "));
 
 }
 
@@ -150,9 +162,9 @@ onEvent("Bucket/Carrier_Details/Update", "delayclick", "saveBucket(\"\")");
 onEvent("Bucket/Carriage_Details/Update", "delayclick", "saveBucket(\"\")");
 onEvent("Bucket/Bucket_Details/Update", "delayclick", "saveBucket(\"\")");
 
-onEvent("Bucket/Carrier_Details/Duplicate", "delayclick", "saveBucket(\"bucket_id=null;autoNumBucket();\")");
-onEvent("Bucket/Carriage_Details/Duplicate", "delayclick", "saveBucket(\"bucket_id=null;autoNumBucket();\")");
-onEvent("Bucket/Bucket_Details/Duplicate", "delayclick", "saveBucket(\"bucket_id=null;autoNumBucket();\")");
+onEvent("Bucket/Carrier_Details/Duplicate", "delayclick", "saveBucket(\"bucket_id=null;autoNumBucket();clearBucketPictures();\")");
+onEvent("Bucket/Carriage_Details/Duplicate", "delayclick", "saveBucket(\"bucket_id=null;autoNumBucket();clearBucketPictures();\")");
+onEvent("Bucket/Bucket_Details/Duplicate", "delayclick", "saveBucket(\"bucket_id=null;autoNumBucket();clearBucketPictures();\")");
 
 onEvent("Bucket/Carrier_Details/New", "delayclick", "saveBucket(\"newBucket();\")");
 onEvent("Bucket/Carriage_Details/New", "delayclick", "saveBucket(\"newBucket();\")");
@@ -173,9 +185,9 @@ onEvent("Bucket/Carrier_Details/CalculateGPS", "delayclick", "fillInGPS(\"Bucket
 onEvent("Bucket/Carriage_Details/CalculateGPS", "delayclick", "fillInGPS(\"Bucket/Carriage_Details/Carriage_\")");
 onEvent("Bucket/Bucket_Details/CalculateGPS", "delayclick", "fillInGPS(\"Bucket/Bucket_Details/Bucket_\")");
 
-onEvent("Bucket/Carrier_Details/takePhoto", "delayclick", "attachPictureTo(\"Bucket/Carrier_Details/Carrier_photos\")");
-onEvent("Bucket/Carriage_Details/takePhoto", "delayclick", "attachPictureTo(\"Bucket/Carriage_Details/Carriage_photos\")");
-onEvent("Bucket/Bucket_Details/takePhoto", "delayclick", "attachPictureTo(\"Bucket/Bucket_Details/Bucket_photos\")");
+onEvent("Bucket/Carrier_Details/takePhoto", "delayclick", "saveBucket(\"attachPictureTo(\\\"Bucket/Carrier_Details/Carrier_photos\\\")\")");
+onEvent("Bucket/Carriage_Details/takePhoto", "delayclick", "saveBucket(\"attachPictureTo(\\\"Bucket/Carriage_Details/Carriage_photos\\\")\")");
+onEvent("Bucket/Bucket_Details/takePhoto", "delayclick", "saveBucket(\"attachPictureTo(\\\"Bucket/Bucket_Details/Bucket_photos\\\")\")");
 
 String bucket_id;
 
@@ -255,6 +267,13 @@ reallyDeleteBucket() {
 loadBucketRelated() {
     feature_id = bucket_id;
     loadRelatedPhotologs("Bucket/PhotoLog/ListPhotoLog");
+}
+
+clearBucketPictures() {
+    empty = new ArrayList();
+    populateCameraPictureGallery("Bucket/Carrier_Details/Carrier_photos", empty);
+    populateCameraPictureGallery("Bucket/Carriage_Details/Carriage_photos", empty);
+    populateCameraPictureGallery("Bucket/Bucket_Details/Bucket_photos", empty);
 }
 
 /** ARCHENT: Tower **/
@@ -465,13 +484,13 @@ loadTowerPhotologRelated() {
 
 /** ARCHENT: Tower Pole **/
 onEvent("Tower_pole/Details/Update", "delayclick", "saveTowerPole(\"\")");
-onEvent("Tower_pole/Details/Duplicate", "delayclick", "saveTowerPole(\"tower_pole_id=null;autoNumTowerPole();\")");
+onEvent("Tower_pole/Details/Duplicate", "delayclick", "saveTowerPole(\"tower_pole_id=null;autoNumTowerPole();clearTowerPolePictures();\")");
 onEvent("Tower_pole/Details/New", "delayclick", "saveTowerPole(\"newTowerPole();\")");
 onEvent("Tower_pole/Details/Close", "delayclick", "saveTowerPole(\"cancelTabGroup(\\\"Tower_pole\\\", false);showTab(\\\"Tower/Tower_pole\\\");\")");
 onEvent("Tower_pole/Details/Delete", "delayclick", "deleteTowerPole()");
 
 onEvent("Tower_pole/Details/CalculateGPS", "delayclick", "fillInGPS(\"Tower_pole/Details/\")");
-onEvent("Tower_pole/Details/Attach_photos", "delayclick", "attachPictureTo(\"Tower_pole/Details/Photos\")");
+onEvent("Tower_pole/Details/Attach_photos", "delayclick", " saveTowerPole(\"attachPictureTo(\\\"Tower_pole/Details/Photos\\\")\")");
 
 String tower_pole_id;
 
@@ -536,15 +555,20 @@ reallyDeleteTowerPole(){
     cancelTabGroup("Tower_pole", false);
 }
 
+clearTowerPolePictures() {
+    empty = new ArrayList();
+    populateCameraPictureGallery("Tower_pole/Details/Photos", empty);
+}
+
 /** ARCHENT: Track Crossbar **/
 onEvent("Track_crossbar/Details/Update", "delayclick", "saveTrackCrossbar(\"\")");
-onEvent("Track_crossbar/Details/Duplicate", "delayclick", "saveTrackCrossbar(\"track_crossbar_id=null;autoNumTrackCrossbar();\")");
+onEvent("Track_crossbar/Details/Duplicate", "delayclick", "saveTrackCrossbar(\"track_crossbar_id=null;autoNumTrackCrossbar();clearTrackCrossbarPictures();\")");
 onEvent("Track_crossbar/Details/New", "delayclick", "saveTrackCrossbar(\"newTrackCrossbar();\")");
 onEvent("Track_crossbar/Details/Close", "delayclick", "saveTrackCrossbar(\"cancelTabGroup(\\\"Track_crossbar\\\", false);showTab(\\\"Tower/Tower_hardware\\\");\")");
 onEvent("Track_crossbar/Details/Delete", "delayclick", "deleteTrackCrossbar()");
 
 onEvent("Track_crossbar/Details/CalculateGPS", "delayclick", "fillInGPS(\"Track_crossbar/Details/\")");
-onEvent("Track_crossbar/Details/Attach_photos", "delayclick", "attachPictureTo(\"Track_crossbar/Details/Photos\")");
+onEvent("Track_crossbar/Details/Attach_photos", "delayclick", "saveTrackCrossbar(\"attachPictureTo(\\\"Track_crossbar/Details/Photos\\\")\")");
 
 String track_crossbar_id;
 
@@ -612,15 +636,20 @@ reallyDeleteTrackCrossbar(){
     cancelTabGroup("Track_crossbar", false);
 }
 
+clearTrackCrossbarPictures() {
+    empty = new ArrayList();
+    populateCameraPictureGallery("Track_crossbar/Details/Photos", empty);
+}
+
 /** ARCHENT: Haul rope wheel frame **/
 onEvent("Wheel_frame/Details/Update", "delayclick", "saveWheelFrame(\"\")");
-onEvent("Wheel_frame/Details/Duplicate", "delayclick", "saveWheelFrame(\"wheel_frame_id=null;autoNumWheelFrame();\")");
+onEvent("Wheel_frame/Details/Duplicate", "delayclick", "saveWheelFrame(\"wheel_frame_id=null;autoNumWheelFrame();clearWheelFramePictures();\")");
 onEvent("Wheel_frame/Details/New", "delayclick", "saveWheelFrame(\"newWheelFrame();\")");
 onEvent("Wheel_frame/Details/Close", "delayclick", "saveWheelFrame(\"cancelTabGroup(\\\"Wheel_frame\\\", false);showTab(\\\"Tower/Tower_hardware\\\");\")");
 onEvent("Wheel_frame/Details/Delete", "delayclick", "deleteWheelFrame()");
 
 onEvent("Wheel_frame/Details/CalculateGPS", "delayclick", "fillInGPS(\"Wheel_frame/Details/\")");
-onEvent("Wheel_frame/Details/Attach_photos", "delayclick", "attachPictureTo(\"Wheel_frame/Details/Photos\")");
+onEvent("Wheel_frame/Details/Attach_photos", "delayclick", "saveWheelFrame(\"attachPictureTo(\\\"Wheel_frame/Details/Photos\\\")\")");
 
 String wheel_frame_id;
 
@@ -685,15 +714,21 @@ reallyDeleteWheelFrame(){
     cancelTabGroup("Wheel_frame", false);
 }
 
+clearWheelFramePictures() {
+    empty = new ArrayList();
+    populateCameraPictureGallery("Wheel_frame/Details/Photos", empty);
+}
+
+
 /** ARCHENT: Tower Bolt Archent **/
 onEvent("Tower_bolts/Details/Update", "delayclick", "saveTowerBolt(\"\")");
-onEvent("Tower_bolts/Details/Duplicate", "delayclick", "saveTowerBolt(\"tower_bolt_id = null;\")");
+onEvent("Tower_bolts/Details/Duplicate", "delayclick", "saveTowerBolt(\"tower_bolt_id = null;clearTowerBoltPictures();\")");
 onEvent("Tower_bolts/Details/New", "delayclick", "saveTowerBolt(\"newTowerBolt();\")");
 onEvent("Tower_bolts/Details/Close", "delayclick", "saveTowerBolt(\"cancelTabGroup(\\\"Tower_bolts\\\", false);showTab(\\\"Tower/Tower_bolts\\\");\")");
 onEvent("Tower_bolts/Details/Delete", "delayclick", "deleteTowerBolt()");
 
 onEvent("Tower_bolts/Details/CalculateGPS", "delayclick", "fillInGPS(\"Tower_bolts/Details/\")");
-onEvent("Tower_bolts/Details/Attach_photos", "delayclick", "attachPictureTo(\"Tower_bolts/Details/Photos\")");
+onEvent("Tower_bolts/Details/Attach_photos", "delayclick", "saveTowerBolt(\"attachPictureTo(\\\"Tower_bolts/Details/Photos\\\")\")");
 
 String tower_bolt_id;
 
@@ -758,6 +793,11 @@ reallyDeleteTowerBolt(){
     cancelTabGroup("Tower_bolts", false);
 }
 
+clearTowerBoltPictures() {
+    empty = new ArrayList();
+    populateCameraPictureGallery("Tower_bolts/Details/Photos", empty);
+}
+
 /** ARCHENT: Tension Station **/
 onEvent("Tension_station/Tension_bolts", "show", "loadTensionStationBoltRelated()");
 onEvent("Tension_station/PhotoLog", "show", "loadTensionStationPhotoLogRelated()");
@@ -767,10 +807,10 @@ onEvent("Tension_station/Chain_rollers/Update", "delayclick", "saveTensionStatio
 onEvent("Tension_station/Cradle/Update", "delayclick", "saveTensionStation(\"\")");
 onEvent("Tension_station/Notes/Update", "delayclick", "saveTensionStation(\"\")");
 
-onEvent("Tension_station/Details/Duplicate", "delayclick", "saveTensionStation(\"tension_station_id=null;\")");
-onEvent("Tension_station/Chain_rollers/Duplicate", "delayclick", "saveTensionStation(\"tension_station_id=null;\")");
-onEvent("Tension_station/Cradle/Duplicate", "delayclick", "saveTensionStation(\"tension_station_id=null;\")");
-onEvent("Tension_station/Notes/Duplicate", "delayclick", "saveTensionStation(\"tension_station_id=null;\")");
+onEvent("Tension_station/Details/Duplicate", "delayclick", "saveTensionStation(\"tension_station_id=null;clearTensionStationPictures();\")");
+onEvent("Tension_station/Chain_rollers/Duplicate", "delayclick", "saveTensionStation(\"tension_station_id=null;clearTensionStationPictures();\")");
+onEvent("Tension_station/Cradle/Duplicate", "delayclick", "saveTensionStation(\"tension_station_id=null;clearTensionStationPictures();\")");
+onEvent("Tension_station/Notes/Duplicate", "delayclick", "saveTensionStation(\"tension_station_id=null;clearTensionStationPictures();\")");
 
 onEvent("Tension_station/Details/New", "delayclick", "saveTensionStation(\"newTensionStation();\")");
 onEvent("Tension_station/Chain_rollers/New", "delayclick", "saveTensionStation(\"newTensionStation();\")");
@@ -788,19 +828,19 @@ onEvent("Tension_station/Cradle/Delete", "delayclick", "deleteTensionStation()")
 onEvent("Tension_station/Notes/Delete", "delayclick", "deleteTensionStation()");
 
 onEvent("Tension_station/Cradle/Cradle_1_get_lat_long", "delayclick", "fillInGPS(\"Tension_station/Cradle/Cradle_1_\")");
-onEvent("Tension_station/Cradle/Cradle_1_attach_photos", "delayclick", "attachPictureTo(\"Tension_station/Cradle/Cradle_1_photos\")");
+onEvent("Tension_station/Cradle/Cradle_1_attach_photos", "delayclick", "saveTensionStation(\"attachPictureTo(\\\"Tension_station/Cradle/Cradle_1_photos\\\")\")");
 onEvent("Tension_station/Cradle/Cradle_2_get_lat_long", "delayclick", "fillInGPS(\"Tension_station/Cradle/Cradle_2_\")");
-onEvent("Tension_station/Cradle/Cradle_2_attach_photos", "delayclick", "attachPictureTo(\"Tension_station/Cradle/Cradle_2_photos\")");
+onEvent("Tension_station/Cradle/Cradle_2_attach_photos", "delayclick", "saveTensionStation(\"attachPictureTo(\\\"Tension_station/Cradle/Cradle_2_photos\\\")\")");
 onEvent("Tension_station/Cradle/Cradle_3_get_lat_long", "delayclick", "fillInGPS(\"Tension_station/Cradle/Cradle_3_\")");
-onEvent("Tension_station/Cradle/Cradle_3_attach_photos", "delayclick", "attachPictureTo(\"Tension_station/Cradle/Cradle_3_photos\")");
+onEvent("Tension_station/Cradle/Cradle_3_attach_photos", "delayclick", "saveTensionStation(\"attachPictureTo(\\\"Tension_station/Cradle/Cradle_3_photos\\\")\")");
 onEvent("Tension_station/Cradle/Cradle_4_get_lat_long", "delayclick", "fillInGPS(\"Tension_station/Cradle/Cradle_4_\")");
-onEvent("Tension_station/Cradle/Cradle_4_attach_photos", "delayclick", "attachPictureTo(\"Tension_station/Cradle/Cradle_4_photos\")");
+onEvent("Tension_station/Cradle/Cradle_4_attach_photos", "delayclick", "saveTensionStation(\"attachPictureTo(\\\"Tension_station/Cradle/Cradle_4_photos\\\")\")");
 
 onEvent("Tension_station/Notes/Corner_point_1_lat_long", "delayclick", "fillInGPS(\"Tension_station/Notes/Corner_point_1_\")");
 onEvent("Tension_station/Notes/Corner_point_2_lat_long", "delayclick", "fillInGPS(\"Tension_station/Notes/Corner_point_2_\")");
 onEvent("Tension_station/Notes/Corner_point_3_lat_long", "delayclick", "fillInGPS(\"Tension_station/Notes/Corner_point_3_\")");
 onEvent("Tension_station/Notes/Corner_point_4_lat_long", "delayclick", "fillInGPS(\"Tension_station/Notes/Corner_point_4_\")");
-onEvent("Tension_station/Notes/Attach_photos", "delayclick", "attachPictureTo(\"Tension_station/Notes/Photos\")");
+onEvent("Tension_station/Notes/Attach_photos", "delayclick", "saveTensionStation(\"attachPictureTo(\\\"Tension_station/Notes/Photos\\\")\")");
 
 onEvent("Tension_station/Tension_bolts/Add_tension_bolt", "delayclick", "saveTensionStation(\"newTensionStationBolt();\")");
 onEvent("Tension_station/Tension_bolts/List_tension_bolt", "click", "loadTensionStationBolt();");
@@ -917,6 +957,15 @@ loadTensionStationPhotoLogRelated() {
     loadRelatedPhotologs("Tension_station/PhotoLog/ListPhotoLog");
 }
 
+clearTensionStationPictures() {
+    empty = new ArrayList();
+    populateCameraPictureGallery("Tension_station/Cradle/Cradle_1_photos", empty);
+    populateCameraPictureGallery("Tension_station/Cradle/Cradle_2_photos", empty);
+    populateCameraPictureGallery("Tension_station/Cradle/Cradle_3_photos", empty);
+    populateCameraPictureGallery("Tension_station/Cradle/Cradle_4_photos", empty);
+    populateCameraPictureGallery("Tension_station/Notes/Photos", empty);
+}
+
 /** ARCHENT: Tension Station Bolt **/
 onEvent("Tension_bolts/Details/Update", "delayclick", "saveTensionStationBolt(\"\")");
 onEvent("Tension_bolts/Details/Duplicate", "delayclick", "saveTensionStationBolt(\"tension_station_bolt_id = null;\")");
@@ -988,13 +1037,13 @@ reallyDeleteTensionStationBolt(){
 onEvent("Track_rope/PhotoLog", "show", "loadTrackRopeRelated()");
 
 onEvent("Track_rope/Details/Update", "delayclick", "saveTrackRope(\"\")");
-onEvent("Track_rope/Details/Duplicate", "delayclick", "saveTrackRope(\"track_rope_id=null;autoNumTrackRope();\")");
+onEvent("Track_rope/Details/Duplicate", "delayclick", "saveTrackRope(\"track_rope_id=null;autoNumTrackRope();clearTrackRopePictures();\")");
 onEvent("Track_rope/Details/New", "delayclick", "saveTrackRope(\"newTrackRope();\")");
 onEvent("Track_rope/Details/Close", "delayclick", "saveTrackRope(\"cancelTabGroup(\\\"Track_rope\\\", false);\")");
 onEvent("Track_rope/Details/Delete", "delayclick", "deleteTrackRope()");
 
 onEvent("Track_rope/Details/CalculateGPS", "delayclick", "fillInGPS(\"Track_rope/Details/\")");
-onEvent("Track_rope/Details/Attach_photos", "delayclick", "attachPictureTo(\"Track_rope/Details/Photos\")");
+onEvent("Track_rope/Details/Attach_photos", "delayclick", "saveTrackRope(\"attachPictureTo(\\\"Track_rope/Details/Photos\\\")\")");
 
 onEvent("Track_rope/PhotoLog/newPhotoLog", "delayclick", "saveTrackRope(\"feature_id = track_rope_id; feature_type=\\\"Track_rope\\\"; newPhotolog();\")");
 onEvent("Track_rope/PhotoLog/ListPhotoLog", "click", "feature_id = track_rope_id; loadPhotolog();");
@@ -1065,17 +1114,22 @@ loadTrackRopeRelated() {
     loadRelatedPhotologs("Track_rope/PhotoLog/ListPhotoLog");
 }
 
+clearTrackRopePictures() {
+    empty = new ArrayList();
+    populateCameraPictureGallery("Track_rope/Details/Photos", empty);
+}
+
 /** ARCHENT: Haul Rope Remnant **/
 onEvent("Haul_rope_remnant/PhotoLog", "show", "loadHaulRopeRelated()");
 
 onEvent("Haul_rope_remnant/Details/Update", "delayclick", "saveHaulRope(\"\")");
-onEvent("Haul_rope_remnant/Details/Duplicate", "delayclick", "saveHaulRope(\"haul_rope_id=null;autoNumHaulRope();\")");
+onEvent("Haul_rope_remnant/Details/Duplicate", "delayclick", "saveHaulRope(\"haul_rope_id=null;autoNumHaulRope();clearHaulRopePictures();\")");
 onEvent("Haul_rope_remnant/Details/New", "delayclick", "saveHaulRope(\"newHaulRope();\")");
 onEvent("Haul_rope_remnant/Details/Close", "delayclick", "saveHaulRope(\"cancelTabGroup(\\\"Haul_rope_remnant\\\", false);\")");
 onEvent("Haul_rope_remnant/Details/Delete", "delayclick", "deleteHaulRope()");
 
 onEvent("Haul_rope_remnant/Details/CalculateGPS", "delayclick", "fillInGPS(\"Haul_rope_remnant/Details/\")");
-onEvent("Haul_rope_remnant/Details/Attach_photos", "delayclick", "attachPictureTo(\"Haul_rope_remnant/Details/Photos\")");
+onEvent("Haul_rope_remnant/Details/Attach_photos", "delayclick", "saveHaulRope(\"attachPictureTo(\\\"Haul_rope_remnant/Details/Photos\\\")\")");
 
 onEvent("Haul_rope_remnant/PhotoLog/newPhotoLog", "delayclick", "saveHaulRope(\"feature_id = haul_rope_id; feature_type=\\\"Haul_rope_remnant\\\";newPhotolog();\")");
 onEvent("Haul_rope_remnant/PhotoLog/ListPhotoLog", "click", "feature_id = haul_rope_id; loadPhotolog();");
@@ -1136,18 +1190,23 @@ loadHaulRopeRelated() {
     loadRelatedPhotologs("Haul_rope_remnant/PhotoLog/ListPhotoLog");
 }
 
+clearHaulRopePictures() {
+    empty = new ArrayList();
+    populateCameraPictureGallery("Haul_rope_remnant/Details/Photos", empty);
+}
+
 
 /** ARCHENT: Rope Joiner **/
 onEvent("Rope_joiner/PhotoLog", "show", "loadRopeJoinerRelated()");
 
 onEvent("Rope_joiner/Details/Update", "delayclick", "saveRopeJoiner(\"\")");
-onEvent("Rope_joiner/Details/Duplicate", "delayclick", "saveRopeJoiner(\"rope_joiner_id=null;\")");
+onEvent("Rope_joiner/Details/Duplicate", "delayclick", "saveRopeJoiner(\"rope_joiner_id=null;clearRopeJoinerPictures();\")");
 onEvent("Rope_joiner/Details/New", "delayclick", "saveRopeJoiner(\"newRopeJoiner();\")");
 onEvent("Rope_joiner/Details/Close", "delayclick", "saveRopeJoiner(\"cancelTabGroup(\\\"Rope_joiner\\\", false);\")");
 onEvent("Rope_joiner/Details/Delete", "delayclick", "deleteRopeJoiner()");
 
 onEvent("Rope_joiner/Details/CalculateGPS", "delayclick", "fillInGPS(\"Rope_joiner/Details/\")");
-onEvent("Rope_joiner/Details/Attach_photos", "delayclick", "attachPictureTo(\"Rope_joiner/Details/Photos\")");
+onEvent("Rope_joiner/Details/Attach_photos", "delayclick", "saveRopeJoiner(\"attachPictureTo(\\\"Rope_joiner/Details/Photos\\\")\")");
 
 onEvent("Rope_joiner/PhotoLog/newPhotoLog", "delayclick", "saveRopeJoiner(\"feature_id = rope_joiner_id; feature_type=\\\"Rope_joiner\\\";newPhotolog();\")");
 onEvent("Rope_joiner/PhotoLog/ListPhotoLog", "click", "feature_id = rope_joiner_id; loadPhotolog();");
@@ -1210,17 +1269,22 @@ loadRopeJoinerRelated() {
     loadRelatedPhotologs("Rope_joiner/PhotoLog/ListPhotoLog");
 }
 
+clearRopeJoinerPictures() {
+    empty = new ArrayList();
+    populateCameraPictureGallery("Rope_joiner/Details/Photos", empty);
+}
+
 /** ARCHENT: Rope Groove **/
 onEvent("Rope_groove/PhotoLog", "show", "loadRopeGrooveRelated()");
 
 onEvent("Rope_groove/Details/Update", "delayclick", "saveRopeGroove(\"\")");
-onEvent("Rope_groove/Details/Duplicate", "delayclick", "saveRopeGroove(\"rope_groove_id=null;\")");
+onEvent("Rope_groove/Details/Duplicate", "delayclick", "saveRopeGroove(\"rope_groove_id=null;clearRopeGroovePictures();\")");
 onEvent("Rope_groove/Details/New", "delayclick", "saveRopeGroove(\"newRopeGroove();\")");
 onEvent("Rope_groove/Details/Close", "delayclick", "saveRopeGroove(\"cancelTabGroup(\\\"Rope_groove\\\", false);\")");
 onEvent("Rope_groove/Details/Delete", "delayclick", "deleteRopeGroove()");
 
 onEvent("Rope_groove/Details/CalculateGPS", "delayclick", "fillInGPS(\"Rope_groove/Details/\")");
-onEvent("Rope_groove/Details/Attach_photos", "delayclick", "attachPictureTo(\"Rope_groove/Details/Photos\")");
+onEvent("Rope_groove/Details/Attach_photos", "delayclick", "saveRopeGroove(\"attachPictureTo(\\\"Rope_groove/Details/Photos\\\")\")");
 
 onEvent("Rope_groove/PhotoLog/newPhotoLog", "delayclick", "saveRopeGroove(\"feature_id = rope_groove_id; feature_type=\\\"Rope_groove\\\";ewPhotolog();\")");
 onEvent("Rope_groove/PhotoLog/ListPhotoLog", "click", "feature_id = rope_groove_id; loadPhotolog();");
@@ -1281,17 +1345,22 @@ loadRopeGrooveRelated() {
     loadRelatedPhotologs("Rope_groove/PhotoLog/ListPhotoLog");
 }
 
+clearRopeGroovePictures() {
+    empty = new ArrayList();
+    populateCameraPictureGallery("Rope_groove/Details/Photos", empty);
+}
+
 /** ARCHENT: Other **/
 onEvent("Other/PhotoLog", "show", "loadOtherRelated()");
 
 onEvent("Other/Details/Update", "delayclick", "saveOther(\"\")");
-onEvent("Other/Details/Duplicate", "delayclick", "saveOther(\"other_id=null;\")");
+onEvent("Other/Details/Duplicate", "delayclick", "saveOther(\"other_id=null;clearOtherPictures();\")");
 onEvent("Other/Details/New", "delayclick", "saveOther(\"newOther();\")");
 onEvent("Other/Details/Close", "delayclick", "saveOther(\"cancelTabGroup(\\\"Other\\\", false);\")");
 onEvent("Other/Details/Delete", "delayclick", "deleteOther()");
 
 onEvent("Other/Details/CalculateGPS", "delayclick", "fillInGPS(\"Other/Details/\")");
-onEvent("Other/Details/Attach_photos", "delayclick", "attachPictureTo(\"Other/Details/Photos\")");
+onEvent("Other/Details/Attach_photos", "delayclick", "saveOther(\"attachPictureTo(\\\"Other/Details/Photos\\\")\")");
 
 onEvent("Other/PhotoLog/newPhotoLog", "delayclick", "saveRopeGroove(\"feature_id = other_id; feature_type=\\\"Other\\\";newPhotolog();\")");
 onEvent("Other/PhotoLog/ListPhotoLog", "click", "feature_id = other_id; loadPhotolog();");
@@ -1304,6 +1373,7 @@ newOther(){
     date = fetchOne("select date('now', 'localtime');");
     setFieldValue("Other/Details/Creation_Date", date.get(0));
     setFieldValue("Other/Details/Created_By", username);
+    setFieldValue("Other/Details/Dimensions", "L:\nW:\nD:");
 }
 
 loadOtherFrom(archent_id) {
@@ -1318,6 +1388,13 @@ loadOtherFrom(archent_id) {
     setFieldValue("Other/Details/Created_By", foo.get(0));
     Object bar = fetchOne("select uuid, datetime(aentTimestamp, 'localtime')  from archentity where uuid = '"+other_id+"' group by uuid having min(aenttimestamp);");
     setFieldValue("Other/Details/Creation_Date", bar.get(1));
+    setFieldValue("Other/Details/Other_ID", getFieldAnnotation("Other/Details/Other_type"));
+    Object foo2 = fetchOne("select freetext, measure " +
+        "from latestnondeletedaentvalue join attributekey using (attributeid) " +
+        "where uuid = '" + other_id + "' " +
+        "and attributename = 'Notes'; ");
+    setFieldValue("Other/Details/Notes", foo2.get(0));
+    setFieldValue("Other/Details/Dimensions", foo2.get(1));
 }
 
 loadOtherAttributes(){
@@ -1325,10 +1402,19 @@ loadOtherAttributes(){
 }
 
 saveOther(String callback) {
+    if(isNull(getFieldValue("Other/Details/Other_ID"))) {
+        showWarning("Validation Error", "Cannot save Other with Identifier.");
+        return;
+    }
     if (!isNull(other_id)) {
         entity = fetchArchEnt(other_id);
     }
-    saveTabGroup("Other", other_id, null, null, "other_id = getLastSavedRecordId();" + callback);
+    setFieldAnnotation("Other/Details/Other_type", getFieldValue("Other/Details/Other_ID"));
+    List attributes = createAttributeList();
+    
+    attributes.add(createEntityAttribute("Notes", getFieldValue("Other/Details/Notes"), null, getFieldValue("Other/Details/Dimensions"), null));
+    saveTabGroup("Other", other_id, null, attributes, "other_id = getLastSavedRecordId();" + callback);
+
 }
 
 deleteOther(){
@@ -1347,6 +1433,11 @@ reallyDeleteOther(){
 loadOtherRelated() {
     feature_id = other_id;
     loadRelatedPhotologs("Other/PhotoLog/ListPhotoLog");
+}
+
+clearOtherPictures() {
+    empty = new ArrayList();
+    populateCameraPictureGallery("Other/Details/Photos", empty);
 }
 
 /*** Arch Ent: PhotoLog ***/
